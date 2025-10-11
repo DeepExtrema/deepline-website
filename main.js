@@ -1,4 +1,57 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Event tracking function
+    function track(eventName, props = {}) {
+        console.log('event:', eventName, props);
+    }
+
+    // Add event tracking to all elements with data-event
+    document.querySelectorAll('[data-event]').forEach(el => {
+        el.addEventListener('click', () => {
+            track(el.dataset.event);
+        });
+    });
+
+    // Reveal on scroll animation
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.classList.add('reveal');
+                io.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.problem, .capabilities, .how-it-works, .playbooks, .security, .install-footprint, .capability-card, .playbook-card').forEach(el => {
+        el.classList.add('pre-reveal');
+        io.observe(el);
+    });
+
+    // Nav scroll behavior - hide on scroll down, show on scroll up
+    let lastScroll = 0;
+    const nav = document.querySelector('.nav');
+
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.scrollY;
+
+        if (currentScroll <= 0) {
+            nav.classList.remove('is-scrolling');
+            nav.style.transform = 'translateY(0)';
+            return;
+        }
+
+        if (currentScroll > 0) {
+            nav.classList.add('is-scrolling');
+        }
+
+        if (currentScroll > lastScroll && currentScroll > 100) {
+            nav.style.transform = 'translateY(-100%)';
+        } else {
+            nav.style.transform = 'translateY(0)';
+        }
+
+        lastScroll = currentScroll;
+    });
+
     const form = document.getElementById('earlyAccessForm');
     const formContainer = document.querySelector('.access-form');
     const successMessage = document.getElementById('formSuccess');
@@ -7,23 +60,40 @@ document.addEventListener('DOMContentLoaded', function() {
         e.preventDefault();
 
         const formData = new FormData(form);
+        const email = formData.get('email')?.trim();
+        const role = formData.get('role');
+        const pain = formData.get('top-pain')?.trim() || '';
+        const wantsDesignPartner = formData.get('design-partner');
+
+        // Validate required fields
+        if (!email || !role) {
+            alert('Email and role are required.');
+            return;
+        }
+
+        // Validate pain field length if filled
+        if (pain && pain.length < 10) {
+            alert('Tell us your pain in ~10+ characters.');
+            return;
+        }
+
         const data = {
-            email: formData.get('email'),
-            role: formData.get('role'),
+            email: email,
+            role: role,
             companySize: formData.get('company-size'),
             clouds: formData.getAll('cloud'),
-            topPain: formData.get('top-pain'),
+            topPain: pain,
+            designPartner: wantsDesignPartner ? true : false,
             consent: formData.get('consent'),
             timestamp: new Date().toISOString()
         };
 
         console.log('Form submitted:', data);
+        track('form_submit_success', { role: data.role });
 
-        if (typeof gtag !== 'undefined') {
-            gtag('event', 'submit_early_access', {
-                role: data.role,
-                company_size: data.companySize
-            });
+        // If wants design partner pricing, open Calendly
+        if (wantsDesignPartner) {
+            window.open('https://calendly.com/deeplineanalytics/30min', '_blank', 'noopener');
         }
 
         formContainer.style.display = 'none';
@@ -63,55 +133,4 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    const ctaButtons = document.querySelectorAll('.btn-primary');
-    ctaButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            if (typeof gtag !== 'undefined') {
-                const location = this.closest('.hero') ? 'hero' : 'other';
-                gtag('event', 'click_cta_' + location + '_primary');
-            }
-        });
-    });
-
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-
-    const animatedElements = document.querySelectorAll('.problem-item, .capability-card, .step, .playbook-card');
-    animatedElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-    });
-
-    let lastScroll = 0;
-    const nav = document.querySelector('.nav');
-
-    window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
-
-        if (currentScroll <= 0) {
-            nav.style.transform = 'translateY(0)';
-            return;
-        }
-
-        if (currentScroll > lastScroll && currentScroll > 100) {
-            nav.style.transform = 'translateY(-100%)';
-        } else {
-            nav.style.transform = 'translateY(0)';
-        }
-
-        lastScroll = currentScroll;
-    });
 });

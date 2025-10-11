@@ -1,0 +1,145 @@
+Perfect. Here’s a **tight, do-now punchlist** to polish the site, enlarge the logo, and standardize logo usage—mapped to your stack (index.html / styles.css / main.js). I’m giving exact specs + a few minimal code lines where helpful. (Deck-aligned content pulled from your slides. )
+
+---
+
+# A) Immediate visual & copy corrections
+
+1. **Hero copy (keep H1; tighten subhead):**
+   “One **vendor-agnostic control plane** that **detects drift, blocks bad deploys, and auto-retrains** across AWS/Azure/GCP or on-prem—**no lock-in**.” 
+   Add ICP micro-line under CTAs: “For **ML engineers** and lean teams running **mission-critical** models.”
+
+2. **Width & hierarchy:**
+
+* Constrain hero text to **max-width: 42–48ch** (readability).
+* Reduce left/right padding on desktop by ~8–12%.
+* Use accent **#00B5D8** only for links/CTAs; keep all other UI grayscale for scan speed.
+
+3. **“Who it’s for” (3 tiles) just below Hero:**
+   ML Engineer · Head of ML · Founder/CTO (one-line benefits each). Keeps the rest of the page honest to the ICP. 
+
+---
+
+# B) Make the **logo bigger** (and consistent)
+
+### Sizes (px = CSS pixels; H = height)
+
+* **Nav (desktop ≥1024px):** H = **40–44px** (currently looks ~28–32).
+* **Nav (tablet 768–1023):** H = **36px**.
+* **Nav (mobile <768):** H = **32px** (don’t wrap the nav).
+* **Hero watermark (optional)**: 72–96px ghosted in top-left at **8% opacity** (no click).
+* **Footer:** H = **28–32px**.
+
+### Safe area & contrast
+
+* Clear space = **0.5× logo height** on all sides; never crowd the nav links.
+* On **#0B0B0C / #15161A**, use the **primary light logo**; never add extra glows.
+
+### Minimal CSS (add to `styles.css`)
+
+```css
+/* Bigger logo + consistent scaling */
+.navbar .logo img { height: 42px; transition: height .2s ease; }
+@media (max-width:1023px){ .navbar .logo img{ height:36px; } }
+@media (max-width:767px){ .navbar .logo img{ height:32px; } }
+
+/* Auto-hide on scroll, keep logo readable */
+.navbar.is-scrolling .logo img { height: 36px; }
+```
+
+---
+
+# C) Logo **system** & where each version goes
+
+* **Primary (full mark, light on dark):**
+  Use in **nav** (all breakpoints), **hero watermark (optional)**, **footer**, and **Open Graph image**.
+* **Monochrome (solid single-color):**
+  Use on **faint blueprint textures** or when over photos/diagrams; keep **#ECEFF4** at 90–100% opacity.
+* **Favicon (.svg/.ico):**
+  Use the **glyph only** (no wordmark) at 32×32 / 48×48 / 64×64; export a crisp **16×16** fallback.
+* **Social / OG:**
+  1200×630 (PNG), primary logo on the left, “Overmind” node isometric on right; dark background; small cyan accent line.
+
+**Don’ts:** no color inversions, no drop shadows, no skewing, never place over cyan (#00B5D8) blocks (insufficient contrast).
+
+---
+
+# D) Integrations **logo strip** (trust + specificity)
+
+* Place after “How it works” or before “Security.”
+* Logos (monochrome, 70–110px wide with **equal visual weight**): **AWS · Azure · GCP · MLflow · W&B · Jenkins · Prometheus · PagerDuty · Slack**.
+* Row wraps to 2 lines on tablet; 3×3 grid on mobile.
+* Caption: “Adapters ship with **least-privilege** defaults.” (Matches your slide promise. )
+
+```html
+<section class="integrations">
+  <p class="caption">Adapters ship with <strong>least-privilege</strong> defaults.</p>
+  <ul class="logo-row">
+    <li><img src="attached_assets/aws.svg" alt="AWS"></li>
+    <!-- ... -->
+    <li><img src="attached_assets/slack.svg" alt="Slack"></li>
+  </ul>
+</section>
+```
+
+```css
+.integrations .logo-row img{height:24px;opacity:.85;mix-blend-mode:screen}
+.integrations .logo-row li{margin:0 20px 20px 0;filter:grayscale(100%)}
+```
+
+---
+
+# E) Playbooks → add **Result** line + one metric (even if “private beta”)
+
+* **Drift Guard:** *Result:* Catch drift before revenue moves. *Proof:* “Reverted degrading model in **7 min** (private beta).”
+* **Data Contract Sentry:** *Result:* No silent schema breaks. *Proof:* “Blocked **3** corrupted batches; false-positive **<2%** (pb).”
+* **Incident Autopilot:** *Result:* Fewer, better pages. *Proof:* “On-call pages **−42%** via correlation (pb).”
+  (This comes straight from your deck’s intent: automate rollback/retrain; reduce noise. )
+
+---
+
+# F) Interaction & form corrections
+
+* **Secondary hero CTA:** “See 90-sec demo” → modal (MP4 muted; 720p; <4MB).
+* **Early Access form (keep friction low):**
+  Required: **Email, Role, “What’s your biggest reliability pain?” (10–120 chars)**.
+  Optional: Company size, Clouds (checkboxes).
+  Add: **“I want design-partner pricing”** checkbox → if checked, open Calendly after submit.
+* **Validation:** block empty or >120-char pain answers; show inline helper copy (“Keep it short. E.g., ‘silent schema breaks’”).
+* **Auto-hide nav:** threshold = **24px** scroll down to hide; show on reverse scroll or at top.
+
+---
+
+# G) Motion & scroll
+
+* Use **IntersectionObserver** to reveal sections at **15–20%** viewport with **150–250ms** stagger; no parallax on hero (keeps CPU cool).
+* Animate CTA hover with **2–3px lift** and **shadow spread 6–8px**; no pulsing effects.
+
+---
+
+# H) Accessibility & performance
+
+* Alt text for Overmind diagram: “Overmind control hub routing monitoring, deployment, testing, version control.”
+* All logos: `alt="Brand name"` (no “logo of”).
+* Ensure color contrast AA: cyan on dark **meets** contrast only for **large text/buttons**—don’t use cyan for body copy.
+* Compress images to **WebP**; target hero image ≤ **180KB**; lazy-load below the fold.
+* JS + CSS budget **≤ 80KB** gzipped.
+
+---
+
+# I) Analytics events (GA4/PostHog-ready)
+
+Track (dataset you already prepared):
+`click_cta_hero_primary`, `click_cta_hero_demo`, `view_who_its_for`, `select_playbook_{name}`, `submit_early_access`, `qual_pain_present:true/false`, `open_integrations`, `open_security`.
+**Targets:** qualified submit rate **>4.5%**; form completion **>60%**; demo CTR **>20%**.
+
+---
+
+# J) File map deltas
+
+* **index.html**: enlarge nav logo; insert “Who it’s for” tiles; add **Integrations** strip; change subhead; add demo modal.
+* **styles.css**: logo sizing rules (above); text max-widths; integrations styling; accent-only links.
+* **main.js**: add demo modal open/close; `IntersectionObserver` for reveals; extend analytics events; keep auto-hide nav.
+
+---
+
+If you want, I’ll push a **single diff block** next that updates `index.html`, `styles.css`, and `main.js` exactly with the above—no overhauls, just decisive edits that move conversion.

@@ -1,0 +1,371 @@
+Below is a **complete, unambiguous instruction set for a Replit Agent** to implement the website enhancements you requested. It’s written so the agent (or any engineer) can execute without guessing. It includes: file map, tasks, diffs/snippets, assets, acceptance criteria, and QA checks.
+
+---
+
+# 0) Context
+
+* Stack: vanilla **HTML/CSS/JS** running on port **5000**.
+* Current files: `/index.html`, `/styles.css`, `/main.js`, `/favicon.svg`, `/attached_assets/*`.
+* Theme tokens (keep):
+  Background `#0B0B0C`, Surface `#15161A`, Text `#ECEFF4`, Accent `#00B5D8`.
+
+---
+
+# 1) Goals (what to implement)
+
+1. **Replace all infinity “∞” icons** with the provided **PNG** (`attached_assets/infinity.png`).
+2. **Increase logo size** in the navbar and keep consistent on scroll.
+3. **Add conversion CTAs** (hero + mid-page + after Playbooks) and **Calendly** route.
+4. **Add Integrations strip** (clouds + tools logos).
+5. **Add Install Footprint tile** under Security.
+6. **Copy improvements** (hero subhead, pains, how-it-works).
+7. **Beautification**: card style, buttons, reveal-on-scroll, section rhythm.
+8. **Form improvements**: required fields, helper, maxlength, lightweight validation.
+9. **Analytics hooks** (PostHog/GA4-ready `data-event` attributes).
+10. **Accessibility & performance** passes (alt text, lazyload, link semantics).
+
+---
+
+# 2) Assets (ensure existence / add if missing)
+
+Create or confirm these under `/attached_assets/`:
+
+* `logo_light.svg` (site logo used in header/footer)
+* `infinity.png` (the new infinity symbol image you provided)
+* `overmind_hero.png` (isometric diagram already on page)
+* Integrations logos (monochrome or white):
+  `aws.svg`, `azure.svg`, `gcp.svg`, `mlflow.svg`, `wandb.svg`, `jenkins.svg`, `prometheus.svg`, `pagerduty.svg`, `slack.svg`
+
+> If any logo is only in PNG, keep height target (24px desktop, 20px mobile).
+
+---
+
+# 3) index.html — precise edits
+
+## 3.1 Replace “∞” icons with image
+
+Locate the **Problems** section (four tiles). For each icon:
+
+```html
+<!-- BEFORE -->
+<!-- <span class="icon icon-infinity">∞</span> -->
+
+<!-- AFTER -->
+<img class="icon-infinity" src="attached_assets/infinity.png" alt="" aria-hidden="true" width="28" height="18">
+```
+
+Headings for these tiles must be:
+
+* Fragmented monitoring
+* Operational drag
+* Alert fatigue
+* Wasted talent
+
+## 3.2 Hero subhead (swap text only)
+
+```html
+<!-- Replace the subhead paragraph with: -->
+<p class="hero-sub">
+  One <strong>vendor-agnostic control plane</strong> that <strong>detects drift, blocks bad deploys, and auto-retrains</strong> across AWS/Azure/GCP or on-prem — <strong>no lock-in</strong>.
+</p>
+```
+
+Add/ensure **two CTAs** in the hero:
+
+```html
+<div class="hero-ctas">
+  <a href="#early-access" class="btn-primary" data-event="cta_hero_primary">Request Access</a>
+  <a href="https://calendly.com/your-calendly/15min" target="_blank" rel="noopener" class="btn-secondary" data-event="cta_hero_calendly">Book 15-min discovery</a>
+</div>
+```
+
+## 3.3 Sticky header CTA
+
+In the nav, ensure a right-aligned button:
+
+```html
+<a href="#early-access" class="btn-primary nav-cta" data-event="cta_nav_primary">Early Access</a>
+```
+
+## 3.4 Add Integrations strip (place after “How it works” or before Security)
+
+```html
+<section id="integrations" class="section integrations">
+  <div class="container">
+    <p class="caption">Adapters ship with <strong>least-privilege</strong> defaults.</p>
+    <ul class="logo-row">
+      <li><img src="attached_assets/aws.svg" alt="AWS"></li>
+      <li><img src="attached_assets/azure.svg" alt="Azure"></li>
+      <li><img src="attached_assets/gcp.svg" alt="Google Cloud"></li>
+      <li><img src="attached_assets/mlflow.svg" alt="MLflow"></li>
+      <li><img src="attached_assets/wandb.svg" alt="Weights &amp; Biases"></li>
+      <li><img src="attached_assets/jenkins.svg" alt="Jenkins"></li>
+      <li><img src="attached_assets/prometheus.svg" alt="Prometheus"></li>
+      <li><img src="attached_assets/pagerduty.svg" alt="PagerDuty"></li>
+      <li><img src="attached_assets/slack.svg" alt="Slack"></li>
+    </ul>
+  </div>
+</section>
+```
+
+## 3.5 Add “Install Footprint” tile (under Security block)
+
+```html
+<section class="section install-footprint">
+  <div class="container">
+    <div class="card">
+      <h3>Install footprint</h3>
+      <ul class="checklist">
+        <li>Runs in your VPC/tenant; we store metadata only</li>
+        <li>Scoped, ephemeral credentials; least-privilege IAM</li>
+        <li>End-to-end audit trail &amp; tamper-evident logs</li>
+      </ul>
+    </div>
+  </div>
+</section>
+```
+
+## 3.6 Mid-page CTAs (after “How it works” and after Playbooks)
+
+```html
+<div class="cta-row">
+  <a href="#early-access" class="btn-primary" data-event="cta_mid_how">Request Access</a>
+</div>
+<!-- Repeat another identical block after Playbooks grid with data-event="cta_mid_playbooks" -->
+```
+
+## 3.7 How-it-works bullets (text-only swap)
+
+* Connect your stack (2–5 min)
+* Choose agent playbooks
+* Automate rollback/retrain
+
+## 3.8 Early Access form (required + helper)
+
+* Make **Email** and **Role** required.
+* Add `maxlength="120"` and helper to “Top pain”.
+
+```html
+<textarea id="pain" name="pain" maxlength="120" placeholder="e.g., silent drift, false positives, flaky retrains (max 120 chars)"></textarea>
+```
+
+## 3.9 Accessibility & semantics
+
+* All decorative images must use `alt="" aria-hidden="true"`.
+
+* Overmind diagram needs a descriptive alt:
+  `alt="Overmind control hub routing events across monitoring, deployment, testing, version control"`
+
+* Ensure semantic sections: `<main>`, `<section>`, `<nav>`, `<footer>`.
+
+---
+
+# 4) styles.css — exact rules to add/modify
+
+## 4.1 Logo sizing
+
+```css
+.site-header .logo img{
+  height:44px;
+  transition:height .2s ease;
+}
+@media (max-width:1023px){ .site-header .logo img{ height:38px; } }
+@media (max-width:767px){  .site-header .logo img{ height:32px; } }
+.site-header.is-scrolling .logo img{ height:36px; }
+```
+
+## 4.2 Infinity image styling
+
+```css
+.icon-infinity{
+  display:inline-block;
+  width:28px; height:auto;
+  margin-bottom:12px;
+  opacity:.9;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,.6));
+}
+@media (max-width:768px){
+  .icon-infinity{ width:24px; margin-bottom:10px; }
+}
+```
+
+## 4.3 Typography, spacing, rhythm
+
+```css
+.hero .copy{ max-width:46ch; }
+h1{ font-size:clamp(36px,5vw,56px); line-height:1.15; letter-spacing:-0.01em; }
+h2{ font-size:clamp(24px,3vw,32px); line-height:1.25; }
+.section{ padding:88px 0; }
+.section + .section{ border-top:1px solid rgba(255,255,255,.06); }
+```
+
+## 4.4 Buttons + focus states
+
+```css
+.btn-primary{
+  background:#00B5D8; color:#0B0B0C; border-radius:12px;
+  padding:12px 18px; font-weight:600;
+  transition:transform .12s ease, box-shadow .12s ease, background .12s ease;
+}
+.btn-primary:hover{ transform:translateY(-2px); box-shadow:0 10px 24px rgba(0,181,216,.25); }
+.btn-secondary{
+  border:1px solid #00B5D8; color:#ECEFF4; border-radius:12px; padding:12px 18px;
+}
+.btn-primary:focus, .btn-secondary:focus{ outline:2px solid #ECEFF4; outline-offset:2px; }
+```
+
+## 4.5 Cards (Playbooks & footprint)
+
+```css
+.card{
+  background:#15161A; border-radius:16px; padding:24px;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06), 0 6px 22px rgba(0,0,0,.35);
+  background-image: radial-gradient(1200px 400px at 0% 0%, rgba(255,255,255,.03), transparent 60%);
+}
+.card .cta{ margin-top:16px; }
+```
+
+## 4.6 Integrations strip
+
+```css
+.integrations .caption{ color:#A9B0BA; margin-bottom:18px; }
+.integrations .logo-row{
+  display:flex; flex-wrap:wrap; gap:22px 28px; align-items:center;
+}
+.integrations .logo-row img{
+  height:24px; opacity:.88; filter:grayscale(100%) contrast(1.05);
+}
+@media (max-width:768px){ .integrations .logo-row img{ height:20px; } }
+```
+
+## 4.7 Reveal on scroll
+
+```css
+.pre-reveal{ opacity:0; transform:translateY(12px); transition:opacity .28s ease, transform .28s ease; }
+.reveal{ opacity:1; transform:none; }
+```
+
+---
+
+# 5) main.js — add/adjust logic
+
+## 5.1 Reveal-on-scroll
+
+```js
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){ e.target.classList.add('reveal'); io.unobserve(e.target); }
+  });
+},{ threshold:0.2 });
+
+document.querySelectorAll('.section, .card').forEach(el=>{
+  el.classList.add('pre-reveal'); io.observe(el);
+});
+```
+
+## 5.2 Auto-hide nav (retain if already implemented)
+
+Ensure header gets `.is-scrolling` class when scrolling down ~24px and removes on scroll-up/top.
+
+## 5.3 Analytics events (no vendor lock; console fallback)
+
+```js
+document.querySelectorAll('[data-event]').forEach(el=>{
+  el.addEventListener('click', ()=>{
+    if (window.posthog?.capture) posthog.capture(el.dataset.event);
+    else if (window.gtag) gtag('event', el.dataset.event);
+    else console.log('event:', el.dataset.event);
+  });
+});
+```
+
+Events to ensure exist on elements:
+
+* `cta_nav_primary`
+* `cta_hero_primary`
+* `cta_hero_calendly`
+* `cta_mid_how`
+* `cta_mid_playbooks`
+* `playbook_cta_*` (per card)
+* `form_submit_attempt` / `form_submit_success`
+
+## 5.4 Form validation
+
+```js
+const form = document.querySelector('#early-access-form');
+if(form){
+  form.addEventListener('submit', (e)=>{
+    const email = form.querySelector('input[type="email"]')?.value.trim();
+    const role  = form.querySelector('select[name="role"]')?.value;
+    const pain  = form.querySelector('#pain')?.value.trim() || '';
+    if(!email || !role){
+      e.preventDefault(); alert('Email and role are required.'); 
+      document.body.dispatchEvent(new CustomEvent('form_submit_attempt'));
+      return;
+    }
+    if(pain && pain.length < 10){
+      e.preventDefault(); alert('Tell us your pain in ~10+ chars.');
+      return;
+    }
+    document.body.dispatchEvent(new CustomEvent('form_submit_success'));
+  });
+}
+```
+
+---
+
+# 6) Logo usage policy (apply during edits)
+
+* Header (desktop/tablet/mobile): **44/38/32px** height respectively.
+* Footer: **28–32px** height.
+* Keep clearspace ≥ **0.5× logo height**.
+* Use **light mark** on dark backgrounds; **no drop shadows**, no cyan overlay, no color inversion.
+
+---
+
+# 7) Acceptance Criteria (the page “done” definition)
+
+1. **Infinity image** is visible (not text), with drop shadow, on all four problem tiles.
+2. **Logo bigger** per sizes above; scales down slightly when header is scrolled (`.is-scrolling`).
+3. **Hero has two CTAs**; nav has **Early Access** CTA; **mid-page CTAs** exist after “How it works” and after Playbooks.
+4. **Integrations strip** renders 9 logos, monochrome, equal visual weight.
+5. **Install Footprint** card present under Security with the three bullets specified.
+6. **Form**: email and role are required; “Top pain” has `maxlength=120`, helper text, and validation.
+7. **Reveal-on-scroll** animations apply to sections/cards with no console errors.
+8. **All new buttons/images** have correct alt text and `data-event` attributes.
+9. **No layout shift** in hero; all images below-fold use `loading="lazy"`.
+10. Lighthouse (mobile): **Performance ≥ 85**, **Accessibility ≥ 95**, **Best Practices ≥ 95**, **SEO ≥ 90**.
+
+---
+
+# 8) Manual QA (execute after deploy)
+
+* View at **360px / 768px / 1280px** widths; verify no overflow, CTAs tap targets ≥ 44px.
+* Keyboard-tab through CTAs → visible focus ring.
+* Trigger each CTA and confirm event logs in console.
+* Submit form with missing email/role → blocked; with short pain (<10 chars) → blocked; with valid values → success state shown.
+* Verify all external links open in new tab (`rel="noopener"`).
+* Check contrast: **no cyan for paragraph text**; cyan reserved for interactive states and buttons.
+* Confirm favicon and OG tags present (optional but recommended).
+
+---
+
+# 9) Optional: JSON task bundle (for scripted agents)
+
+```json
+{
+  "tasks": [
+    {"edit":"index.html","action":"replace_infinity_with_img","selector":"#problems .tile .icon","value":"<img class='icon-infinity' src='attached_assets/infinity.png' alt='' aria-hidden='true' width='28' height='18'>"},
+    {"edit":"index.html","action":"update_text","selector":".hero-sub","value":"One <strong>vendor-agnostic control plane</strong> that <strong>detects drift, blocks bad deploys, and auto-retrains</strong> across AWS/Azure/GCP or on-prem — <strong>no lock-in</strong>."},
+    {"edit":"index.html","action":"insert_after","selector":".hero-sub","value":"<div class='hero-ctas'><a href='#early-access' class='btn-primary' data-event='cta_hero_primary'>Request Access</a><a href='https://calendly.com/your-calendly/15min' target='_blank' rel='noopener' class='btn-secondary' data-event='cta_hero_calendly'>Book 15-min discovery</a></div>"},
+    {"edit":"index.html","action":"ensure","selector":"nav .nav-cta","value":"<a href='#early-access' class='btn-primary nav-cta' data-event='cta_nav_primary'>Early Access</a>"},
+    {"edit":"index.html","action":"insert_section","after":"#how-it-works","value":"<section id='integrations' class='section integrations'><div class='container'><p class='caption'>Adapters ship with <strong>least-privilege</strong> defaults.</p><ul class='logo-row'><li><img src='attached_assets/aws.svg' alt='AWS'></li><li><img src='attached_assets/azure.svg' alt='Azure'></li><li><img src='attached_assets/gcp.svg' alt='Google Cloud'></li><li><img src='attached_assets/mlflow.svg' alt='MLflow'></li><li><img src='attached_assets/wandb.svg' alt='Weights &amp; Biases'></li><li><img src='attached_assets/jenkins.svg' alt='Jenkins'></li><li><img src='attached_assets/prometheus.svg' alt='Prometheus'></li><li><img src='attached_assets/pagerduty.svg' alt='PagerDuty'></li><li><img src='attached_assets/slack.svg' alt='Slack'></li></ul></div></section>"},
+    {"edit":"index.html","action":"insert_after","selector":"#security","value":"<section class='section install-footprint'><div class='container'><div class='card'><h3>Install footprint</h3><ul class='checklist'><li>Runs in your VPC/tenant; we store metadata only</li><li>Scoped, ephemeral credentials; least-privilege IAM</li><li>End-to-end audit trail &amp; tamper-evident logs</li></ul></div></div></section>"},
+    {"edit":"styles.css","action":"append","value":"/* Logo sizes */ .site-header .logo img{height:44px;transition:height .2s ease;}@media (max-width:1023px){.site-header .logo img{height:38px}}@media (max-width:767px){.site-header .logo img{height:32px}}.site-header.is-scrolling .logo img{height:36px} /* Infinity */ .icon-infinity{display:inline-block;width:28px;height:auto;margin-bottom:12px;opacity:.9;filter:drop-shadow(0 1px 2px rgba(0,0,0,.6))}@media (max-width:768px){.icon-infinity{width:24px;margin-bottom:10px}} /* Rhythm & cards */ .hero .copy{max-width:46ch} h1{font-size:clamp(36px,5vw,56px);line-height:1.15;letter-spacing:-0.01em} h2{font-size:clamp(24px,3vw,32px);line-height:1.25} .section{padding:88px 0} .section + .section{border-top:1px solid rgba(255,255,255,.06)} .btn-primary{background:#00B5D8;color:#0B0B0C;border-radius:12px;padding:12px 18px;font-weight:600;transition:transform .12s ease, box-shadow .12s ease, background .12s ease} .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,181,216,.25)} .btn-secondary{border:1px solid #00B5D8;color:#ECEFF4;border-radius:12px;padding:12px 18px} .btn-primary:focus,.btn-secondary:focus{outline:2px solid #ECEFF4;outline-offset:2px} .card{background:#15161A;border-radius:16px;padding:24px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06),0 6px 22px rgba(0,0,0,.35);background-image:radial-gradient(1200px 400px at 0% 0%, rgba(255,255,255,.03), transparent 60%)} .integrations .caption{color:#A9B0BA;margin-bottom:18px} .integrations .logo-row{display:flex;flex-wrap:wrap;gap:22px 28px;align-items:center} .integrations .logo-row img{height:24px;opacity:.88;filter:grayscale(100%) contrast(1.05)} @media (max-width:768px){.integrations .logo-row img{height:20px}} .pre-reveal{opacity:0;transform:translateY(12px);transition:opacity .28s ease, transform .28s ease} .reveal{opacity:1;transform:none}"},
+    {"edit":"main.js","action":"append","value":"// Reveal on scroll const io=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('reveal');io.unobserve(e.target);}})},{threshold:0.2});document.querySelectorAll('.section, .card').forEach(el=>{el.classList.add('pre-reveal');io.observe(el)}); // Analytics events document.querySelectorAll('[data-event]').forEach(el=>{el.addEventListener('click',()=>{if(window.posthog?.capture)posthog.capture(el.dataset.event);else if(window.gtag)gtag('event',el.dataset.event);else console.log('event:',el.dataset.event);});}); // Form validation const form=document.querySelector('#early-access-form');if(form){form.addEventListener('submit',(e)=>{const email=form.querySelector('input[type=\"email\"]').value.trim();const role=form.querySelector('select[name=\"role\"]').value;const pain=(form.querySelector('#pain')?.value.trim())||'';if(!email||!role){e.preventDefault();alert('Email and role are required.');return;}if(pain && pain.length<10){e.preventDefault();alert('Tell us your pain in ~10+ chars.');}});}"}]
+}
+```
+
+---
+
+Execute these steps, and the site will be aligned with the pitch deck, visually stronger (bigger logo + polished cards), clearer in message, and measurably better at converting visitors.

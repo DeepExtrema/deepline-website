@@ -1,0 +1,193 @@
+Quick Reference (One-pager)
+
+Material: Glass-metal hybrid (smoked chrome), translucent edges, frosted micro-texture.
+
+Mood: Cold, surgical, quiet power. No warmth.
+
+Key moves: Strong Fresnel rim → soft internal body → tiny bloom on brightest curves → micro-mesh only barely visible.
+
+Background: Absolute black. Object sits slightly below center.
+
+1) Color System
+
+Core Swatches
+
+Highlight white: #E9F1F6 → #CFE0EA
+
+Silver mid: #A6B7C3 → #8C9AA6
+
+Cool shadow: #47525B → #2B3238
+
+Rim bloom: #DDEAF3 @ 10–18% opacity (blurred)
+
+Background: #000000
+
+Contrast target: Peak/average ≈ 6:1. Keep midtones dark enough so highlights read as metal/glass, not plastic.
+
+Gradient Stops (typical edge strip)
+#2B3238 (5%) → #8C9AA6 (40%) → #A6B7C3 (60%) → #47525B (95%)
+
+2) Material / Finish
+
+Finish: High gloss with strong Fresnel—edges bright, faces darker.
+
+Translucency: Mild; edges feel thin and glassy (not opaque chrome).
+
+Micro-texture: Very fine satin/mesh visible only in compressed tones (interiors, turns).
+Intensity target: 6–12% visibility.
+
+3) Geometry Notes (applies to both ∞ and deepline glyph)
+
+Cross-section: Elliptical ribbon. Slightly flatter on inside curves to catch broad highlight sweeps.
+
+Thickness variance: Subtle—thicker at outer lobes, thinner at crossover/neck.
+
+Twist: Essentially zero. Optional ≤10° at crossover for richer reflections.
+
+Placement: Centered horizontally; lowered 8–12% vertically. Leave headroom.
+
+4) Lighting Blueprint (3-point minimal)
+
+Key Rim (primary)
+
+Type: Area (rect/strip)
+
+Position: Upper-left / front, grazing angle
+
+Size: 1.0–1.5× object width
+
+Color: #DDEAF3 (cool white)
+
+Intensity: High
+
+Counter Rim (secondary)
+
+Position: Upper-right / back
+
+Intensity: 40–60% of key
+
+Fill (subtle)
+
+Position: Below/center
+
+Color: #9FB6C4
+
+Intensity: Low (only to prevent crushed interiors)
+
+Environment: Very dark HDRI with cold highlights only. Clamp to avoid stray bright sources.
+Post: Bloom/Glare on top 1–2% brightest pixels; small radius.
+
+5) PBR / Shader (Principled BSDF)
+
+Base Color: #9CAFB9
+
+Metallic: 0.20–0.35 (hybrid glass-metal)
+
+Specular: 0.6–0.8
+
+Roughness: 0.08–0.14 (no mirror)
+
+IOR: 1.45–1.50 (glass Fresnel)
+
+Transmission: 0.25–0.35 (edge translucency)
+
+Subsurface (opt.): 0.05, Radius ≈ (0.2, 0.5, 0.7)
+
+Anisotropy: 0.2 (ribbon sheen)
+
+Clearcoat: 0.25, Clearcoat Roughness: 0.03
+
+Normal/Micro: Mix very fine noise + tiled hex/mesh normal at 0.05–0.10 strength
+
+Fresnel Mix: Use a Fresnel node to drive a glossy rim layer for edge pop.
+
+6) 2D Execution (Photoshop / Figma / Illustrator)
+Photoshop
+
+Layer stack (top→bottom)
+
+Rim Bloom (Screen, 10–18%): duplicate highlights, Gaussian Blur 6–12px
+
+Highlights (Screen): painted edge strokes; slight Gaussian Blur 2–4px
+
+Body (Normal): gradient fill; inner glow; satin
+
+Interior Shadow (Multiply): soft form shading
+
+Effects
+
+Body → Gradient Overlay (Linear 0–30°): #2B3238 → #A6B7C3 → #47525B
+
+Body → Inner Glow: #D7E8F1, Screen, Size 8–16px, Choke 0–5%
+
+Body → Satin: Multiply, #2C343A, angle ~30°, distance 10–18px, size 12–20px
+
+Micro-Texture: overlay 200–400px mesh pattern (Soft Light, 6–12%), clipped to shape
+
+Crossover: small elliptical hotspot mask (Screen 30–50%)
+
+Figma
+
+Fill: Linear or Angular gradient (use swatches above)
+
+Inner Shadows (2x): one cool white (low opacity) + one deep blue-gray (strong blur) for Fresnel + cavity
+
+Outer Glow: #E9F1F6, 8–12% opacity, Blur 6–10
+
+Micro-texture: subtle noise overlay (multiply/soft light ≤10%)
+
+Illustrator
+
+Expand stroke → envelope mesh for cross-section shading.
+
+Add Opacity Masks for edge fresnel and crossover glints.
+
+7) Wordmark Treatment (deepline)
+
+Finish: Matte silver, slightly calmer than the symbol
+
+Metallic: ~0.05, Roughness: ~0.20 in PBR terms (or lower gloss in 2D)
+
+Lighting: Gentle top rim highlight only; avoid heavy bloom so the glyph dominates.
+
+Spacing: Keep original kerning; allow slight letter depth via inner shadow to sit in scene.
+
+8) Composition & Export
+
+Scale: Symbol ≈ 70–75% of canvas width; wordmark sized for balance under it.
+
+Vignette: Radial, 0 → 15% at corners; center remains pure black.
+
+Sharpening: Subtle, post-downscale; do not emphasize micro-texture.
+
+Deliverables:
+
+Master: 4096×4096 PNG (16-bit), transparent and on black.
+
+Web: 2048 & 1024 PNG; SVG (flat gradient + masks) for scalable 2D.
+
+Dark-only usage: provide a pure-white fallback mark for non-photoreal contexts.
+
+9) QA Checklist (hard rules)
+
+☐ Midtones too bright? (If yes → plastic. Darken.)
+
+☐ Edges popping via Fresnel? (If no → increase rim layer/clearcoat.)
+
+☐ Roughness varied? (If no → add subtle noise/texture map.)
+
+☐ Any warm hue? (If yes → replace with cool whites/blues.)
+
+☐ Micro-texture restrained? (If visible at arm’s length → reduce to ≤10%.)
+
+☐ Bloom only on top 1–2% brightest pixels? (Keep halo tight.)
+
+10) Applying to the deepline Glyph (shape-specific pointers)
+
+Put strongest rim along the outer left and upper right curves of the glyph.
+
+At the inner bend (where the two tracks converge), add a focused glint and local bloom—this becomes the “nexus.”
+
+For the central circle: treat as a slightly more matte metal bead (Roughness +0.02 vs ribbon) with a tight specular at ~10 o’clock and a soft opposite fill at ~4 o’clock.
+
+The short vertical tick beneath: reduce bloom so it doesn’t steal attention; keep it as a quiet continuation of the ribbon material.

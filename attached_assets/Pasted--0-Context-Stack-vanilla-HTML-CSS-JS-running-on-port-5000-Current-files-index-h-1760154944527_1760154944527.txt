@@ -1,0 +1,138 @@
+
+# 0) Context
+
+* Stack: vanilla **HTML/CSS/JS** running on port **5000**.
+* Current files: `/index.html`, `/styles.css`, `/main.js`, `/favicon.svg`, `/attached_assets/*`.
+* Theme tokens (keep):
+  Background `#0B0B0C`, Surface `#15161A`, Text `#ECEFF4`, Accent `#00B5D8`.
+
+---
+
+# 1) Goals (what to implement)
+
+1. **Replace all infinity “∞” icons** with the provided **PNG** (`attached_assets/infinity.png`).
+2. **Increase logo size** in the navbar and keep consistent on scroll.
+3. **Add conversion CTAs** (hero + mid-page + after Playbooks) and **Calendly** route.
+4. **Add Integrations strip** (clouds + tools logos).
+5. **Add Install Footprint tile** under Security.
+6. **Copy improvements** (hero subhead, pains, how-it-works).
+7. **Beautification**: card style, buttons, reveal-on-scroll, section rhythm.
+8. **Form improvements**: required fields, helper, maxlength, lightweight validation.
+9. **Analytics hooks** (PostHog/GA4-ready `data-event` attributes).
+10. **Accessibility & performance** passes (alt text, lazyload, link semantics).
+
+---
+
+# 2) Assets (ensure existence / add if missing)
+
+Create or confirm these under `/attached_assets/`:
+
+* `logo_light.svg` (site logo used in header/footer)
+* `infinity.png` (the new infinity symbol image you provided)
+* `overmind_hero.png` (isometric diagram already on page)
+* Integrations logos (monochrome or white):
+  `aws.svg`, `azure.svg`, `gcp.svg`, `mlflow.svg`, `wandb.svg`, `jenkins.svg`, `prometheus.svg`, `pagerduty.svg`, `slack.svg`
+
+> If any logo is only in PNG, keep height target (24px desktop, 20px mobile).
+
+---
+
+# 3) index.html — precise edits
+
+## 3.1 Replace “∞” icons with image
+
+Locate the **Problems** section (four tiles). For each icon:
+
+```html
+<!-- BEFORE -->
+<!-- <span class="icon icon-infinity">∞</span> -->
+
+<!-- AFTER -->
+<img class="icon-infinity" src="attached_assets/infinity.png" alt="" aria-hidden="true" width="28" height="18">
+```
+
+Headings for these tiles must be:
+
+* Fragmented monitoring
+* Operational drag
+* Alert fatigue
+* Wasted talent
+
+## 3.2 Hero subhead (swap text only)
+
+```html
+<!-- Replace the subhead paragraph with: -->
+<p class="hero-sub">
+  One <strong>vendor-agnostic control plane</strong> that <strong>detects drift, blocks bad deploys, and auto-retrains</strong> across AWS/Azure/GCP or on-prem — <strong>no lock-in</strong>.
+</p>
+```
+
+Add/ensure **two CTAs** in the hero:
+
+```html
+<div class="hero-ctas">
+  <a href="#early-access" class="btn-primary" data-event="cta_hero_primary">Request Access</a>
+  <a href="https://calendly.com/your-calendly/15min" target="_blank" rel="noopener" class="btn-secondary" data-event="cta_hero_calendly">Book 15-min discovery</a>
+</div>
+```
+
+## 3.3 Sticky header CTA
+
+In the nav, ensure a right-aligned button:
+
+```html
+<a href="#early-access" class="btn-primary nav-cta" data-event="cta_nav_primary">Early Access</a>
+```
+
+## 3.4 Add Integrations strip (place after “How it works” or before Security)
+
+```html
+<section id="integrations" class="section integrations">
+  <div class="container">
+    <p class="caption">Adapters ship with <strong>least-privilege</strong> defaults.</p>
+    <ul class="logo-row">
+      <li><img src="attached_assets/aws.svg" alt="AWS"></li>
+      <li><img src="attached_assets/azure.svg" alt="Azure"></li>
+      <li><img src="attached_assets/gcp.svg" alt="Google Cloud"></li>
+      <li><img src="attached_assets/mlflow.svg" alt="MLflow"></li>
+      <li><img src="attached_assets/wandb.svg" alt="Weights &amp; Biases"></li>
+      <li><img src="attached_assets/jenkins.svg" alt="Jenkins"></li>
+      <li><img src="attached_assets/prometheus.svg" alt="Prometheus"></li>
+      <li><img src="attached_assets/pagerduty.svg" alt="PagerDuty"></li>
+      <li><img src="attached_assets/slack.svg" alt="Slack"></li>
+    </ul>
+  </div>
+</section>
+```
+
+## 3.5 Add “Install Footprint” tile (under Security block)
+
+```html
+<section class="section install-footprint">
+  <div class="container">
+    <div class="card">
+      <h3>Install footprint</h3>
+      <ul class="checklist">
+        <li>Runs in your VPC/tenant; we store metadata only</li>
+        <li>Scoped, ephemeral credentials; least-privilege IAM</li>
+        <li>End-to-end audit trail &amp; tamper-evident logs</li>
+      </ul>
+    </div>
+  </div>
+</section>
+```
+
+## 3.6 Mid-page CTAs (after “How it works” and after Playbooks)
+
+```html
+<div class="cta-row">
+  <a href="#early-access" class="btn-primary" data-event="cta_mid_how">Request Access</a>
+</div>
+<!-- Repeat another identical block after Playbooks grid with data-event="cta_mid_playbooks" -->
+```
+
+## 3.7 How-it-works bullets (text-only swap)
+
+* Connect your stack (2–5 min)
+* Choose agent playbooks
+* Automate rollback/retrain

@@ -15,14 +15,14 @@
     <nav class="nav">
         <div class="nav-container">
             <div class="nav-logo">
-                <img src="/attached_assets/deepline silver logo_1760149751513.png" alt="Deepline" class="logo-img">
+                <img src="/Deepline logos NO BACK/deepline_silver_logo_with_back-removebg-preview.png" alt="Deepline" class="logo-img">
             </div>
             <div class="nav-links">
                 <a href="#product" class="nav-link">Product</a>
                 <a href="#playbooks" class="nav-link">Playbooks</a>
                 <a href="#security" class="nav-link">Security</a>
                 <a href="#docs" class="nav-link">Docs</a>
-                <a href="#early-access" class="btn btn-primary">Early Access</a>
+                <a href="#early-access" class="btn btn-primary" data-event="nav_early_access">Early Access</a>
             </div>
         </div>
     </nav>
@@ -32,10 +32,10 @@
             <div class="hero-content">
                 <div class="hero-text">
                     <h1 class="hero-title">Secure Overmind early access. Let AI command your ML ops.</h1>
-                    <p class="hero-subtitle">A vendor‑agnostic <strong>control plane</strong> that unifies monitoring, drift detection, incident response, and automated retraining—<strong>across AWS/Azure/GCP and on‑prem—without lock‑in.</strong></p>
+                    <p class="hero-subtitle">One <strong>vendor-agnostic control plane</strong> that <strong>detects drift, blocks bad deploys, and auto-retrains</strong> across AWS/Azure/GCP or on-prem—<strong>no lock-in</strong>.</p>
                     <div class="hero-ctas">
-                        <a href="#early-access" class="btn btn-primary btn-large">Join Early Access</a>
-                        <a href="https://calendly.com" target="_blank" class="btn btn-secondary btn-large">Book a 15‑min discovery</a>
+                        <a href="#early-access" class="btn btn-primary btn-large" data-event="hero_cta_request_access">Request Access</a>
+                        <a href="https://calendly.com/deeplineanalytics/30min" target="_blank" rel="noopener" class="btn btn-secondary btn-large" data-event="hero_cta_calendly">Book 15-min Discovery</a>
                     </div>
                     <div class="trust-strip">
                         <span>Data stays in your cloud</span>
@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 <div class="hero-visual">
-                    <img src="/attached_assets/isometric-overmind_1760149751513.png" alt="Overmind Control Plane" class="hero-image">
+                    <img src="/Deepline logos NO BACK/Overmind-circle-schema.png" alt="Overmind control hub routing events across monitoring, deployment, testing, version control" class="hero-image">
                 </div>
             </div>
         </div>
@@ -56,23 +56,23 @@
         <div class="container">
             <div class="problem-grid">
                 <div class="problem-item">
-                    <div class="infinity-icon">∞</div>
-                    <h3>Fragmented Monitoring</h3>
+                    <img class="icon-infinity" src="/Deepline logos NO BACK/Infinity_No_Back-removebg-preview.png" alt="" aria-hidden="true" width="112" height="72">
+                    <h3>Fragmented monitoring</h3>
                     <p>Machine learning systems often lack unified monitoring, causing hidden issues and slow responses.</p>
                 </div>
                 <div class="problem-item">
-                    <div class="infinity-icon">∞</div>
-                    <h3>Operational Inefficiency</h3>
+                    <img class="icon-infinity" src="/Deepline logos NO BACK/Infinity_No_Back-removebg-preview.png" alt="" aria-hidden="true" width="112" height="72">
+                    <h3>Operational drag</h3>
                     <p>Poor oversight leads to inefficiencies, costly downtime, and delayed deployments.</p>
                 </div>
                 <div class="problem-item">
-                    <div class="infinity-icon">∞</div>
-                    <h3>Monitoring Fatigue</h3>
+                    <img class="icon-infinity" src="/Deepline logos NO BACK/Infinity_No_Back-removebg-preview.png" alt="" aria-hidden="true" width="112" height="72">
+                    <h3>Alert fatigue</h3>
                     <p>Overly complex monitoring setups create fatigue and increase the risk of critical failures.</p>
                 </div>
                 <div class="problem-item">
-                    <div class="infinity-icon">∞</div>
-                    <h3>Wasted Talent</h3>
+                    <img class="icon-infinity" src="/Deepline logos NO BACK/Infinity_No_Back-removebg-preview.png" alt="" aria-hidden="true" width="112" height="72">
+                    <h3>Wasted talent</h3>
                     <p>Companies waste valuable time and money maintaining ML pipelines instead of focusing on building better models.</p>
                 </div>
             </div>
@@ -128,8 +128,9 @@
                 </div>
             </div>
             <div class="diagram-container">
-                <img src="/attached_assets/isometric-overmind_1760149751513.png" alt="Architecture Diagram" class="diagram-image">
+                <img src="/Deepline logos NO BACK/Overmind Schema Art No Back.png" alt="Overmind control hub routing events across monitoring, deployment, testing, version control" class="diagram-image" loading="lazy">
             </div>
+            <p class="center cta-mid"><a href="#early-access" class="btn btn-primary btn-large" data-event="cta_mid_how">Request Access</a></p>
         </div>
     </section>
 
@@ -146,7 +147,7 @@
                         <li>Opens PR to bump model version</li>
                     </ul>
                     <span class="badge">Usage-based pricing</span>
-                    <a href="#early-access" class="btn btn-outline">Activate in Early Access</a>
+                    <a href="#early-access" class="btn btn-outline" data-event="playbook_drift_guard">Activate in Early Access</a>
                 </div>
                 <div class="playbook-card">
                     <h3>Data Contract Sentry</h3>
@@ -157,7 +158,7 @@
                         <li>Maintains data integrity across pipeline</li>
                     </ul>
                     <span class="badge">Usage-based pricing</span>
-                    <a href="#early-access" class="btn btn-outline">Activate in Early Access</a>
+                    <a href="#early-access" class="btn btn-outline" data-event="playbook_data_contract">Activate in Early Access</a>
                 </div>
                 <div class="playbook-card">
                     <h3>Incident Autopilot</h3>
@@ -168,9 +169,10 @@
                         <li>Escalates with run/expt context</li>
                     </ul>
                     <span class="badge">Usage-based pricing</span>
-                    <a href="#early-access" class="btn btn-outline">Activate in Early Access</a>
+                    <a href="#early-access" class="btn btn-outline" data-event="playbook_incident_autopilot">Activate in Early Access</a>
                 </div>
             </div>
+            <p class="center cta-mid"><a href="#early-access" class="btn btn-primary btn-large" data-event="cta_after_playbooks">Request Access</a></p>
         </div>
     </section>
 
@@ -201,6 +203,19 @@
                     <h3>Audit</h3>
                     <p>End‑to‑end event lineage; tamper‑evident logs.</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="install-footprint">
+        <div class="container">
+            <div class="card">
+                <h3>Install footprint</h3>
+                <ul>
+                    <li>Runs in your VPC/tenant; we store metadata only</li>
+                    <li>Scoped, ephemeral credentials; least-privilege IAM</li>
+                    <li>End-to-end audit trail & tamper-evident logs</li>
+                </ul>
             </div>
         </div>
     </section>
@@ -260,7 +275,14 @@
                     </div>
                     <div class="form-group">
                         <label for="top-pain">Top pain (optional)</label>
-                        <textarea id="top-pain" name="top-pain" maxlength="120" rows="3" placeholder="What's your biggest MLOps challenge?"></textarea>
+                        <textarea id="top-pain" name="top-pain" maxlength="120" rows="3" placeholder="e.g., silent drift, false positives, flaky retrains (max 120 chars)"></textarea>
+                        <small class="helper-text">If you share your pain, please tell us in ~10+ characters</small>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="want-design-partner" name="design-partner">
+                            <span>I want design-partner pricing</span>
+                        </label>
                     </div>
                     <div class="form-group">
                         <label class="checkbox-label consent">
@@ -268,7 +290,7 @@
                             <span>I agree to receive product emails.</span>
                         </label>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-large btn-full">Join Early Access</button>
+                    <button type="submit" class="btn btn-primary btn-large btn-full" data-event="form_submit_attempt">Join Early Access</button>
                 </form>
                 <div id="formSuccess" class="form-success" style="display: none;">
                     <h3>Thank you for joining!</h3>
@@ -288,6 +310,7 @@
                     <p>Phone: (347)-358-0012</p>
                 </div>
                 <div class="footer-links">
+                    <a href="https://calendly.com/deeplineanalytics/30min" target="_blank" rel="noopener" data-event="footer_calendly">Book a Call</a>
                     <a href="#privacy">Privacy</a>
                     <a href="#terms">Terms</a>
                 </div>
