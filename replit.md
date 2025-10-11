@@ -43,6 +43,8 @@ Turn qualified traffic (ML engineers, technical founders, Heads of ML) into **Ea
 ## Recent Changes
 - 2025-10-11: Initial website creation with all sections
 - 2025-10-11: Set up Python HTTP server workflow on port 5000
+- 2025-10-11: Added favicon.svg for browser tab icon
+- 2025-10-11: Completed and tested all website functionality
 
 ## Tech Stack
 - Plain HTML/CSS/JavaScript (no frameworks)
