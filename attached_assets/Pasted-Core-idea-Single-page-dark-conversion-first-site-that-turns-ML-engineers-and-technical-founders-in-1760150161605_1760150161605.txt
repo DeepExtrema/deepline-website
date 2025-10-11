@@ -1,0 +1,40 @@
+Core idea
+Single-page, dark, conversion-first site that turns ML engineers and technical founders into Early Access signups. Message: “Secure Overmind early access. Let AI command your ML ops.” Deepline is a vendor-agnostic MLOps control plane that unifies monitoring, drift detection, incident response, and automated retraining across AWS/Azure/GCP/on-prem—without lock-in.
+
+Must-have sections (in order)
+
+Hero (above the fold): H1 + subhead, primary CTA Join Early Access, secondary CTA Book a 15-min discovery (Calendly). Right side: your isometric Overmind diagram. Micro-trust strip: “Data stays in your cloud · Least-privilege · Full audit.”
+
+Problem → Outcome (3 bullets): fragmented monitoring; ops drag; alert fatigue → “One plane to observe, decide, act.”
+
+What Deepline is (bullets): vendor-agnostic adapters; unified ML schema; agentic automation; enterprise controls.
+
+How it works (3 steps): Connect stack → Select Playbooks (Drift Guard, Data Contract Sentry, Incident Autopilot) → Automate remediation.
+
+Playbooks (cards): one sentence “prevents…”, three bullets “does…”, button Activate in Early Access.
+
+Why now: dashboard sprawl → neutral control plane.
+
+Security: data stays in your cloud; scoped creds; audit trails.
+
+Early Access form: fields = email (req), role, company size (opt), primary clouds (checkboxes), top pain (120 chars).
+
+Footer: contact, GitHub, X/LinkedIn, Privacy/Terms.
+
+Replit build instructions
+
+Create Repl: “HTML, CSS, JS” (simple) or Next.js (optional).
+
+Files: /index.html, /styles.css, /main.js, /assets/{logo.svg, overmind.png}.
+
+Styling: dark graphite (#0B0B0C) background, silver text (#ECEFF4), cyan/ultramarine accents; large, legible H1; responsive grid (CSS).
+
+Calendly: link or embed in modal.
+
+Form handling: wire to Formspree (no-backend) or Google Form; show success state.
+
+Analytics: add data-event on CTAs (click_cta_hero_primary, submit_early_access); send to PostHog/Umami later.
+
+Perf/UX: <80KB CSS/JS; lazy-load images; mobile-first; high contrast; keyboard focus states.
+
+SEO: title “Deepline — Agentic MLOps Control Plane”; meta description; OG image = Overmind diagram + logo.

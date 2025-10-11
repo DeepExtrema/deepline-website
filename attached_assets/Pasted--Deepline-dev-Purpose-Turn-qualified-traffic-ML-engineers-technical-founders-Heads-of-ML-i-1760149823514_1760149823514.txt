@@ -1,0 +1,313 @@
+# Deepline.dev 
+
+> Purpose: Turn qualified traffic (ML engineers, technical founders, Heads of ML) into **Early Access** signups while signaling credibility and momentum.
+> Tone: direct, technical, no fluff. Visual DNA: dark graphite/black base, soft silver accents, ultramarine/cyan micro-highlights.
+
+---
+
+## 0) Global navigation (lean)
+
+* **Logo** (top-left)
+* **Product** (anchors to How it Works)
+* **Playbooks** (Drift Guard, Data Contract Sentry)
+* **Security**
+* **Docs** (can be “Docs (coming soon)” → email capture)
+* **Early Access** (primary button)
+
+> Keep nav fixed, reduce choices. CTA button appears in nav and hero.
+
+---
+
+## 1) Hero (above the fold)
+
+**H1 (value prop):** Secure Overmind early access. Let AI command your ML ops.
+
+**Subhead (clarify outcome):** A vendor‑agnostic **control plane** that unifies monitoring, drift detection, incident response, and automated retraining—**across AWS/Azure/GCP and on‑prem—without lock‑in.**
+
+**Primary CTA:** [Join Early Access]
+
+**Secondary CTA:** [Book a 15‑min discovery] (Calendly)
+
+**Right‑side visual:**
+
+* Short 15–25s silent loop: “Overmind” node hub routing events between tools (GitHub Actions, MLflow/W&B, S3/GCS/Blob, CloudWatch/Prometheus, PagerDuty/Slack). Show auto‑rollback/retrain badges firing.
+* Alt: static isometric diagram if video unavailable.
+
+**Micro‑trust strip (beneath CTAs):** “Data stays in your cloud · Least‑privilege · Full audit”
+
+---
+
+## 2) Problem → Outcome (pain framing in 3 bullets)
+
+* **Fragmented monitoring** hides failures and slows response.
+* **Ops drag**: small teams burn cycles stitching tools instead of building models.
+* **Alert fatigue**: too many dashboards, no closed‑loop remediation.
+
+**Outcome line:** Ship models with confidence—**one plane to observe, decide, and act.**
+
+---
+
+## 3) What Deepline is (one-liner + bullets)
+
+**One‑liner:** Deepline is an **agentic MLOps control plane** with a **unified ML schema** and **cross‑tool event bus** that can **act** (rollback/retrain), not just alert.
+
+**Key capabilities:**
+
+* **Vendor‑agnostic adapters:** AWS / Azure / GCP + on‑prem; MLflow, W&B, ClearML; S3/GCS/Blob; GitHub Actions/Jenkins; CloudWatch/Prometheus; PagerDuty/Slack.
+* **Unified data model:** Normalize runs, artifacts, metrics, alerts for single‑pane governance and search.
+* **Agentic automation:** Live metric sentries, data/contract checks, daily retrains, noise‑aware routing, “ask‑and‑wire” installs.
+* **Enterprise controls:** VPC/on‑prem, least‑privilege, full audit trails.
+
+**CTA (inline):** [See Playbooks]
+
+---
+
+## 4) How it works (3 steps)
+
+1. **Connect your stack** — OAuth/keys to clouds + tools (2–5 minutes).
+2. **Select Playbooks** — e.g., **Drift Guard**, **Data Contract Sentry**, **Hotfix Rollback**.
+3. **Automate remediation** — Agents execute: block bad deploys, trigger retrains, open PRs, ping on‑call.
+
+**Diagram:** Top‑down blueprint of Overmind hub with spokes to adapters; show event routes (detect → decide → act).
+
+**CTA:** [Get Early Access]
+
+---
+
+## 5) Agent Playbooks (cards)
+
+* **Drift Guard** — Detects data/model drift; auto‑rolls back or schedules retrain; posts diff to Slack; opens PR to bump model version.
+* **Data Contract Sentry** — Enforces schema/constraints; quarantines corrupted batches; notifies with minimal false positives.
+* **Incident Autopilot** — Correlates alerts across tools; suppresses noise; escalates with run/expt context.
+
+> Each card: 1‑sentence “what it prevents”, 3‑bullet “what it does”, tiny badge: *usage‑based pricing*. Button: [Activate in Early Access].
+
+---
+
+## 6) Why now (context + buyer signal)
+
+* Teams are migrating from **point tools → platform control** without surrendering choice.
+* **Dashboard sprawl** + **alert noise** = demand for a **neutral control plane**.
+* Forward‑deployed installs show **fast time‑to‑value**; agents being productized.
+
+**CTA:** [Join the Waitlist]
+
+---
+
+## 7) Pricing (pre‑PMF framing)
+
+* **Founder Base (paid, low)** — includes small agent‑run allowance; perfect for startups.
+* **Usage Bundles** — per agent run with fair overage; margins protected by infra pass‑through.
+* **Team** — seats + pooled credits, RBAC, audit, SLA‑lite.
+* **Enterprise Add‑ons** — SSO, VPC/on‑prem surcharge, annual commit credits.
+
+> Copy note: publish tiers *only if ready*. Else show “Pricing during Early Access is discounted; we calibrate with design partners.”
+
+**CTA:** [Request Founder Base]
+
+---
+
+## 8) Social proof / credibility (lean, honest)
+
+* **Founding team:** DS × SWE with multi‑cloud systems and MLOps experience; ship fast via tight feedback loops.
+* **Design partners:** “We’re onboarding early adopters in fintech, e‑commerce, platform observability.”
+* **Security stance:** “Your data stays in your cloud. We operate with least‑privilege and full auditability.”
+
+> Add logos/testimonials only when real; until then, keep this section text‑based.
+
+---
+
+## 9) Security & compliance (1 short block)
+
+* **Data residency:** in your VPC/tenant; Deepline stores metadata only.
+* **Access:** scoped, ephemeral credentials; principle of least privilege.
+* **Audit:** end‑to‑end event lineage; tamper‑evident logs.
+
+**CTA:** [Read Security Overview]
+
+---
+
+## 10) Early Access module (form)
+
+**Headline:** Be a founding user.
+
+**Copy:** Join Early Access to influence the roadmap and get **priority onboarding**. Limited slots each month.
+
+**Form (min fields):** Email (required), Role (dropdown: ML Eng, Head of ML, Founder, DevOps), Company size (optional), Primary cloud(s) (checkboxes), Top pain (free text ~120 chars).
+
+**Consent:** “I agree to receive product emails.” (checkbox)
+
+**Submit:** [Join Early Access]
+
+**Post‑submit:** Success message + optional short survey link: “Tell us about your stack (2 minutes).”
+
+---
+
+## 11) Footer (simple)
+
+* Contact email
+* GitHub org (if public)
+* X/LinkedIn links
+* Privacy · Terms
+
+---
+
+# Copy Blocks (ready-to-paste)
+
+### Hero
+
+* **H1:** Secure Overmind early access. Let AI command your ML ops.
+* **Subhead:** A vendor‑agnostic control plane that unifies monitoring, drift detection, incident response, and automated retraining across AWS/Azure/GCP and on‑prem—without lock‑in.
+* **CTA primary:** Join Early Access
+* **CTA secondary:** Book a 15‑min discovery
+* **Micro‑trust:** Data stays in your cloud · Least‑privilege · Full audit
+
+### Problem → Outcome
+
+* Fragmented monitoring hides failures and slows response.
+* Ops drag: small teams burn cycles stitching tools instead of building models.
+* Alert fatigue with no closed‑loop remediation.
+* **Outcome:** One plane to observe, decide, and act.
+
+### What is Deepline
+
+Deepline is an **agentic MLOps control plane** with a **unified ML schema** and a **cross‑tool event bus** that can **act** (rollback/retrain), not just alert.
+
+### How it works (bullets)
+
+* Connect clouds and tools in minutes.
+* Choose Playbooks (Drift Guard, Data Contract Sentry, Incident Autopilot).
+* Agents enforce contracts, trigger retrains, open PRs, and page humans only when needed.
+
+### Playbooks (short)
+
+* **Drift Guard:** Catch distribution & performance drift early; rollback or retrain automatically; ship diffs to Slack and PRs.
+* **Data Contract Sentry:** Enforce schema/constraints; quarantine bad batches; minimize noise.
+* **Incident Autopilot:** Correlate alerts across tools; suppress noise; escalate with full run context.
+
+### Why now
+
+Dashboard sprawl and noisy alerts are pushing teams toward **neutral control planes** that unify data, models, and events across vendors—without lock‑in.
+
+### Pricing (placeholder)
+
+Early Access pricing favors startups and design partners. Usage‑based agent runs; optional Founder Base plan.
+
+### Security
+
+Your data stays in your cloud. We use scoped, ephemeral credentials and provide full audit trails.
+
+### Early Access (CTA block)
+
+Be a founding user—shape the roadmap, get priority onboarding. **Join Early Access.**
+
+---
+
+# Component & Section Inventory
+
+* **Sticky Nav** (Logo, anchors, Docs, Security, CTA)
+* **Hero** (H1, subhead, primary/secondary CTA, looped visual)
+* **Pain→Outcome** (3 bullets + 1 outcome line)
+* **Capabilities** (4 bullets + inline CTA)
+* **How it Works** (3 steps + diagram)
+* **Playbooks grid** (cards with actions)
+* **Why Now** (context + CTA)
+* **Pricing** (toggle or simple table; optional now)
+* **Security** (short block + deep‑dive link)
+* **Early Access form** (minimal fields)
+* **Footer**
+
+---
+
+# Design System (quick spec)
+
+* **Typography:**
+
+  * H1: 56/64, semi‑bold
+  * H2: 28/36, medium
+  * Body: 16/26, regular
+  * Mono for code labels
+* **Colors:**
+
+  * Background: #0B0B0C (near‑black)
+  * Surface: #15161A (graphite)
+  * Text primary: #ECEFF4 (silver‑white)
+  * Text secondary: #A9B0BA
+  * Accent: #00B5D8 (cyan) or #2E7CF6 (ultramarine)
+  * Success: #4ADE80 · Warning: #FBBF24 · Danger: #F87171
+* **Buttons:**
+
+  * Primary: Accent bg, dark text; hover lift
+  * Secondary: Outline accent; hover glow subtle
+* **Cards:**
+
+  * Surface with 12–16px padding, 16px radius, subtle inner grid lines
+* **Illustrations:**
+
+  * Isometric/blueprint motif, soft silver dots/nodes
+
+---
+
+# Analytics & Experiment Plan
+
+**Core events (names):**
+
+* `view_hero`, `click_cta_hero_primary`, `click_cta_hero_secondary`
+* `view_how_it_works`, `click_playbook_card_{name}`
+* `submit_early_access`, `submit_early_access_success`
+* `open_docs`, `open_security`
+
+**Form fields captured (clean):** email, role, company_size, clouds_selected, top_pain (free text)
+
+**Baseline metrics:**
+
+* Hero CTR (primary), overall submit rate, scroll‑depth, time‑to‑submit
+
+**A/B tests (sequence):**
+
+1. H1 variant: “Let AI command your ML ops” vs “The vendor‑agnostic ML control plane.”
+2. Secondary CTA: Calendly vs “Email me a 2‑pager.”
+3. Playbook order: Drift‑first vs Incident‑first.
+
+---
+
+# SEO & Sharing
+
+* **Meta title:** Deepline — The agentic MLOps control plane (vendor‑agnostic)
+* **Meta description:** Unify monitoring, drift detection, incident response, and automated retraining across AWS/Azure/GCP and on‑prem. Join Early Access.
+* **OG image:** Overmind node hub on dark gradient; title and logo.
+
+---
+
+# CMS Content Model (if using Notion/Headless CMS)
+
+**Collections:**
+
+* `playbooks`: {slug, name, summary, bullets[], icon, status}
+* `integrations`: {name, category, status, logo}
+* `updates`: {title, date, summary, link}
+* `pages`: {slug, sections[]}
+
+---
+
+# Interview & Funnel Hooks (post‑submit)
+
+* Auto‑reply: thanks + Calendly + short stack survey.
+* Tag by role/cloud; prioritize Heads of ML and founders using multi‑cloud.
+* Offer 30‑min roadmap interview for top‑fit respondents; add to design‑partner cohort.
+
+---
+
+# Accessibility & Perf
+
+* Color contrast AA, focus states visible, semantic headings.
+* Ship with <80KB CSS/JS for landing; lazy‑load heavy visuals.
+
+---
+
+# Implementation Notes
+
+* Build with Next.js + Tailwind. Use a single /index for now; anchor sections.
+* Add `/security`, `/docs` (stub with capture), `/legal`.
+* Wire to GA4/umami + PostHog for events.
+* Use Modal for Early Access success + survey link.
