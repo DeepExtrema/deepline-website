@@ -223,8 +223,8 @@ body {
     z-index: 1;
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 140px 5% 80px 5%;
+    justify-content: flex-start;
+    padding: 0 8%;
     pointer-events: none;
 }
 
