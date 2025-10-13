@@ -1,0 +1,251 @@
+/**
+ * Metal-Glass Design Token System
+ * Deepline - Dual Theme Support
+ * 
+ * Themes:
+ * - cool-silver: Original high-gloss metallic (default)
+ * - warm-matte: Warm dark silver with more subdued finish
+ */
+
+/* ============================================================================
+   SHARED FOUNDATION TOKENS (theme-agnostic)
+   ========================================================================= */
+
+:root {
+  /* Radii */
+  --mg-radius-sm: 8px;
+  --mg-radius-md: 12px;
+  --mg-radius-lg: 16px;
+  --mg-radius-xl: 24px;
+  --mg-radius-full: 9999px;
+  
+  /* Shadows (glass-metal hybrid) */
+  --mg-shadow-inner: inset 0 0 0 1px rgba(233, 241, 246, 0.12);
+  --mg-shadow-edge: inset 0 1px 2px rgba(221, 234, 243, 0.15);
+  --mg-shadow-depth: 0 6px 22px rgba(0, 0, 0, 0.35);
+  --mg-shadow-depth-lg: 0 10px 32px rgba(0, 0, 0, 0.45);
+  --mg-shadow-glow: 0 0 24px rgba(0, 181, 216, 0.2);
+  
+  /* Strokes */
+  --mg-stroke-subtle: rgba(233, 241, 246, 0.06);
+  --mg-stroke-default: rgba(233, 241, 246, 0.12);
+  --mg-stroke-strong: rgba(233, 241, 246, 0.18);
+  
+  /* Transitions */
+  --mg-transition-fast: 0.12s ease;
+  --mg-transition-base: 0.3s ease;
+  --mg-transition-slow: 0.6s ease;
+  
+  /* Z-index */
+  --mg-z-base: 1;
+  --mg-z-dropdown: 100;
+  --mg-z-sticky: 200;
+  --mg-z-modal: 1000;
+  --mg-z-toast: 1100;
+  
+  /* Spacing scale */
+  --mg-space-xs: 8px;
+  --mg-space-sm: 12px;
+  --mg-space-md: 16px;
+  --mg-space-lg: 24px;
+  --mg-space-xl: 32px;
+  --mg-space-2xl: 48px;
+  --mg-space-3xl: 64px;
+  
+  /* Typography */
+  --mg-font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --mg-font-mono: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  
+  --mg-text-xs: 12px;
+  --mg-text-sm: 14px;
+  --mg-text-base: 16px;
+  --mg-text-lg: 18px;
+  --mg-text-xl: 20px;
+  --mg-text-2xl: 24px;
+  --mg-text-3xl: 32px;
+  --mg-text-4xl: 40px;
+  --mg-text-5xl: 56px;
+  
+  --mg-leading-tight: 1.15;
+  --mg-leading-snug: 1.25;
+  --mg-leading-normal: 1.5;
+  --mg-leading-relaxed: 1.6;
+  --mg-leading-loose: 1.8;
+  
+  --mg-tracking-tight: -0.01em;
+  --mg-tracking-normal: 0;
+  --mg-tracking-wide: 0.025em;
+}
+
+/* ============================================================================
+   COOL SILVER THEME (Default)
+   High-gloss metallic with surgical precision
+   ========================================================================= */
+
+[data-theme="cool-silver"],
+:root {
+  /* Core palette */
+  --mg-highlight-1: #E9F1F6;
+  --mg-highlight-2: #CFE0EA;
+  --mg-silver-1: #A6B7C3;
+  --mg-silver-2: #8C9AA6;
+  --mg-shadow-1: #47525B;
+  --mg-shadow-2: #2B3238;
+  --mg-bloom: #DDEAF3;
+  --mg-base: #9CAFB9;
+  --mg-bg: #000000;
+  
+  /* Glass material base */
+  --mg-glass-base: #CFE0EA;
+  
+  /* Material properties (for Three.js sync) */
+  --mg-metalness: 0.95;
+  --mg-roughness: 0.12;
+  --mg-ior: 1.5;
+  --mg-transmission: 0.30;
+  --mg-thickness: 0.5;
+  --mg-specular-intensity: 0.8;
+  --mg-clearcoat: 0.25;
+  --mg-clearcoat-roughness: 0.03;
+  --mg-env-map-intensity: 1.2;
+  
+  /* Bloom/post-processing */
+  --mg-bloom-threshold: 0.94;
+  --mg-bloom-strength: 0.28;
+  --mg-bloom-radius: 0.5;
+  
+  /* Lighting */
+  --mg-rim-intensity: 0.85;
+  --mg-counter-rim-intensity: 0.42;
+  --mg-fill-intensity: 0.15;
+  
+  /* Semantic colors */
+  --mg-bg-primary: #0B0B0C;
+  --mg-bg-surface: #15161A;
+  --mg-text-primary: #ECEFF4;
+  --mg-text-secondary: #A9B0BA;
+  --mg-accent: #00B5D8;
+  --mg-accent-alt: #2E7CF6;
+  --mg-success: #4ADE80;
+  --mg-warning: #FBBF24;
+  --mg-danger: #F87171;
+  
+  /* Gradients */
+  --mg-gradient-surface: radial-gradient(
+    ellipse 1200px 400px at 50% 30%, 
+    rgba(166, 183, 195, 0.08), 
+    transparent 70%
+  ),
+  radial-gradient(
+    ellipse 600px 300px at 50% 50%, 
+    rgba(221, 234, 243, 0.06), 
+    transparent 60%
+  );
+  
+  --mg-gradient-card: radial-gradient(
+    ellipse 500px 350px at 50% 40%, 
+    rgba(166, 183, 195, 0.08), 
+    transparent 70%
+  ),
+  radial-gradient(
+    ellipse 350px 250px at 50% 50%, 
+    rgba(221, 234, 243, 0.06), 
+    transparent 60%
+  );
+  
+  --mg-gradient-button: linear-gradient(135deg, var(--mg-accent), var(--mg-accent-alt));
+  
+  --mg-gradient-shimmer: linear-gradient(
+    110deg,
+    transparent 0%,
+    transparent 40%,
+    rgba(233, 241, 246, 0.1) 50%,
+    transparent 60%,
+    transparent 100%
+  );
+}
+
+/* Disable transitions for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
+
+/* ============================================================================
+   HELPER CLASSES (theme-aware)
+   ========================================================================= */
+
+.mg-surface {
+  background: var(--mg-bg-surface);
+  background-image: var(--mg-gradient-card);
+  border-radius: var(--mg-radius-lg);
+  box-shadow: 
+    var(--mg-shadow-inner),
+    var(--mg-shadow-edge),
+    var(--mg-shadow-depth);
+}
+
+.mg-surface-subtle {
+  background: var(--mg-bg-surface);
+  border-radius: var(--mg-radius-md);
+  box-shadow: var(--mg-shadow-inner);
+}
+
+.mg-glass-effect {
+  backdrop-filter: blur(10px);
+  background: rgba(var(--mg-bg-surface-rgb), 0.7);
+  border: 1px solid var(--mg-stroke-subtle);
+}
+
+.mg-text-gradient {
+  background: linear-gradient(135deg, var(--mg-highlight-1), var(--mg-silver-1));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.mg-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.mg-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 150%;
+  height: 100%;
+  background: var(--mg-gradient-shimmer);
+  animation: mg-shimmer-slide 3s infinite;
+}
+
+@keyframes mg-shimmer-slide {
+  0% { left: -150%; }
+  50%, 100% { left: 150%; }
+}
+
+/* ============================================================================
+   MICRO-TEXTURE OVERLAY (6-12% visibility)
+   ========================================================================= */
+
+.mg-micro-texture {
+  position: relative;
+}
+
+.mg-micro-texture::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+  opacity: 0.08;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+

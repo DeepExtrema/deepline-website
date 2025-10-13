@@ -1,0 +1,346 @@
+/**
+ * InfoCard Component Styles
+ * Token-driven, theme-aware card styling
+ */
+
+/* ============================================================================
+   BASE CARD (all variants share these)
+   ========================================================================= */
+
+.info-card {
+  position: relative;
+  background: var(--mg-bg-surface);
+  background-image: var(--mg-gradient-card);
+  border-radius: var(--mg-radius-lg);
+  box-shadow: 
+    var(--mg-shadow-inner),
+    var(--mg-shadow-edge),
+    var(--mg-shadow-depth);
+  transition: 
+    transform var(--mg-transition-base),
+    box-shadow var(--mg-transition-base);
+}
+
+.info-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    var(--mg-shadow-inner),
+    var(--mg-shadow-edge),
+    var(--mg-shadow-depth-lg);
+}
+
+/* Micro-texture overlay */
+.info-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+  opacity: 0.08;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Adjust texture for warm-matte */
+[data-theme="warm-matte"] .info-card::before {
+  opacity: 0.06;
+}
+
+/* ============================================================================
+   DEFAULT VARIANT (problem items, security items)
+   ========================================================================= */
+
+.info-card--default {
+  text-align: center;
+  padding: var(--mg-space-lg) var(--mg-space-md);
+}
+
+.info-card--default .info-card__icon {
+  width: 112px;
+  height: auto;
+  margin-bottom: var(--mg-space-sm);
+  opacity: 0.9;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.6));
+}
+
+.info-card--default .info-card__title {
+  font-size: var(--mg-text-xl);
+  margin-bottom: var(--mg-space-sm);
+  color: var(--mg-text-primary);
+  font-weight: 600;
+  line-height: var(--mg-leading-snug);
+}
+
+.info-card--default .info-card__description {
+  color: var(--mg-text-secondary);
+  font-size: var(--mg-text-base);
+  line-height: var(--mg-leading-relaxed);
+}
+
+/* ============================================================================
+   FEATURE VARIANT (capability cards)
+   ========================================================================= */
+
+.info-card--feature {
+  padding: var(--mg-space-xl);
+}
+
+.info-card--feature .info-card__icon--feature {
+  width: 48px;
+  height: 48px;
+  margin-bottom: var(--mg-space-md);
+}
+
+.info-card--feature .info-card__title {
+  font-size: var(--mg-text-xl);
+  margin-bottom: var(--mg-space-sm);
+  font-weight: 600;
+  line-height: var(--mg-leading-snug);
+}
+
+.info-card--feature .info-card__title--accent {
+  color: var(--mg-accent);
+}
+
+.info-card--feature .info-card__description {
+  color: var(--mg-text-secondary);
+  line-height: var(--mg-leading-relaxed);
+}
+
+/* ============================================================================
+   STEP VARIANT (how-it-works)
+   ========================================================================= */
+
+.info-card--step {
+  text-align: center;
+  padding: var(--mg-space-lg) var(--mg-space-md);
+}
+
+.info-card--step .info-card__number {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--mg-gradient-button);
+  color: var(--mg-bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--mg-text-2xl);
+  font-weight: 600;
+  margin: 0 auto var(--mg-space-lg);
+  box-shadow: 0 4px 12px rgba(0, 181, 216, 0.3);
+}
+
+.info-card--step .info-card__title {
+  font-size: var(--mg-text-2xl);
+  margin-bottom: var(--mg-space-sm);
+  color: var(--mg-text-primary);
+  font-weight: 600;
+  line-height: var(--mg-leading-snug);
+}
+
+.info-card--step .info-card__description {
+  color: var(--mg-text-secondary);
+  line-height: var(--mg-leading-relaxed);
+}
+
+/* ============================================================================
+   PLAYBOOK VARIANT (agent playbooks)
+   ========================================================================= */
+
+.info-card--playbook {
+  padding: var(--mg-space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--mg-space-md);
+}
+
+.info-card--playbook .info-card__title {
+  font-size: var(--mg-text-2xl);
+  margin-bottom: 0;
+  font-weight: 600;
+  line-height: var(--mg-leading-snug);
+}
+
+.info-card--playbook .info-card__title--accent {
+  color: var(--mg-accent);
+}
+
+.info-card--playbook .info-card__subtitle {
+  color: var(--mg-text-secondary);
+  font-style: italic;
+  line-height: var(--mg-leading-relaxed);
+  margin-top: calc(var(--mg-space-sm) * -1);
+}
+
+.info-card--playbook .info-card__bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.info-card--playbook .info-card__bullets li {
+  color: var(--mg-text-secondary);
+  margin-bottom: var(--mg-space-xs);
+  padding-left: var(--mg-space-lg);
+  position: relative;
+  line-height: var(--mg-leading-relaxed);
+}
+
+.info-card--playbook .info-card__bullets li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--mg-accent);
+  font-weight: 600;
+}
+
+.info-card--playbook .info-card__badge {
+  display: inline-block;
+  background: rgba(0, 181, 216, 0.15);
+  color: var(--mg-accent);
+  padding: 4px 12px;
+  border-radius: var(--mg-radius-md);
+  font-size: var(--mg-text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--mg-tracking-wide);
+  align-self: flex-start;
+}
+
+[data-theme="warm-matte"] .info-card--playbook .info-card__badge {
+  background: rgba(0, 181, 216, 0.12);
+}
+
+.info-card--playbook .info-card__cta {
+  margin-top: auto;
+}
+
+/* ============================================================================
+   RESPONSIVE ADJUSTMENTS
+   ========================================================================= */
+
+@media (max-width: 768px) {
+  .info-card--default,
+  .info-card--step {
+    padding: var(--mg-space-md);
+  }
+  
+  .info-card--feature,
+  .info-card--playbook {
+    padding: var(--mg-space-lg);
+  }
+  
+  .info-card--default .info-card__icon {
+    width: 96px;
+    margin-bottom: 10px;
+  }
+  
+  .info-card--step .info-card__number {
+    width: 52px;
+    height: 52px;
+    font-size: var(--mg-text-xl);
+    margin-bottom: var(--mg-space-md);
+  }
+  
+  .info-card--default .info-card__title,
+  .info-card--feature .info-card__title,
+  .info-card--step .info-card__title {
+    font-size: var(--mg-text-lg);
+  }
+  
+  .info-card--playbook .info-card__title {
+    font-size: var(--mg-text-xl);
+  }
+}
+
+@media (max-width: 480px) {
+  .info-card--default .info-card__icon {
+    width: 80px;
+  }
+}
+
+/* ============================================================================
+   GRID LAYOUTS (for card containers)
+   ========================================================================= */
+
+.info-card-grid {
+  display: grid;
+  gap: var(--mg-space-xl);
+}
+
+.info-card-grid--2 {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.info-card-grid--3 {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.info-card-grid--4 {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+@media (max-width: 968px) {
+  .info-card-grid {
+    grid-template-columns: 1fr;
+    gap: var(--mg-space-lg);
+  }
+}
+
+/* ============================================================================
+   ANIMATIONS (optional, reveal on scroll)
+   ========================================================================= */
+
+.info-card.pre-reveal {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.info-card.reveal {
+  opacity: 1;
+  transform: translateY(0);
+  transition: 
+    opacity 0.28s ease,
+    transform 0.28s ease;
+}
+
+/* ============================================================================
+   ACCESSIBILITY
+   ========================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .info-card,
+  .info-card.pre-reveal,
+  .info-card.reveal {
+    transition: none !important;
+    animation: none !important;
+  }
+  
+  .info-card:hover {
+    transform: none;
+  }
+}
+
+/* Focus styles for interactive cards */
+.info-card:focus-within {
+  outline: 2px solid var(--mg-accent);
+  outline-offset: 4px;
+}
+
+/* Ensure good contrast for text */
+@media (prefers-contrast: high) {
+  .info-card {
+    border: 2px solid var(--mg-stroke-strong);
+  }
+  
+  .info-card__description,
+  .info-card__subtitle {
+    color: var(--mg-text-primary);
+  }
+}
+

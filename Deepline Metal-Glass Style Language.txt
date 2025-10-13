@@ -1,0 +1,124 @@
+Deepline Metal-Glass Style Language
+
+## 0) Essence
+
+* **Mood:** cold, surgical, quiet power. Zero warmth.
+* **Material:** glass–metal hybrid (“smoked chrome”): translucent edges + glossy metallic body.
+* **Signature:** bright **Fresnel rim**, dimmer interior, tight **bloom** only on hottest edges.
+
+---
+
+## 1) Core Palette (tokens)
+
+| Token              | Hex                | Use                     |
+| ------------------ | ------------------ | ----------------------- |
+| `--dl-highlight-1` | `#E9F1F6`          | peak edge/specular hits |
+| `--dl-highlight-2` | `#CFE0EA`          | rolling edge into body  |
+| `--dl-silver-1`    | `#A6B7C3`          | body mid-high           |
+| `--dl-silver-2`    | `#8C9AA6`          | body mid-low            |
+| `--dl-shadow-1`    | `#47525B`          | cool shadow             |
+| `--dl-shadow-2`    | `#2B3238`          | deep cavity             |
+| `--dl-bloom`       | `#DDEAF3` @ 10–18% | rim bloom/outer glow    |
+| `--dl-bg`          | `#000000`          | background              |
+
+**Contrast target:** ~**6:1** overall. Keep mids subdued so highlights read metallic.
+
+**Default edge gradient:** `#2B3238 → #8C9AA6 → #A6B7C3 → #47525B`.
+
+---
+
+## 2) Finish & Texture
+
+* **Gloss:** high; **Roughness 0.08–0.14** (no mirror).
+* **Translucency:** light; edges feel thin.
+* **Micro-texture:** ultra-fine satin/mesh **6–12%** visibility; only inside turns/cavities.
+
+---
+
+## 3) Lighting Language
+
+* **Key Rim:** cool white from **upper-left/front**; grazing angle; strongest source.
+* **Counter Rim:** **upper-right/back**, 40–60% of key.
+* **Fill:** soft, below/center; just lifting interior (avoid warm casts).
+* **Bloom/Glare:** apply only to top **1–2%** brightest; radius small and clean.
+* **Background:** absolute black with faint vignette; object sits **8–12%** below center.
+
+---
+
+## 4) 3D Shader Targets (PBR shorthand)
+
+* **Base:** `#9CAFB9`, **Metallic 0.20–0.35**, **Specular 0.6–0.8**, **Roughness 0.08–0.14**
+* **IOR:** 1.45–1.50; **Transmission 0.25–0.35** (edge translucency)
+* **Clearcoat:** 0.25 (Roughness 0.03)
+* **Anisotropy:** 0.2 (ribbon sheen)
+* **Normals:** fine noise + mesh (strength 0.05–0.10)
+* **Fresnel:** explicit rim boost layer.
+
+---
+
+## 5) 2D Execution Rules
+
+**Required layers (top→bottom):**
+
+1. **Rim Bloom** (Screen, 10–18%, blur 6–12px)
+2. **Edge Highlights** (Screen, blur 2–4px)
+3. **Body Gradient** (Normal; use edge gradient above) + **Inner Glow** (cool white) + **Satin** (deep blue-gray)
+4. **Interior Shadow** (Multiply, soft)
+
+**Figma shortcuts:**
+
+* Fill = Linear/Angular gradient with tokens.
+* 2× **Inner Shadow** (cool white subtle + deep gray broad) for Fresnel + cavity.
+* **Outer Glow** = `--dl-bloom` 8–12%, blur 6–10.
+* Micro-texture overlay ≤10% (Soft Light/Multiply), clipped.
+
+---
+
+## 6) Form & Layout
+
+* **Cross-section:** elliptical ribbon; slightly flatter on inside curves.
+* **Thickness:** subtle variance (thicker lobes, thinner neck/crossover).
+* **Twist:** near-zero (≤10° at crossover max).
+* **Framing:** symbol ≈ **70–75%** canvas width; generous top negative space.
+
+---
+
+## 7) Wordmark Treatment
+
+* **Finish:** **matte-silver** variant (quieter than symbol): Metallic ~0.05 / Roughness ~0.20 (or equivalent 2D).
+* **Highlighting:** single top rim; minimal bloom. Symbol must outshine type.
+* **Kerning/weight:** preserve brand metrics; add subtle inner shadow for seat-in-scene.
+
+---
+
+## 8) Motion (optional)
+
+* **Edge run:** 0→100% sweep of highlight along rim (2–3s ease-in-out).
+* **Breathing bloom:** ±5% intensity at peaks; never pulses the whole object.
+* **Parallax:** micro shift (1–2px) on hover to suggest depth.
+
+---
+
+## 9) Guardrails (Do / Don’t)
+
+**Do**
+
+* Keep mids dark → let edges do the work.
+* Use cool whites only; keep temperature consistent.
+* Keep micro-texture nearly imperceptible.
+
+**Don’t**
+
+* Don’t raise midtones (plastic look).
+* Don’t add warm glows or color tints.
+* Don’t over-bloom or soften edges globally.
+
+---
+
+## 10) Deliverables
+
+* **Master**: 4096×4096 PNG (16-bit) on black + transparent.
+* **Web**: 2048, 1024 PNG; scalable **SVG** (gradients + masks).
+* **Dark-mode only** by default; include pure-white flat mark for non-photoreal contexts.
+
+This is the compact source of truth for “silvery, glowy, sleek” Deepline visuals.

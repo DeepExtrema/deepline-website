@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+
     // Event tracking function
     function track(eventName, props = {}) {
         console.log('event:', eventName, props);
