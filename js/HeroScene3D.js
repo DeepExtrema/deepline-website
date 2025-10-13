@@ -50,8 +50,9 @@ export class HeroScene3D {
       this.scene = new THREE.Scene();
       this.scene.background = null; // Transparent
 
-      // Setup camera
-      const aspect = window.innerWidth / window.innerHeight;
+      // Setup camera based on container dimensions
+      const container = this.canvas.parentElement;
+      const aspect = container.clientWidth / container.clientHeight;
       this.camera = new THREE.PerspectiveCamera(45, aspect, 0.1, 1000);
       this.camera.position.set(0, 0, 15);
       this.camera.lookAt(0, 0, 0);
@@ -260,8 +261,9 @@ export class HeroScene3D {
     this.composer.addPass(renderPass);
 
     // Add bloom pass
+    const container = this.canvas.parentElement;
     const bloomPass = new UnrealBloomPass(
-      new this.THREE.Vector2(window.innerWidth, window.innerHeight),
+      new this.THREE.Vector2(container.clientWidth, container.clientHeight),
       PARAMS.BLOOM_STRENGTH,
       PARAMS.BLOOM_RADIUS,
       PARAMS.BLOOM_THRESHOLD
@@ -328,8 +330,9 @@ export class HeroScene3D {
   handleResize() {
     if (!this.renderer || !this.camera) return;
 
-    const width = window.innerWidth;
-    const height = window.innerHeight;
+    const container = this.canvas.parentElement;
+    const width = container.clientWidth;
+    const height = container.clientHeight;
 
     this.camera.aspect = width / height;
     this.camera.updateProjectionMatrix();
