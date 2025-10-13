@@ -161,8 +161,8 @@ body {
 .hero-3d-container {
     position: absolute;
     top: 0;
-    left: 0;
-    width: 50%;
+    right: 0;
+    width: 55%;
     height: 100%;
     z-index: 0;
     pointer-events: none;
@@ -222,7 +222,7 @@ body {
     z-index: 1;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: flex-start;
     min-height: 90vh;
     padding: 140px 0 80px;
     pointer-events: none;
@@ -230,9 +230,9 @@ body {
 
 .hero-overlay .container {
     pointer-events: none;
-    width: 50%;
-    margin-right: 0;
-    padding-right: 5%;
+    width: 45%;
+    margin-left: 0;
+    padding-left: 5%;
 }
 
 .hero-text {

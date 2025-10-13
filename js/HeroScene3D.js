@@ -54,8 +54,8 @@ export class HeroScene3D {
       const container = this.canvas.parentElement;
       const aspect = container.clientWidth / container.clientHeight;
       this.camera = new THREE.PerspectiveCamera(45, aspect, 0.1, 1000);
-      this.camera.position.set(0, 0, 15);
-      this.camera.lookAt(0, 0, 0);
+      this.camera.position.set(1, 0, 12);
+      this.camera.lookAt(1, 0, 0);
 
       // Load GLB model
       await this.loadModel();
@@ -128,9 +128,9 @@ export class HeroScene3D {
             this.ball = this.model.children.find(c => c.isMesh) || this.model.children[0];
           }
           
-          // Scale model down to about 1/4 size and position it to the left
-          this.model.scale.setScalar(0.25);
-          this.model.position.set(-3, 0, 0);
+          // Scale model down to about 1/4 size and position it slightly to the right
+          this.model.scale.setScalar(0.35);
+          this.model.position.set(1, 0, 0);
           
           this.scene.add(this.model);
           resolve();
@@ -148,10 +148,10 @@ export class HeroScene3D {
 
   async createTextLabels() {
     const labels = [
-      { text: 'deployment', position: { x: -4.2, y: 1.2, z: 0 } },
-      { text: 'monitoring', position: { x: -1.2, y: 0.8, z: 0 } },
-      { text: 'testing', position: { x: -4.5, y: -0.8, z: 0 } },
-      { text: 'version control', position: { x: -1.5, y: -1.2, z: 0 } }
+      { text: 'deployment', position: { x: -0.5, y: 1.5, z: 0 } },
+      { text: 'monitoring', position: { x: 3, y: 0.8, z: 0 } },
+      { text: 'testing', position: { x: -1, y: -1, z: 0 } },
+      { text: 'version control', position: { x: 3.2, y: -1.3, z: 0 } }
     ];
 
     try {
@@ -216,10 +216,10 @@ export class HeroScene3D {
         this.scene.add(textMesh);
         this.textLabels.push(textMesh);
 
-        // Create connecting line from label to model center (at -3, 0, 0)
+        // Create connecting line from label to model center (at 1, 0, 0)
         const lineGeometry = new this.THREE.BufferGeometry().setFromPoints([
           new this.THREE.Vector3(label.position.x, label.position.y, label.position.z),
-          new this.THREE.Vector3(-3, 0, 0)
+          new this.THREE.Vector3(1, 0, 0)
         ]);
         
         const line = new this.THREE.Line(lineGeometry, lineMaterial);
