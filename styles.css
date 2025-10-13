@@ -4,16 +4,17 @@
     box-sizing: border-box;
 }
 
+/* Legacy variables - now pointing to Metal-Glass tokens */
 :root {
-    --bg-primary: #0B0B0C;
-    --bg-surface: #15161A;
-    --text-primary: #ECEFF4;
-    --text-secondary: #A9B0BA;
-    --accent: #00B5D8;
-    --accent-alt: #2E7CF6;
-    --success: #4ADE80;
-    --warning: #FBBF24;
-    --danger: #F87171;
+    --bg-primary: var(--mg-bg-primary, #0B0B0C);
+    --bg-surface: var(--mg-bg-surface, #15161A);
+    --text-primary: var(--mg-text-primary, #ECEFF4);
+    --text-secondary: var(--mg-text-secondary, #A9B0BA);
+    --accent: var(--mg-accent, #00B5D8);
+    --accent-alt: var(--mg-accent-alt, #2E7CF6);
+    --success: var(--mg-success, #4ADE80);
+    --warning: var(--mg-warning, #FBBF24);
+    --danger: var(--mg-danger, #F87171);
 }
 
 body {
@@ -148,23 +149,99 @@ body {
 }
 
 .hero {
-    padding: 140px 0 80px;
     min-height: 90vh;
     display: flex;
     align-items: center;
-    background: radial-gradient(ellipse 1200px 800px at 70% 50%, rgba(0, 181, 216, 0.08), transparent 50%),
-                radial-gradient(ellipse 800px 600px at 30% 50%, rgba(46, 124, 246, 0.05), transparent 50%);
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
 }
 
-.hero-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
+/* 3D Canvas Container */
+.hero-3d-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.hero-3d-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+}
+
+.hero-3d-container.loaded .hero-3d-canvas {
+    opacity: 1;
+}
+
+.hero-3d-container.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(166, 183, 195, 0.2);
+    border-top-color: rgba(166, 183, 195, 0.8);
+    border-radius: 50%;
+    animation: hero-3d-spin 1s linear infinite;
+}
+
+@keyframes hero-3d-spin {
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.hero-3d-container.fallback .fallback-image {
+    display: block !important;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 600px;
+    width: 50%;
+    height: auto;
+}
+
+.hero-3d-container.loaded .fallback-image,
+.hero-3d-container.loading .fallback-image {
+    display: none !important;
+}
+
+/* Hero Overlay with Text */
+.hero-overlay {
+    position: relative;
+    z-index: 1;
+    display: flex;
     align-items: center;
+    justify-content: center;
+    min-height: 90vh;
+    padding: 140px 0 80px;
+    pointer-events: none;
+}
+
+.hero-overlay .container {
+    pointer-events: none;
 }
 
 .hero-text {
     max-width: 46ch;
+    text-align: left;
+    margin-left: auto;
+    margin-right: 5%;
+    background: rgba(11, 11, 12, 0.3);
+    backdrop-filter: blur(8px);
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid rgba(236, 239, 244, 0.08);
+    pointer-events: auto;
 }
 
 .hero-title {
@@ -190,6 +267,7 @@ body {
     display: flex;
     gap: 16px;
     margin-bottom: 32px;
+    justify-content: flex-start;
 }
 
 .trust-strip {
@@ -198,22 +276,11 @@ body {
     display: flex;
     gap: 12px;
     align-items: center;
+    justify-content: flex-start;
 }
 
 .separator {
     opacity: 0.5;
-}
-
-.hero-visual {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.hero-image {
-    width: 100%;
-    max-width: 500px;
-    height: auto;
 }
 
 .section-title {
@@ -330,8 +397,8 @@ body {
         inset 0 1px 2px rgba(221, 234, 243, 0.15),
         0 6px 22px rgba(0, 0, 0, 0.35);
     background-image: 
-        radial-gradient(1200px 400px at 0% 0%, rgba(166, 183, 195, 0.06), transparent 60%),
-        radial-gradient(800px 300px at 100% 100%, rgba(207, 224, 234, 0.04), transparent 50%);
+        radial-gradient(ellipse 500px 350px at 50% 40%, rgba(166, 183, 195, 0.08), transparent 70%),
+        radial-gradient(ellipse 350px 250px at 50% 50%, rgba(221, 234, 243, 0.06), transparent 60%);
 }
 
 .capability-card h3 {
@@ -379,6 +446,15 @@ body {
 
 .step {
     text-align: center;
+    position: relative;
+    padding: 24px 16px;
+    border-radius: 12px;
+    background-image: 
+        radial-gradient(ellipse 400px 300px at 50% 30%, rgba(166, 183, 195, 0.08), transparent 70%),
+        radial-gradient(ellipse 300px 200px at 50% 50%, rgba(221, 234, 243, 0.06), transparent 60%);
+    box-shadow: 
+        inset 0 0 0 1px rgba(233, 241, 246, 0.06),
+        0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .step-number {
@@ -436,8 +512,8 @@ body {
         inset 0 1px 2px rgba(221, 234, 243, 0.15),
         0 6px 22px rgba(0, 0, 0, 0.35);
     background-image: 
-        radial-gradient(1200px 400px at 0% 0%, rgba(166, 183, 195, 0.06), transparent 60%),
-        radial-gradient(800px 300px at 100% 100%, rgba(207, 224, 234, 0.04), transparent 50%);
+        radial-gradient(ellipse 500px 350px at 50% 40%, rgba(166, 183, 195, 0.08), transparent 70%),
+        radial-gradient(ellipse 350px 250px at 50% 50%, rgba(221, 234, 243, 0.06), transparent 60%);
     display: flex;
     flex-direction: column;
 }
@@ -538,6 +614,15 @@ body {
 
 .security-item {
     text-align: center;
+    position: relative;
+    padding: 24px 16px;
+    border-radius: 12px;
+    background-image: 
+        radial-gradient(ellipse 400px 300px at 50% 30%, rgba(166, 183, 195, 0.08), transparent 70%),
+        radial-gradient(ellipse 300px 200px at 50% 50%, rgba(221, 234, 243, 0.06), transparent 60%);
+    box-shadow: 
+        inset 0 0 0 1px rgba(233, 241, 246, 0.06),
+        0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .security-item h3 {
@@ -596,8 +681,8 @@ body {
         inset 0 1px 2px rgba(221, 234, 243, 0.15),
         0 6px 22px rgba(0, 0, 0, 0.35);
     background-image: 
-        radial-gradient(1200px 400px at 0% 0%, rgba(166, 183, 195, 0.06), transparent 60%),
-        radial-gradient(800px 300px at 100% 100%, rgba(207, 224, 234, 0.04), transparent 50%);
+        radial-gradient(ellipse 600px 300px at 50% 40%, rgba(166, 183, 195, 0.08), transparent 70%),
+        radial-gradient(ellipse 400px 200px at 50% 50%, rgba(221, 234, 243, 0.06), transparent 60%);
     max-width: 800px;
     margin: 0 auto;
 }
@@ -832,13 +917,9 @@ body {
 }
 
 @media (max-width: 968px) {
-    .hero-content {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-
     .hero-text {
         max-width: 100%;
+        padding: 32px 24px;
     }
 
     .hero-title {
@@ -846,12 +927,7 @@ body {
     }
 
     .hero-ctas {
-        justify-content: center;
         flex-wrap: wrap;
-    }
-
-    .trust-strip {
-        justify-content: center;
     }
 
     .nav-links {
