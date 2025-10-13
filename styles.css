@@ -149,27 +149,47 @@ body {
 }
 
 .hero {
+    padding: 140px 0 80px;
     min-height: 90vh;
-    display: grid;
-    grid-template-columns: minmax(420px, 1fr) 1fr;
+    display: flex;
     align-items: center;
-    gap: clamp(24px, 5vw, 64px);
     position: relative;
     overflow: hidden;
 }
 
-/* 3D Canvas Container - Right column with stable centering */
+/* Hero Content Grid - 50/50 split like main */
+.hero-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-text {
+    max-width: 46ch;
+}
+
+/* Right column visual container */
+.hero-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 3D Container - Drop-in replacement for static image */
 .hero-3d-container {
-    grid-column: 2;
+    width: 100%;
+    max-width: 500px;
+    aspect-ratio: var(--hero-aspect, 1 / 1);
     position: relative;
     display: grid;
     place-items: center;
-    height: clamp(360px, 60vh, 560px);
     isolation: isolate;
-    overflow: visible;
 }
 
-/* GLB renderer fills the box */
+/* Canvas/model fills the box */
 .hero-3d-canvas,
 .hero-3d-container model-viewer {
     position: absolute;
@@ -203,10 +223,11 @@ body {
     to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
-/* Fallback image - centered by the grid, not absolute */
+/* Fallback image - same constraints as static hero-image */
 .hero-3d-container .fallback-image {
-    max-width: min(520px, 80%);
-    height: auto;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
     opacity: 1;
     transition: opacity 0.6s ease-in-out;
 }
@@ -221,33 +242,6 @@ body {
     pointer-events: none;
 }
 
-/* Hero Overlay with Text - Left column */
-.hero-overlay {
-    grid-column: 1;
-    position: relative;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 0 5%;
-    pointer-events: auto;
-}
-
-.hero-overlay .container {
-    max-width: 46ch;
-    margin: 0;
-    padding: 0;
-}
-
-.hero-text {
-    max-width: 100%;
-    text-align: left;
-    background: transparent;
-    backdrop-filter: none;
-    padding: 0;
-    border-radius: 0;
-    border: none;
-}
 
 .hero-title {
     font-size: 56px;
