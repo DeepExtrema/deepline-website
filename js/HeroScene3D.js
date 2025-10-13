@@ -64,7 +64,17 @@ export class HeroScene3D {
       createLighting(THREE, this.scene);
 
       // Create 3D text labels
-      await this.createTextLabels();
+      // await this.createTextLabels(); // DISABLED: Labels hidden for cleaner view
+
+      // Apply 3x zoom using bounding-box framing
+      if (this.model) {
+        // Fit camera to object with moderate framing
+        this.fitCameraToObject(this.model, 4.4);
+        
+        // Optional: Apply additional camera zoom for extra punch
+        // this.camera.zoom = 1.2;
+        // this.camera.updateProjectionMatrix();
+      }
 
       // Setup post-processing
       await this.setupPostProcessing();
@@ -144,6 +154,30 @@ export class HeroScene3D {
         }
       );
     });
+  }
+
+  fitCameraToObject(object, offset = 1.2) {
+    const box = new this.THREE.Box3().setFromObject(object);
+    const size = box.getSize(new this.THREE.Vector3());
+    const center = box.getCenter(new this.THREE.Vector3());
+
+    const maxSize = Math.max(size.x, size.y, size.z);
+    const fitHeight = maxSize / (2 * Math.tan(this.THREE.MathUtils.degToRad(this.camera.fov * 0.5)));
+    const fitWidth = fitHeight / this.camera.aspect;
+    const distance = offset * Math.max(fitHeight, fitWidth);
+
+    const dir = new this.THREE.Vector3()
+      .subVectors(this.camera.position, center)
+      .normalize();
+
+    this.camera.position.copy(center).add(dir.multiplyScalar(distance));
+    
+    // Clamp near/far for depth precision
+    this.camera.near = Math.max(0.01, distance / 100);
+    this.camera.far = Math.min(2000, distance * 100);
+    this.camera.updateProjectionMatrix();
+    
+    this.camera.lookAt(center);
   }
 
   async createTextLabels() {
@@ -302,26 +336,30 @@ export class HeroScene3D {
       this.model.rotation.y += this.currentRotation.y * 0.01;
     }
 
-    // Update billboard text labels to face camera
-    this.textLabels.forEach(label => {
-      if (label.userData.isBillboard) {
-        label.lookAt(this.camera.position);
-      }
-    });
+    // Update billboard text labels to face camera (only if labels exist)
+    if (this.textLabels.length > 0) {
+      this.textLabels.forEach(label => {
+        if (label.userData.isBillboard) {
+          label.lookAt(this.camera.position);
+        }
+      });
+    }
 
-    // Update connecting lines
-    this.labelLines.forEach(({ line, start }) => {
-      const positions = line.geometry.attributes.position.array;
-      // Update end point to follow ball position if it exists
-      if (this.ball) {
-        const ballWorldPos = new this.THREE.Vector3();
-        this.ball.getWorldPosition(ballWorldPos);
-        positions[3] = ballWorldPos.x;
-        positions[4] = ballWorldPos.y;
-        positions[5] = ballWorldPos.z;
-      }
-      line.geometry.attributes.position.needsUpdate = true;
-    });
+    // Update connecting lines (only if lines exist)
+    if (this.labelLines.length > 0) {
+      this.labelLines.forEach(({ line, start }) => {
+        const positions = line.geometry.attributes.position.array;
+        // Update end point to follow ball position if it exists
+        if (this.ball) {
+          const ballWorldPos = new this.THREE.Vector3();
+          this.ball.getWorldPosition(ballWorldPos);
+          positions[3] = ballWorldPos.x;
+          positions[4] = ballWorldPos.y;
+          positions[5] = ballWorldPos.z;
+        }
+        line.geometry.attributes.position.needsUpdate = true;
+      });
+    }
 
     // Render with post-processing
     this.composer.render();
@@ -338,6 +376,7 @@ export class HeroScene3D {
     this.camera.updateProjectionMatrix();
 
     this.renderer.setSize(width, height);
+    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Cap at 2x for performance
 
     if (this.composer) {
       this.composer.setSize(width, height);
