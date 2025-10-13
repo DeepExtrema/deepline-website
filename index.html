@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="cool-silver">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +9,17 @@
     <meta property="og:description" content="Unify monitoring, drift detection, incident response, and automated retraining across AWS/Azure/GCP and on-prem. Join Early Access.">
     <meta property="og:image" content="/attached_assets/isometric-overmind_1760149751513.png">
     <link rel="icon" type="image/png" href="/Deepline logos NO BACK/deepline silver logo with back.png">
+    <link rel="stylesheet" href="ui/foundation/tokens.css">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="js/components/InfoCard.css">
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+      }
+    }
+    </script>
 </head>
 <body>
     <nav class="nav">
@@ -28,8 +38,12 @@
     </nav>
 
     <section class="hero" id="hero">
-        <div class="container">
-            <div class="hero-content">
+        <div class="hero-3d-container">
+            <canvas id="hero-3d-canvas" class="hero-3d-canvas"></canvas>
+            <img src="/Deepline logos NO BACK/Overmind-circle-schema.png" alt="Overmind control hub routing events across monitoring, deployment, testing, version control" class="fallback-image" style="display: none;">
+        </div>
+        <div class="hero-overlay">
+            <div class="container">
                 <div class="hero-text">
                     <h1 class="hero-title">Secure Overmind early access. Let AI command your ML ops.</h1>
                     <p class="hero-subtitle">One <strong>vendor-agnostic control plane</strong> that <strong>detects drift, blocks bad deploys, and auto-retrains</strong> across AWS/Azure/GCP or on-prem—<strong>no lock-in</strong>.</p>
@@ -44,9 +58,6 @@
                         <span class="separator">·</span>
                         <span>Full audit</span>
                     </div>
-                </div>
-                <div class="hero-visual">
-                    <img src="/Deepline logos NO BACK/Overmind-circle-schema.png" alt="Overmind control hub routing events across monitoring, deployment, testing, version control" class="hero-image">
                 </div>
             </div>
         </div>
@@ -319,5 +330,6 @@
     </footer>
 
     <script src="main.js"></script>
+    <script type="module" src="js/hero-3d-init.js"></script>
 </body>
 </html>
