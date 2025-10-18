@@ -45,10 +45,14 @@ export class HeroScene3D {
       this.THREE = THREE;
       this.renderer = renderer;
       this.clock = new THREE.Clock();
+      window.heroScene = this; // TEMPORARY: For diagnostics
 
       // Setup scene
       this.scene = new THREE.Scene();
       this.scene.background = null; // Transparent
+      
+      // Add background shader plane
+      // this.createBackgroundShader(); // DISABLED: Removed for transparency
 
       // Setup camera based on container dimensions
       const container = this.canvas.parentElement;
@@ -80,7 +84,7 @@ export class HeroScene3D {
       await this.setupPostProcessing();
 
       // Setup mouse tracking
-      this.setupMouseTracking();
+      // this.setupMouseTracking(); // DEACTIVATED: Mouse tracking disabled
 
       // Handle resize
       this.handleResize();
@@ -96,6 +100,11 @@ export class HeroScene3D {
       return false;
     }
   }
+
+  // createBackgroundShader() {
+  //   // DISABLED: Method removed for transparency
+  //   // This method created a black gradient background that prevented transparency
+  // }
 
   async loadModel() {
     // Dynamically import GLTFLoader
@@ -287,11 +296,25 @@ export class HeroScene3D {
     const { RenderPass } = await import('three/addons/postprocessing/RenderPass.js');
     const { UnrealBloomPass } = await import('three/addons/postprocessing/UnrealBloomPass.js');
 
-    // Create composer
-    this.composer = new EffectComposer(this.renderer);
+    // Create composer with alpha support
+    const container = this.canvas.parentElement;
+    const renderTarget = new this.THREE.WebGLRenderTarget(
+      container.clientWidth,
+      container.clientHeight,
+      {
+        minFilter: this.THREE.LinearFilter,
+        magFilter: this.THREE.LinearFilter,
+        format: this.THREE.RGBAFormat,
+        type: this.THREE.UnsignedByteType,
+        stencilBuffer: false
+      }
+    );
+    this.composer = new EffectComposer(this.renderer, renderTarget);
 
-    // Add render pass
+    // Add render pass with transparency support
     const renderPass = new RenderPass(this.scene, this.camera);
+    renderPass.clear = false; // Don't clear the render target
+    renderPass.clearDepth = false; // Don't clear depth buffer
     this.composer.addPass(renderPass);
 
     // Add bloom pass
@@ -312,14 +335,15 @@ export class HeroScene3D {
     const time = this.clock.getElapsedTime();
 
     // Floating animation
-    if (this.ball) {
-      const baseY = this.ball.userData.baseY !== undefined ? this.ball.userData.baseY : this.ball.position.y;
-      if (this.ball.userData.baseY === undefined) {
-        this.ball.userData.baseY = baseY;
-      }
-      
-      this.ball.position.y = baseY + Math.sin(time * this.floatSpeed) * this.floatAmount;
-    }
+    // DEACTIVATED: Bouncing motion disabled
+    // if (this.ball) {
+    //   const baseY = this.ball.userData.baseY !== undefined ? this.ball.userData.baseY : this.ball.position.y;
+    //   if (this.ball.userData.baseY === undefined) {
+    //     this.ball.userData.baseY = baseY;
+    //   }
+    //   
+    //   this.ball.position.y = baseY + Math.sin(time * this.floatSpeed) * this.floatAmount;
+    // }
 
     // Slow rotation
     if (!prefersReducedMotion()) {
@@ -327,14 +351,15 @@ export class HeroScene3D {
     }
 
     // Mouse tracking with lerp smoothing
-    this.currentRotation.x += (this.targetRotation.x - this.currentRotation.x) * this.mouseDamping;
-    this.currentRotation.y += (this.targetRotation.y - this.currentRotation.y) * this.mouseDamping;
+    // DEACTIVATED: Mouse-based rotation disabled
+    // this.currentRotation.x += (this.targetRotation.x - this.currentRotation.x) * this.mouseDamping;
+    // this.currentRotation.y += (this.targetRotation.y - this.currentRotation.y) * this.mouseDamping;
 
-    if (this.model) {
-      this.model.rotation.x = this.currentRotation.x;
-      // Combine manual rotation with mouse rotation
-      this.model.rotation.y += this.currentRotation.y * 0.01;
-    }
+    // if (this.model) {
+    //   this.model.rotation.x = this.currentRotation.x;
+    //   // Combine manual rotation with mouse rotation
+    //   this.model.rotation.y += this.currentRotation.y * 0.01;
+    // }
 
     // Update billboard text labels to face camera (only if labels exist)
     if (this.textLabels.length > 0) {
@@ -378,6 +403,9 @@ export class HeroScene3D {
     this.renderer.setSize(width, height);
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Cap at 2x for performance
 
+    // Update background shader resolution
+    // REMOVED: Background shader disabled for transparency
+
     if (this.composer) {
       this.composer.setSize(width, height);
     }
@@ -414,6 +442,9 @@ export class HeroScene3D {
       if (line.geometry) line.geometry.dispose();
       if (line.material) line.material.dispose();
     });
+
+    // Dispose background shader
+    // REMOVED: Background shader disabled for transparency
   }
 }
 

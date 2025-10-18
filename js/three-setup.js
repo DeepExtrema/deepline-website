@@ -49,6 +49,9 @@ export function createRenderer(canvas, options = {}) {
       // Enable shadows if needed
       renderer.shadowMap.enabled = false; // Disabled for performance
 
+      // Set clear color to transparent for alpha blending
+      renderer.setClearColor(0x000000, 0); // Clear to transparent (color, alpha)
+
       return { THREE, renderer };
     });
 }
