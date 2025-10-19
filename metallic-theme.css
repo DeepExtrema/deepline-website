@@ -5,17 +5,80 @@
  */
 
 /* ============================================================================
-   NAVIGATION BORDERS
+   MAIN BODY - Metallic Deep Space Background
+   ========================================================================= */
+
+body {
+    background: 
+        /* Ultra dark gunmetal black gradient */
+        radial-gradient(ellipse at center 40%, 
+            #06080A 0%, 
+            #040506 25%, 
+            #000000 100%
+        ),
+        /* Ultra dark gunmetal texture overlay */
+        radial-gradient(ellipse 2000px 1000px at 30% 20%, 
+            rgba(40, 45, 55, 0.2) 0%, 
+            transparent 50%
+        ),
+        radial-gradient(ellipse 1500px 800px at 70% 80%, 
+            rgba(50, 55, 65, 0.15) 0%, 
+            transparent 60%
+        ),
+        /* Strong metallic noise texture */
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.15'/%3E%3C/svg%3E");
+    position: relative;
+}
+
+/* Add subtle animated metallic shimmer to body */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(40, 45, 55, 0.12) 45%,
+        rgba(50, 55, 65, 0.15) 50%,
+        rgba(40, 45, 55, 0.12) 55%,
+        transparent 70%
+    );
+    background-size: 200% 200%;
+    animation: metallic-shimmer 8s ease-in-out infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* ============================================================================
+   NAVIGATION - Chrome Glass Panel
    ========================================================================= */
 
 .nav {
-    /* Replace flat border with metallic chrome edge */
+    background: 
+        /* Ultra dark gunmetal chrome gradient base */
+        linear-gradient(180deg, 
+            rgba(8, 9, 10, 0.95) 0%,
+            rgba(2, 2, 3, 0.98) 100%
+        ),
+        /* Ultra dark gunmetal reflection overlay */
+        radial-gradient(ellipse 800px 200px at 50% 0%, 
+            rgba(40, 45, 55, 0.4) 0%, 
+            transparent 70%
+        );
+    backdrop-filter: blur(15px) saturate(1.2);
     border-bottom: none;
     box-shadow: 
-        inset 0 -1px 0 rgba(255, 255, 255, 0.15),
-        inset 0 -2px 0 rgba(166, 183, 195, 0.1),
-        0 1px 0 rgba(0, 0, 0, 0.3),
-        0 2px 4px rgba(0, 0, 0, 0.2);
+        /* Strong chrome edges */
+        inset 0 2px 0 rgba(160, 170, 185, 0.25),
+        inset 0 1px 0 rgba(140, 150, 165, 0.35),
+        /* Bottom shadow */
+        inset 0 -1px 0 rgba(0, 0, 0, 0.6),
+        /* Outer glow */
+        0 2px 8px rgba(0, 0, 0, 0.7),
+        0 0 30px rgba(100, 110, 125, 0.3);
 }
 
 /* ============================================================================
@@ -96,8 +159,61 @@
         );
 }
 
-/* Primary Button - Enhanced Metallic Glow */
+/* ============================================================================
+   PRIMARY BUTTON - Metallic Border (same as secondary)
+   ========================================================================= */
+
+.btn-primary {
+    border: 2px solid transparent;
+    background-image: 
+        linear-gradient(var(--bg-primary), var(--bg-primary)),
+        linear-gradient(135deg, 
+            #00B5D8 0%,
+            #2E7CF6 25%,
+            #FFFFFF 50%,
+            #2E7CF6 75%,
+            #00B5D8 100%
+        );
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    position: relative;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(135deg, 
+        rgba(0, 181, 216, 0.4) 0%,
+        rgba(46, 124, 246, 0.4) 25%,
+        rgba(255, 255, 255, 0.6) 50%,
+        rgba(46, 124, 246, 0.4) 75%,
+        rgba(0, 181, 216, 0.4) 100%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.btn-primary:hover::before {
+    opacity: 1;
+}
+
 .btn-primary:hover {
+    background-image: 
+        linear-gradient(var(--bg-primary), var(--bg-primary)),
+        linear-gradient(135deg, 
+            #00B5D8 0%,
+            #2E7CF6 25%,
+            #FFFFFF 50%,
+            #2E7CF6 75%,
+            #00B5D8 100%
+        );
     box-shadow: 
         0 10px 24px rgba(0, 181, 216, 0.25),
         inset 0 1px 0 rgba(255, 255, 255, 0.3),
@@ -114,72 +230,188 @@
 .playbook-card,
 .install-footprint .card {
     box-shadow: 
-        /* Metallic inner highlight */
-        inset 0 0 0 1px rgba(233, 241, 246, 0.18),
-        inset 1px 1px 0 rgba(255, 255, 255, 0.15),
-        inset -1px -1px 0 rgba(0, 0, 0, 0.25),
-        /* Top edge reflection */
-        inset 0 2px 3px rgba(233, 241, 246, 0.2),
-        inset 0 1px 2px rgba(221, 234, 243, 0.15),
-        /* Bottom edge shadow */
-        inset 0 -1px 2px rgba(0, 0, 0, 0.15),
-        /* Drop shadow */
-        0 6px 22px rgba(0, 0, 0, 0.35),
-        /* Outer glow */
-        0 0 0 1px rgba(166, 183, 195, 0.08);
+        /* Strong gunmetal inner highlight */
+        inset 0 0 0 1px rgba(100, 110, 125, 0.4),
+        inset 1px 1px 0 rgba(140, 150, 165, 0.3),
+        inset -1px -1px 0 rgba(0, 0, 0, 0.5),
+        /* Strong top edge reflection */
+        inset 0 2px 3px rgba(120, 130, 145, 0.35),
+        inset 0 1px 2px rgba(100, 110, 125, 0.25),
+        /* Strong top edge dark shadow */
+        inset 0 1px 2px rgba(0, 0, 0, 0.4),
+        /* Strong bottom edge shadow */
+        inset 0 -1px 2px rgba(0, 0, 0, 0.3),
+        /* Strong drop shadow */
+        0 8px 30px rgba(0, 0, 0, 0.5),
+        /* Strong outer glow */
+        0 0 0 1px rgba(80, 90, 105, 0.2);
 }
 
-/* Problem Items, Steps, Security Items - Subtle Chrome */
+/* Problem Items, Steps, Security Items - Deep Gunmetal */
 .problem-item,
 .step,
 .security-item {
     box-shadow: 
-        /* Beveled metallic edge */
-        inset 0 0 0 1px rgba(233, 241, 246, 0.12),
-        inset 1px 1px 0 rgba(255, 255, 255, 0.1),
-        inset -1px -1px 0 rgba(0, 0, 0, 0.2),
-        /* Subtle highlights */
-        inset 0 1px 1px rgba(233, 241, 246, 0.08),
-        /* Drop shadow */
-        0 2px 8px rgba(0, 0, 0, 0.15),
-        /* Outer rim */
-        0 0 0 1px rgba(166, 183, 195, 0.05);
+        /* Strong gunmetal beveled edge */
+        inset 0 0 0 1px rgba(100, 110, 125, 0.25),
+        inset 1px 1px 0 rgba(120, 130, 145, 0.2),
+        inset -1px -1px 0 rgba(0, 0, 0, 0.5),
+        /* Strong highlights */
+        inset 0 1px 1px rgba(120, 130, 145, 0.15),
+        /* Strong top edge dark shadow */
+        inset 0 1px 2px rgba(0, 0, 0, 0.4),
+        /* Strong bottom edge dark shadow */
+        inset 0 -1px 2px rgba(0, 0, 0, 0.4),
+        /* Strong drop shadow */
+        0 4px 15px rgba(0, 0, 0, 0.5),
+        /* Strong outer rim */
+        0 0 0 1px rgba(80, 90, 105, 0.1);
 }
 
-/* Hover effects - Metallic shimmer */
+/* Hover effects - Enhanced Gunmetal */
 .capability-card:hover,
 .playbook-card:hover,
 .problem-item:hover,
 .step:hover,
 .security-item:hover {
     box-shadow: 
-        inset 0 0 0 1px rgba(233, 241, 246, 0.25),
-        inset 1px 1px 0 rgba(255, 255, 255, 0.2),
-        inset -1px -1px 0 rgba(0, 0, 0, 0.3),
-        inset 0 2px 3px rgba(233, 241, 246, 0.25),
-        0 8px 28px rgba(0, 0, 0, 0.4),
-        0 0 0 1px rgba(166, 183, 195, 0.15);
+        inset 0 0 0 1px rgba(100, 110, 125, 0.4),
+        inset 1px 1px 0 rgba(120, 130, 145, 0.3),
+        inset -1px -1px 0 rgba(0, 0, 0, 0.7),
+        inset 0 2px 3px rgba(120, 130, 145, 0.3),
+        /* Strong top edge dark shadow on hover */
+        inset 0 1px 2px rgba(0, 0, 0, 0.6),
+        /* Strong bottom edge dark shadow on hover */
+        inset 0 -1px 2px rgba(0, 0, 0, 0.6),
+        0 10px 35px rgba(0, 0, 0, 0.7),
+        0 0 0 1px rgba(80, 90, 105, 0.2);
     transition: box-shadow 0.3s ease;
 }
 
 /* ============================================================================
-   SECTION DIVIDERS - Metallic Separator Bars
+   SECTION BACKGROUNDS - Metallic Panel Surfaces
    ========================================================================= */
 
 .problem,
 .how-it-works,
 .why-now,
 .early-access {
+    background: 
+        /* Ultra dark gunmetal surface */
+        linear-gradient(180deg, 
+            #121418 0%, 
+            #0E0F11 50%, 
+            #08090A 100%
+        ),
+        /* Ultra dark gunmetal reflection zones */
+        radial-gradient(ellipse 1200px 400px at 50% 0%, 
+            rgba(40, 45, 55, 0.25) 0%, 
+            transparent 60%
+        ),
+        radial-gradient(ellipse 800px 300px at 30% 100%, 
+            rgba(50, 55, 65, 0.2) 0%, 
+            transparent 50%
+        ),
+        /* Strong metallic texture */
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.2'/%3E%3C/svg%3E");
+    
     box-shadow: 
-        /* Top metallic edge - bright highlight */
-        inset 0 2px 0 rgba(255, 255, 255, 0.08),
-        inset 0 1px 0 rgba(233, 241, 246, 0.2),
-        /* Top shadow */
-        inset 0 3px 2px rgba(0, 0, 0, 0.1),
-        /* Bottom metallic edge - subtle highlight */
-        inset 0 -1px 0 rgba(233, 241, 246, 0.12),
-        /* Bottom shadow */
-        inset 0 -2px 2px rgba(0, 0, 0, 0.08);
+        /* Strong metallic edges */
+        inset 0 2px 0 rgba(160, 170, 185, 0.2),
+        inset 0 1px 0 rgba(140, 150, 165, 0.3),
+        /* Bottom edge */
+        inset 0 -1px 0 rgba(0, 0, 0, 0.5),
+        /* Outer rim glow */
+        0 0 0 1px rgba(100, 110, 125, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Add animated metallic shimmer to sections */
+.problem::after,
+.how-it-works::after,
+.why-now::after,
+.early-access::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(40, 45, 55, 0.15) 50%,
+        transparent 100%
+    );
+    animation: section-shimmer 6s ease-in-out infinite;
+    pointer-events: none;
+}
+
+/* ============================================================================
+   HERO SECTION - Deep Metallic Space
+   ========================================================================= */
+
+.hero {
+    background: 
+        /* Deep metallic gradient */
+        radial-gradient(ellipse at center 40%, 
+            #0A121A 0%, 
+            #0B0F14 30%, 
+            #000000 100%
+        ),
+        /* Ultra dark gunmetal central glow */
+        radial-gradient(ellipse 1000px 600px at 50% 50%, 
+            rgba(40, 45, 55, 0.25) 0%, 
+            transparent 60%
+        ),
+        /* Ultra dark gunmetal corner highlights */
+        radial-gradient(ellipse 600px 400px at 20% 20%, 
+            rgba(50, 55, 65, 0.2) 0%, 
+            transparent 50%
+        ),
+        radial-gradient(ellipse 600px 400px at 80% 80%, 
+            rgba(50, 55, 65, 0.2) 0%, 
+            transparent 50%
+        );
+    position: relative;
+}
+
+/* Add subtle animated metallic particles effect */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle 2px at 20% 30%, rgba(40, 45, 55, 0.35) 0%, transparent 50%),
+        radial-gradient(circle 1px at 80% 20%, rgba(50, 55, 65, 0.3) 0%, transparent 50%),
+        radial-gradient(circle 1.5px at 60% 80%, rgba(60, 70, 85, 0.28) 0%, transparent 50%);
+    animation: metallic-particles 12s ease-in-out infinite;
+    pointer-events: none;
+}
+
+/* ============================================================================
+   CAPABILITIES & SECURITY SECTIONS - Subtle Metallic
+   ========================================================================= */
+
+.capabilities,
+.security {
+    background: 
+        /* Ultra dark gunmetal base */
+        radial-gradient(ellipse 2000px 800px at 50% 50%, 
+            rgba(40, 45, 55, 0.15) 0%, 
+            transparent 70%
+        ),
+        /* Inherit ultra dark gunmetal body background */
+        radial-gradient(ellipse at center 40%, 
+            #06080A 0%, 
+            #040506 25%, 
+            #000000 100%
+        );
+    position: relative;
 }
 
 /* ============================================================================
@@ -374,6 +606,29 @@
     }
 }
 
+@keyframes section-shimmer {
+    0% {
+        left: -100%;
+    }
+    50% {
+        left: 100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+@keyframes metallic-particles {
+    0%, 100% {
+        opacity: 0.3;
+        transform: translateY(0px);
+    }
+    50% {
+        opacity: 0.6;
+        transform: translateY(-10px);
+    }
+}
+
 /* Apply shimmer to interactive elements */
 .btn-secondary:hover,
 .btn-outline:hover {
@@ -457,8 +712,64 @@
     .capability-card::after,
     .playbook-card::after,
     .step-number,
-    .playbook-card:hover .badge {
+    .playbook-card:hover .badge,
+    body::before,
+    .problem::after,
+    .how-it-works::after,
+    .why-now::after,
+    .early-access::after,
+    .hero::before {
         animation: none;
+    }
+}
+
+/* ============================================================================
+   RESPONSIVE OPTIMIZATIONS FOR METALLIC BACKGROUNDS
+   ========================================================================= */
+
+@media (max-width: 768px) {
+    /* Reduce animation complexity on mobile for performance */
+    body::before,
+    .problem::after,
+    .how-it-works::after,
+    .why-now::after,
+    .early-access::after,
+    .hero::before {
+        animation: none;
+    }
+    
+    /* Simplify gradients for performance */
+    .problem,
+    .how-it-works,
+    .why-now,
+    .early-access {
+        background: 
+            linear-gradient(180deg, 
+                #1A1F28 0%, 
+                #15161A 50%, 
+                #0F1114 100%
+            );
+    }
+    
+    /* Simplify hero background on mobile */
+    .hero {
+        background: 
+            radial-gradient(ellipse at center 40%, 
+                #0A121A 0%, 
+                #0B0F14 30%, 
+                #000000 100%
+            );
+    }
+    
+    /* Simplify capabilities and security backgrounds */
+    .capabilities,
+    .security {
+        background: 
+            radial-gradient(ellipse at center 40%, 
+                #0A121A 0%, 
+                #0B0F14 25%, 
+                #000000 100%
+            );
     }
 }
 
