@@ -771,8 +771,77 @@ body {
 }
 
 .form-container {
-    max-width: 600px;
+    position: relative;
+    z-index: 1;
+}
+
+.form-card {
+    background: var(--bg-surface);
+    padding: 24px;
+    border-radius: 20px;
+    max-width: 650px;
     margin: 0 auto;
+    box-shadow: 
+        /* Strong gunmetal inner highlight */
+        inset 0 0 0 1px rgba(100, 110, 125, 0.4),
+        inset 1px 1px 0 rgba(140, 150, 165, 0.3),
+        inset -1px -1px 0 rgba(0, 0, 0, 0.5),
+        /* Strong top edge reflection */
+        inset 0 2px 3px rgba(120, 130, 145, 0.35),
+        inset 0 1px 2px rgba(100, 110, 125, 0.25),
+        /* Strong top edge dark shadow */
+        inset 0 1px 2px rgba(0, 0, 0, 0.4),
+        /* Strong bottom edge shadow */
+        inset 0 -1px 2px rgba(0, 0, 0, 0.3),
+        /* Strong drop shadow */
+        0 8px 30px rgba(0, 0, 0, 0.5),
+        /* Strong outer glow */
+        0 0 0 1px rgba(80, 90, 105, 0.2);
+    background-image: 
+        radial-gradient(ellipse 600px 300px at 50% 40%, rgba(166, 183, 195, 0.08), transparent 70%),
+        radial-gradient(ellipse 400px 200px at 50% 50%, rgba(221, 234, 243, 0.06), transparent 60%);
+    position: relative;
+    overflow: hidden;
+}
+
+.form-card:hover {
+    box-shadow: 
+        inset 0 0 0 1px rgba(100, 110, 125, 0.4),
+        inset 1px 1px 0 rgba(120, 130, 145, 0.3),
+        inset -1px -1px 0 rgba(0, 0, 0, 0.7),
+        inset 0 2px 3px rgba(120, 130, 145, 0.3),
+        /* Strong top edge dark shadow on hover */
+        inset 0 1px 2px rgba(0, 0, 0, 0.6),
+        /* Strong bottom edge dark shadow on hover */
+        inset 0 -1px 2px rgba(0, 0, 0, 0.6),
+        0 10px 35px rgba(0, 0, 0, 0.7),
+        0 0 0 1px rgba(80, 90, 105, 0.2);
+    transition: box-shadow 0.3s ease;
+}
+
+.form-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(233, 241, 246, 0.03) 45%,
+        rgba(255, 255, 255, 0.08) 50%,
+        rgba(233, 241, 246, 0.03) 55%,
+        transparent 70%
+    );
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.form-card:hover::after {
+    opacity: 1;
+    animation: metallic-shimmer 2s ease-in-out infinite;
 }
 
 .form-title {
@@ -1015,4 +1084,20 @@ body {
 
 html {
     scroll-behavior: smooth;
+}
+
+/* Form card responsive adjustments */
+@media (max-width: 768px) {
+    .form-card {
+        padding: 20px 16px;
+        border-radius: 16px;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 640px) {
+    .form-card {
+        padding: 16px 12px;
+        border-radius: 12px;
+    }
 }

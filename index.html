@@ -236,79 +236,81 @@
 
     <section class="early-access" id="early-access">
         <div class="container">
-            <div class="form-container">
-                <h2 class="form-title">Be a founding user</h2>
-                <p class="form-subtitle">Join Early Access to influence the roadmap and get <strong>priority onboarding</strong>. Limited slots each month.</p>
-                <form id="earlyAccessForm" class="access-form">
-                    <div class="form-group">
-                        <label for="email">Email *</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="role">Role *</label>
-                        <select id="role" name="role" required>
-                            <option value="">Select your role</option>
-                            <option value="ml-engineer">ML Engineer</option>
-                            <option value="head-of-ml">Head of ML</option>
-                            <option value="founder">Founder</option>
-                            <option value="devops">DevOps</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="company-size">Company size (optional)</label>
-                        <select id="company-size" name="company-size">
-                            <option value="">Select company size</option>
-                            <option value="1-10">1-10</option>
-                            <option value="11-50">11-50</option>
-                            <option value="51-200">51-200</option>
-                            <option value="201-1000">201-1000</option>
-                            <option value="1000+">1000+</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Primary cloud(s)</label>
-                        <div class="checkbox-group">
+            <div class="form-card">
+                <div class="form-container">
+                    <h2 class="form-title">Be a founding user</h2>
+                    <p class="form-subtitle">Join Early Access to influence the roadmap and get <strong>priority onboarding</strong>. Limited slots each month.</p>
+                    <form id="earlyAccessForm" class="access-form">
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="role">Role *</label>
+                            <select id="role" name="role" required>
+                                <option value="">Select your role</option>
+                                <option value="ml-engineer">ML Engineer</option>
+                                <option value="head-of-ml">Head of ML</option>
+                                <option value="founder">Founder</option>
+                                <option value="devops">DevOps</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="company-size">Company size (optional)</label>
+                            <select id="company-size" name="company-size">
+                                <option value="">Select company size</option>
+                                <option value="1-10">1-10</option>
+                                <option value="11-50">11-50</option>
+                                <option value="51-200">51-200</option>
+                                <option value="201-1000">201-1000</option>
+                                <option value="1000+">1000+</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Primary cloud(s)</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="cloud" value="aws">
+                                    <span>AWS</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="cloud" value="azure">
+                                    <span>Azure</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="cloud" value="gcp">
+                                    <span>GCP</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="cloud" value="on-prem">
+                                    <span>On-prem</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="top-pain">Top pain (optional)</label>
+                            <textarea id="top-pain" name="top-pain" maxlength="120" rows="3" placeholder="e.g., silent drift, false positives, flaky retrains (max 120 chars)"></textarea>
+                            <small class="helper-text">If you share your pain, please tell us in ~10+ characters</small>
+                        </div>
+                        <div class="form-group">
                             <label class="checkbox-label">
-                                <input type="checkbox" name="cloud" value="aws">
-                                <span>AWS</span>
-                            </label>
-                            <label class="checkbox-label">
-                                <input type="checkbox" name="cloud" value="azure">
-                                <span>Azure</span>
-                            </label>
-                            <label class="checkbox-label">
-                                <input type="checkbox" name="cloud" value="gcp">
-                                <span>GCP</span>
-                            </label>
-                            <label class="checkbox-label">
-                                <input type="checkbox" name="cloud" value="on-prem">
-                                <span>On-prem</span>
+                                <input type="checkbox" id="want-design-partner" name="design-partner">
+                                <span>I want design-partner pricing</span>
                             </label>
                         </div>
+                        <div class="form-group">
+                            <label class="checkbox-label consent">
+                                <input type="checkbox" name="consent" required>
+                                <span>I agree to receive product emails.</span>
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-large btn-full" data-event="form_submit_attempt">Join Early Access</button>
+                    </form>
+                    <div id="formSuccess" class="form-success" style="display: none;">
+                        <h3>Thank you for joining!</h3>
+                        <p>We'll be in touch soon with next steps.</p>
                     </div>
-                    <div class="form-group">
-                        <label for="top-pain">Top pain (optional)</label>
-                        <textarea id="top-pain" name="top-pain" maxlength="120" rows="3" placeholder="e.g., silent drift, false positives, flaky retrains (max 120 chars)"></textarea>
-                        <small class="helper-text">If you share your pain, please tell us in ~10+ characters</small>
-                    </div>
-                    <div class="form-group">
-                        <label class="checkbox-label">
-                            <input type="checkbox" id="want-design-partner" name="design-partner">
-                            <span>I want design-partner pricing</span>
-                        </label>
-                    </div>
-                    <div class="form-group">
-                        <label class="checkbox-label consent">
-                            <input type="checkbox" name="consent" required>
-                            <span>I agree to receive product emails.</span>
-                        </label>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-large btn-full" data-event="form_submit_attempt">Join Early Access</button>
-                </form>
-                <div id="formSuccess" class="form-success" style="display: none;">
-                    <h3>Thank you for joining!</h3>
-                    <p>We'll be in touch soon with next steps.</p>
                 </div>
             </div>
         </div>
