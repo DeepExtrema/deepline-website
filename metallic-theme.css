@@ -225,67 +225,54 @@ body::before {
    CARD BORDERS - Chrome Inset Bevels
    ========================================================================= */
 
-/* Capability Cards, Playbook Cards, Install Footprint Cards */
-.capability-card,
-.playbook-card,
-.install-footprint .card {
-    box-shadow: 
-        /* Strong gunmetal inner highlight */
-        inset 0 0 0 1px rgba(100, 110, 125, 0.4),
-        inset 1px 1px 0 rgba(140, 150, 165, 0.3),
-        inset -1px -1px 0 rgba(0, 0, 0, 0.5),
-        /* Strong top edge reflection */
-        inset 0 2px 3px rgba(120, 130, 145, 0.35),
-        inset 0 1px 2px rgba(100, 110, 125, 0.25),
-        /* Strong top edge dark shadow */
-        inset 0 1px 2px rgba(0, 0, 0, 0.4),
-        /* Strong bottom edge shadow */
-        inset 0 -1px 2px rgba(0, 0, 0, 0.3),
-        /* Strong drop shadow */
-        0 8px 30px rgba(0, 0, 0, 0.5),
-        /* Strong outer glow */
-        0 0 0 1px rgba(80, 90, 105, 0.2);
-}
+/* Unified box styling applied above */
 
 /* Problem Items, Steps, Security Items - Deep Gunmetal */
+/* Unified box styling applied above */
+
+/* Hover effects - Enhanced Gunmetal */
+/* Unified hover styling applied above */
+
+/* ============================================================================
+   UNIFIED METALLIC BOX SYSTEM
+   ========================================================================= */
+
+/* Consolidate all box types under one unified styling system */
 .problem-item,
+.capability-card,
 .step,
-.security-item {
+.playbook-card,
+.security-item,
+.install-footprint .card {
+    /* Ensure consistent metallic box-shadow across all types */
     box-shadow: 
-        /* Strong gunmetal beveled edge */
         inset 0 0 0 1px rgba(100, 110, 125, 0.25),
         inset 1px 1px 0 rgba(120, 130, 145, 0.2),
         inset -1px -1px 0 rgba(0, 0, 0, 0.5),
-        /* Strong highlights */
         inset 0 1px 1px rgba(120, 130, 145, 0.15),
-        /* Strong top edge dark shadow */
         inset 0 1px 2px rgba(0, 0, 0, 0.4),
-        /* Strong bottom edge dark shadow */
         inset 0 -1px 2px rgba(0, 0, 0, 0.4),
-        /* Strong drop shadow */
         0 4px 15px rgba(0, 0, 0, 0.5),
-        /* Strong outer rim */
-        0 0 0 1px rgba(80, 90, 105, 0.1);
+        0 0 0 1px rgba(80, 90, 105, 0.1) !important;
 }
 
-/* Hover effects - Enhanced Gunmetal */
-.capability-card:hover,
-.playbook-card:hover,
+/* Unified hover effect */
 .problem-item:hover,
+.capability-card:hover,
 .step:hover,
-.security-item:hover {
+.playbook-card:hover,
+.security-item:hover,
+.install-footprint .card:hover {
     box-shadow: 
         inset 0 0 0 1px rgba(100, 110, 125, 0.4),
         inset 1px 1px 0 rgba(120, 130, 145, 0.3),
         inset -1px -1px 0 rgba(0, 0, 0, 0.7),
         inset 0 2px 3px rgba(120, 130, 145, 0.3),
-        /* Strong top edge dark shadow on hover */
         inset 0 1px 2px rgba(0, 0, 0, 0.6),
-        /* Strong bottom edge dark shadow on hover */
         inset 0 -1px 2px rgba(0, 0, 0, 0.6),
         0 10px 35px rgba(0, 0, 0, 0.7),
-        0 0 0 1px rgba(80, 90, 105, 0.2);
-    transition: box-shadow 0.3s ease;
+        0 0 0 1px rgba(80, 90, 105, 0.2) !important;
+    transform: translateY(-2px);
 }
 
 /* ============================================================================
