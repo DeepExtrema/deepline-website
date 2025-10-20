@@ -30,27 +30,6 @@ body {
     position: relative;
 }
 
-/* Add subtle animated metallic shimmer to body */
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-        45deg,
-        transparent 30%,
-        rgba(40, 45, 55, 0.12) 45%,
-        rgba(50, 55, 65, 0.15) 50%,
-        rgba(40, 45, 55, 0.12) 55%,
-        transparent 70%
-    );
-    background-size: 200% 200%;
-    animation: metallic-shimmer 8s ease-in-out infinite;
-    pointer-events: none;
-    z-index: -1;
-}
 
 /* ============================================================================
    NAVIGATION - Chrome Glass Panel
@@ -71,11 +50,6 @@ body::before {
     backdrop-filter: blur(15px) saturate(1.2);
     border-bottom: none;
     box-shadow: 
-        /* Strong chrome edges */
-        inset 0 2px 0 rgba(160, 170, 185, 0.25),
-        inset 0 1px 0 rgba(140, 150, 165, 0.35),
-        /* Bottom shadow */
-        inset 0 -1px 0 rgba(0, 0, 0, 0.6),
         /* Outer glow */
         0 2px 8px rgba(0, 0, 0, 0.7),
         0 0 30px rgba(100, 110, 125, 0.3);
@@ -142,8 +116,6 @@ body::before {
     background-origin: border-box;
     background-clip: padding-box, border-box;
     box-shadow: 
-        inset 0 1px 0 rgba(255, 255, 255, 0.1),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.2),
         0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
@@ -216,8 +188,6 @@ body::before {
         );
     box-shadow: 
         0 10px 24px rgba(0, 181, 216, 0.25),
-        inset 0 1px 0 rgba(255, 255, 255, 0.3),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.2),
         0 0 30px rgba(0, 181, 216, 0.3);
 }
 
@@ -283,10 +253,6 @@ body::before {
     
     /* Enhanced dark shadows on all edges */
     box-shadow: 
-        inset 1px 1px 3px rgba(0, 0, 0, 0.5),
-        inset -1px -1px 3px rgba(0, 0, 0, 0.5),
-        inset 0 3px 6px rgba(0, 0, 0, 0.4),
-        inset 0 -3px 6px rgba(0, 0, 0, 0.4),
         0 6px 20px rgba(0, 0, 0, 0.7),
         0 0 0 1px rgba(0, 0, 0, 0.3) !important;
 }
@@ -300,11 +266,6 @@ body::before {
 .install-footprint .card:hover,
 .form-card:hover {
     box-shadow: 
-        /* Enhanced dark shadows on hover */
-        inset 1px 1px 4px rgba(0, 0, 0, 0.6),
-        inset -1px -1px 4px rgba(0, 0, 0, 0.6),
-        inset 0 4px 8px rgba(0, 0, 0, 0.5),
-        inset 0 -4px 8px rgba(0, 0, 0, 0.5),
         /* Stronger outer shadow */
         0 12px 40px rgba(0, 0, 0, 0.8),
         0 0 0 1px rgba(0, 0, 0, 0.4) !important;
@@ -349,7 +310,6 @@ body::before {
 .install-footprint .card:hover::after,
 .form-card:hover::after {
     opacity: 1;
-    animation: metallic-shimmer 2s ease-in-out infinite;
 }
 
 /* ============================================================================
@@ -360,67 +320,43 @@ body::before {
 .how-it-works,
 .why-now,
 .early-access {
-    background: 
-        /* Ultra dark gunmetal surface - DARKER AT TOP AND BOTTOM */
-        linear-gradient(180deg, 
-            #08090A 0%,      /* DARKEST at top */
-            #121418 50%,     /* Lighter in middle */
-            #08090A 100%     /* DARKEST at bottom */
+    background:
+        /* Vertical vignette for seamless top/bottom fades to black */
+        linear-gradient(180deg,
+            rgba(0, 0, 0, 0.72) 0%,
+            rgba(0, 0, 0, 0.00) 14%,
+            rgba(0, 0, 0, 0.00) 86%,
+            rgba(0, 0, 0, 0.72) 100%
         ),
-        /* Top dark zone */
-        radial-gradient(ellipse 800px 300px at 50% 0%, 
-            rgba(0, 0, 0, 0.4) 0%,        /* Dark shadow at top */
+        /* Base surface with pure-black edges */
+        linear-gradient(180deg,
+            #000000 0%,
+            #0F1114 50%,
+            #000000 100%
+        ),
+        /* Darker, wider top shadow */
+        radial-gradient(ellipse 1100px 420px at 50% 0%,
+            rgba(0, 0, 0, 0.68) 0%,
+            transparent 75%
+        ),
+        /* Darker, wider bottom shadow */
+        radial-gradient(ellipse 1100px 420px at 50% 100%,
+            rgba(0, 0, 0, 0.68) 0%,
+            transparent 70%
+        ),
+        /* Softer reflection so edges don’t lift */
+        radial-gradient(ellipse 1200px 400px at 50% 0%,
+            rgba(40, 45, 55, 0.15) 0%,
             transparent 60%
         ),
-        /* Bottom dark zone */
-        radial-gradient(ellipse 800px 300px at 30% 100%, 
-            rgba(0, 0, 0, 0.4) 0%,        /* Dark shadow at bottom */
-            transparent 50%
-        ),
-        /* Ultra dark gunmetal reflection zones */
-        radial-gradient(ellipse 1200px 400px at 50% 0%, 
-            rgba(40, 45, 55, 0.25) 0%, 
-            transparent 60%
-        ),
-        /* Strong metallic texture */
-        url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.2'/%3E%3C/svg%3E");
-    
-    box-shadow: 
-        /* TOP EDGE - Dark shading */
-        inset 0 1px 0 rgba(0, 0, 0, 0.5),   /* Dark line at top */
-        inset 0 3px 8px rgba(0, 0, 0, 0.4), /* Dark shadow bleeding down from top */
-        /* Strong metallic edges */
-        inset 0 2px 0 rgba(160, 170, 185, 0.2),
-        inset 0 1px 0 rgba(140, 150, 165, 0.3),
-        /* BOTTOM EDGE - Dark shading */
-        inset 0 -1px 0 rgba(0, 0, 0, 0.5),  /* Dark line at bottom */
-        inset 0 -3px 8px rgba(0, 0, 0, 0.4), /* Dark shadow bleeding up from bottom */
-        /* Outer rim glow */
-        0 0 0 1px rgba(100, 110, 125, 0.15);
+        /* Slightly reduced noise to avoid mid grey haze */
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.12'/%3E%3C/svg%3E");
+
+    box-shadow: none;
     position: relative;
     overflow: hidden;
 }
 
-/* Add animated metallic shimmer to sections */
-.problem::after,
-.how-it-works::after,
-.why-now::after,
-.early-access::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent 0%,
-        rgba(40, 45, 55, 0.15) 50%,
-        transparent 100%
-    );
-    animation: section-shimmer 6s ease-in-out infinite;
-    pointer-events: none;
-}
 
 /* ============================================================================
    HERO SECTION - Deep Metallic Space
@@ -451,6 +387,24 @@ body::before {
     position: relative;
 }
 
+/* Hero top vignette overlay to blend to true black */
+.hero::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 160px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 100%);
+    pointer-events: none;
+    z-index: 1; /* above particles (::before), below content */
+}
+
+.hero > * {
+    position: relative;
+    z-index: 2;
+}
+
 /* Add subtle animated metallic particles effect */
 .hero::before {
     content: '';
@@ -473,19 +427,112 @@ body::before {
 
 .capabilities,
 .security {
+    position: relative;
+}
+
+/* ============================================================================
+   REUSABLE METALLIC BACKGROUND SYSTEM
+   Responsive, transferable, theme-aware gradient system
+   Uses CSS custom properties defined in ui/foundation/tokens.css
+   ========================================================================= */
+
+/* Basic metallic background with blue hue - RESPONSIVE & DYNAMIC */
+.metallic-bg {
     background: 
-        /* Ultra dark gunmetal base */
-        radial-gradient(ellipse 2000px 800px at 50% 50%, 
-            rgba(40, 45, 55, 0.15) 0%, 
-            transparent 70%
+        /* Blue metallic tint - uses CSS custom properties */
+        radial-gradient(
+            ellipse 
+            var(--mg-metallic-gradient-width) 
+            var(--mg-metallic-gradient-height) 
+            at var(--mg-metallic-gradient-x) var(--mg-metallic-gradient-y), 
+            rgba(
+                var(--mg-metallic-blue-r), 
+                var(--mg-metallic-blue-g), 
+                var(--mg-metallic-blue-b), 
+                var(--mg-metallic-blue-opacity)
+            ) 0%, 
+            transparent var(--mg-metallic-gradient-falloff)
         ),
-        /* Inherit ultra dark gunmetal body background */
-        radial-gradient(ellipse at center 40%, 
-            #06080A 0%, 
-            #040506 25%, 
-            #000000 100%
+        /* Ultra dark gunmetal base */
+        radial-gradient(
+            ellipse at center var(--mg-metallic-base-position), 
+            var(--mg-metallic-base-dark-1) 0%, 
+            var(--mg-metallic-base-dark-2) 25%, 
+            var(--mg-metallic-base-dark-3) 100%
         );
     position: relative;
+    overflow: hidden;
+    transform: translateZ(0); /* GPU acceleration */
+    will-change: background;
+}
+
+/* Ensure content stays above background effects */
+.metallic-bg > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* ============================================================================
+   SECTION-SPECIFIC GRADIENT ADJUSTMENTS
+   ========================================================================= */
+
+/* Capabilities - Default values work well */
+.capabilities.metallic-bg {
+  /* Uses default values */
+}
+
+/* Playbooks - Slightly taller section */
+.playbooks.metallic-bg {
+  --mg-metallic-gradient-height: 70%;
+}
+
+/* Security - Tallest section (includes install footprint) */
+.security.metallic-bg {
+  --mg-metallic-gradient-height: 75%;
+  --mg-metallic-gradient-y: 45%; /* Shift slightly up for better centering */
+}
+
+/* ============================================================================
+   METALLIC BACKGROUND MODIFIERS
+   ========================================================================= */
+
+/* Intense variant - for hero sections */
+.metallic-bg--intense {
+  --mg-metallic-blue-opacity: 0.35;
+  --mg-metallic-gradient-width: 75%;
+  --mg-metallic-gradient-height: 60%;
+}
+
+/* Subtle variant - less prominent sections */
+.metallic-bg--subtle {
+  --mg-metallic-blue-opacity: 0.18;
+  --mg-metallic-gradient-width: 95%;
+}
+
+/* Top-weighted gradient */
+.metallic-bg--top {
+  --mg-metallic-gradient-y: 30%;
+}
+
+/* Bottom-weighted gradient */
+.metallic-bg--bottom {
+  --mg-metallic-gradient-y: 70%;
+}
+
+/* ============================================================================
+   PERFORMANCE & ACCESSIBILITY
+   ========================================================================= */
+
+/* Reduce motion - disable animations but keep effect */
+@media (prefers-reduced-motion: reduce) {
+  .metallic-bg::after,
+  .metallic-bg::before {
+    animation: none !important;
+  }
+  
+  .metallic-bg {
+    will-change: auto;
+  }
 }
 
 /* ============================================================================
@@ -508,11 +555,6 @@ body::before {
     background-origin: border-box;
     background-clip: padding-box, border-box;
     box-shadow: 
-        /* Inset bevel - pushed into surface */
-        inset 0 1px 2px rgba(0, 0, 0, 0.3),
-        inset 0 -1px 1px rgba(255, 255, 255, 0.05),
-        inset 1px 0 1px rgba(0, 0, 0, 0.15),
-        inset -1px 0 1px rgba(0, 0, 0, 0.15),
         /* Subtle outer glow */
         0 0 0 1px rgba(0, 0, 0, 0.2);
 }
@@ -530,8 +572,6 @@ body::before {
             rgba(0, 181, 216, 0.4) 100%
         );
     box-shadow: 
-        inset 0 1px 2px rgba(0, 0, 0, 0.3),
-        inset 0 -1px 1px rgba(0, 181, 216, 0.2),
         0 0 0 1px rgba(0, 181, 216, 0.3),
         0 0 12px rgba(0, 181, 216, 0.2);
 }
@@ -554,8 +594,6 @@ body::before {
     background-origin: border-box;
     background-clip: padding-box, border-box;
     box-shadow: 
-        inset 0 1px 0 rgba(255, 255, 255, 0.2),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.2),
         0 4px 12px rgba(74, 222, 128, 0.2),
         0 0 20px rgba(74, 222, 128, 0.15);
 }
@@ -566,10 +604,7 @@ body::before {
 
 .footer {
     border-top: none;
-    box-shadow: 
-        inset 0 2px 0 rgba(0, 0, 0, 0.2),
-        inset 0 1px 0 rgba(233, 241, 246, 0.15),
-        inset 0 3px 2px rgba(233, 241, 246, 0.08);
+    box-shadow: none;
 }
 
 /* ============================================================================
@@ -580,7 +615,6 @@ body::before {
     box-shadow: 
         /* Inner glow */
         inset 0 0 20px rgba(255, 255, 255, 0.1),
-        inset 0 1px 2px rgba(255, 255, 255, 0.3),
         /* Metallic rim */
         0 0 0 2px rgba(166, 183, 195, 0.3),
         0 0 0 3px rgba(233, 241, 246, 0.15),
@@ -608,8 +642,6 @@ body::before {
     background-origin: border-box;
     background-clip: padding-box, border-box;
     box-shadow: 
-        inset 0 1px 0 rgba(255, 255, 255, 0.15),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.2),
         0 2px 6px rgba(0, 181, 216, 0.2);
 }
 
@@ -641,56 +673,22 @@ body::before {
    ========================================================================= */
 
 /* Shimmer keyframes */
-@keyframes metallic-shimmer {
-    0% {
-        background-position: -200% center;
-    }
-    100% {
-        background-position: 200% center;
-    }
-}
 
-@keyframes border-shimmer {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
 
 @keyframes chrome-pulse {
     0%, 100% {
         box-shadow: 
             inset 0 0 0 1px rgba(233, 241, 246, 0.18),
-            inset 1px 1px 0 rgba(255, 255, 255, 0.15),
-            inset -1px -1px 0 rgba(0, 0, 0, 0.25),
             0 6px 22px rgba(0, 0, 0, 0.35);
     }
     50% {
         box-shadow: 
             inset 0 0 0 1px rgba(233, 241, 246, 0.3),
-            inset 1px 1px 0 rgba(255, 255, 255, 0.25),
-            inset -1px -1px 0 rgba(0, 0, 0, 0.3),
             0 8px 28px rgba(0, 0, 0, 0.4),
             0 0 20px rgba(166, 183, 195, 0.2);
     }
 }
 
-@keyframes section-shimmer {
-    0% {
-        left: -100%;
-    }
-    50% {
-        left: 100%;
-    }
-    100% {
-        left: 100%;
-    }
-}
 
 @keyframes metallic-particles {
     0%, 100% {
@@ -707,7 +705,6 @@ body::before {
 .btn-secondary:hover,
 .btn-outline:hover {
     background-size: 200% 100%;
-    animation: border-shimmer 2s ease-in-out infinite;
 }
 
 .capability-card,
@@ -740,7 +737,6 @@ body::before {
 .capability-card:hover::after,
 .playbook-card:hover::after {
     opacity: 1;
-    animation: metallic-shimmer 2s ease-in-out infinite;
 }
 
 /* Step numbers pulse gently */
@@ -751,7 +747,6 @@ body::before {
 /* Badge shimmer on parent hover */
 .playbook-card:hover .badge {
     background-size: 200% 100%;
-    animation: border-shimmer 1.5s ease-in-out infinite;
 }
 
 /* ============================================================================
@@ -767,7 +762,6 @@ body::before {
     .security-item {
         box-shadow: 
             inset 0 0 0 1px rgba(233, 241, 246, 0.15),
-            inset 0 1px 0 rgba(255, 255, 255, 0.1),
             0 4px 12px rgba(0, 0, 0, 0.3);
     }
     
@@ -776,6 +770,15 @@ body::before {
     .playbook-card::after,
     .step-number {
         animation: none;
+    }
+
+    /* Simplify and preserve pure-black edges on mobile */
+    .problem,
+    .how-it-works,
+    .why-now,
+    .early-access {
+        background:
+            linear-gradient(180deg, #000000 0%, #121418 50%, #000000 100%);
     }
 }
 

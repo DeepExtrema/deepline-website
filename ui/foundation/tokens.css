@@ -21,7 +21,7 @@
   
   /* Shadows (glass-metal hybrid) */
   --mg-shadow-inner: inset 0 0 0 1px rgba(233, 241, 246, 0.12);
-  --mg-shadow-edge: inset 0 1px 2px rgba(221, 234, 243, 0.15);
+  --mg-shadow-edge: none;
   --mg-shadow-depth: 0 6px 22px rgba(0, 0, 0, 0.35);
   --mg-shadow-depth-lg: 0 10px 32px rgba(0, 0, 0, 0.45);
   --mg-shadow-glow: 0 0 24px rgba(0, 181, 216, 0.2);
@@ -75,6 +75,66 @@
   --mg-tracking-tight: -0.01em;
   --mg-tracking-normal: 0;
   --mg-tracking-wide: 0.025em;
+  
+  /* Metallic Background System Tokens */
+  --mg-metallic-gradient-width: 85%;
+  --mg-metallic-gradient-height: 65%;
+  --mg-metallic-blue-r: 30;
+  --mg-metallic-blue-g: 35;
+  --mg-metallic-blue-b: 75;
+  --mg-metallic-blue-opacity: 0.25;
+  --mg-metallic-gradient-x: 50%;
+  --mg-metallic-gradient-y: 50%;
+  --mg-metallic-gradient-falloff: 70%;
+  --mg-metallic-base-dark-1: #06080A;
+  --mg-metallic-base-dark-2: #040506;
+  --mg-metallic-base-dark-3: #000000;
+  --mg-metallic-base-position: 40%;
+}
+
+/* ============================================================================
+   RESPONSIVE METALLIC GRADIENT SCALING
+   ========================================================================= */
+
+/* Tablet Landscape (768px - 1023px) */
+@media (max-width: 1023px) {
+  :root {
+    --mg-metallic-gradient-width: 88%;
+    --mg-metallic-gradient-height: 68%;
+    --mg-metallic-blue-opacity: 0.26;
+  }
+}
+
+/* Tablet Portrait (640px - 767px) */
+@media (max-width: 767px) {
+  :root {
+    --mg-metallic-gradient-width: 92%;
+    --mg-metallic-gradient-height: 72%;
+    --mg-metallic-blue-opacity: 0.28;
+  }
+}
+
+/* Mobile (< 640px) */
+@media (max-width: 640px) {
+  :root {
+    --mg-metallic-gradient-width: 95%;
+    --mg-metallic-gradient-height: 75%;
+    --mg-metallic-blue-opacity: 0.30;
+  }
+}
+
+/* Ultra-wide monitors (1920px+) */
+@media (min-width: 1920px) {
+  :root {
+    --mg-metallic-gradient-width: 70%;
+  }
+}
+
+/* High contrast mode - disable subtle effects */
+@media (prefers-contrast: high) {
+  :root {
+    --mg-metallic-blue-opacity: 0;
+  }
 }
 
 /* ============================================================================
@@ -94,6 +154,11 @@
   --mg-bloom: #DDEAF3;
   --mg-base: #9CAFB9;
   --mg-bg: #000000;
+  
+  /* Metallic background theme colors */
+  --mg-metallic-blue-r: 30;
+  --mg-metallic-blue-g: 35;
+  --mg-metallic-blue-b: 75;
   
   /* Glass material base */
   --mg-glass-base: #CFE0EA;
@@ -205,26 +270,6 @@
   background-clip: text;
 }
 
-.mg-shimmer {
-  position: relative;
-  overflow: hidden;
-}
-
-.mg-shimmer::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -150%;
-  width: 150%;
-  height: 100%;
-  background: var(--mg-gradient-shimmer);
-  animation: mg-shimmer-slide 3s infinite;
-}
-
-@keyframes mg-shimmer-slide {
-  0% { left: -150%; }
-  50%, 100% { left: 150%; }
-}
 
 /* ============================================================================
    MICRO-TEXTURE OVERLAY (6-12% visibility)

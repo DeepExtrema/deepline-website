@@ -1,4 +1,4 @@
-* {
+﻿* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -576,8 +576,7 @@ body {
     color: var(--text-primary);
 }
 
-.security {
-    padding: 80px 0;
+.security {    padding: 60px 0;
 }
 
 .security-grid {
@@ -636,39 +635,6 @@ body {
     filter: brightness(0) invert(1) opacity(0.6);
     mix-blend-mode: screen;
 }
-
-.install-footprint {
-    padding: 80px 0;
-}
-
-.install-footprint .card {
-    border-radius: 16px;
-    padding: 24px 16px;
-    max-width: 800px;
-    margin: 0 auto;
-    position: relative;
-    overflow: hidden;
-}
-
-.install-footprint .card h3 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: var(--accent);
-}
-
-.install-footprint .card ul {
-    list-style: none;
-    padding: 0;
-}
-
-.install-footprint .card li {
-    color: var(--text-secondary);
-    margin-bottom: 12px;
-    padding-left: 20px;
-    position: relative;
-    line-height: 1.6;
-}
-
 
 .center {
     text-align: center;
