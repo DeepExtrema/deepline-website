@@ -335,12 +335,11 @@ body {
 }
 
 .problem-item {
-    background: var(--bg-surface);
-    border: 1px solid rgba(236, 239, 244, 0.2);
     padding: 24px 16px;
     border-radius: 16px;
     text-align: center;
     position: relative;
+    overflow: hidden;
 }
 
 .icon-infinity {
@@ -387,10 +386,10 @@ body {
 }
 
 .capability-card {
-    background: var(--bg-surface);
-    border: 1px solid rgba(236, 239, 244, 0.2);
     padding: 24px 16px;
     border-radius: 16px;
+    position: relative;
+    overflow: hidden;
 }
 
 .capability-card h3 {
@@ -437,12 +436,11 @@ body {
 }
 
 .step {
-    background: var(--bg-surface);
-    border: 1px solid rgba(236, 239, 244, 0.2);
     padding: 24px 16px;
     border-radius: 16px;
     text-align: center;
     position: relative;
+    overflow: hidden;
 }
 
 .step-number {
@@ -492,12 +490,12 @@ body {
 }
 
 .playbook-card {
-    background: var(--bg-surface);
-    border: 1px solid rgba(236, 239, 244, 0.2);
     padding: 24px 16px;
     border-radius: 16px;
     display: flex;
     flex-direction: column;
+    position: relative;
+    overflow: hidden;
 }
 
 .playbook-card h3 {
@@ -525,12 +523,6 @@ body {
     position: relative;
 }
 
-.playbook-bullets li::before {
-    content: "→";
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-}
 
 .badge {
     display: inline-block;
@@ -595,12 +587,11 @@ body {
 }
 
 .security-item {
-    background: var(--bg-surface);
-    border: 1px solid rgba(236, 239, 244, 0.2);
     padding: 24px 16px;
     border-radius: 16px;
     text-align: center;
     position: relative;
+    overflow: hidden;
 }
 
 .security-item h3 {
@@ -651,12 +642,12 @@ body {
 }
 
 .install-footprint .card {
-    background: var(--bg-surface);
-    border: 1px solid rgba(236, 239, 244, 0.2);
     border-radius: 16px;
     padding: 24px 16px;
     max-width: 800px;
     margin: 0 auto;
+    position: relative;
+    overflow: hidden;
 }
 
 .install-footprint .card h3 {
@@ -678,12 +669,6 @@ body {
     line-height: 1.6;
 }
 
-.install-footprint .card li::before {
-    content: "→";
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-}
 
 .center {
     text-align: center;
@@ -747,7 +732,7 @@ body {
 
 .form-card {
     background: var(--bg-surface);
-    padding: 24px;
+    padding: 24px 16px;
     border-radius: 20px;
     max-width: 650px;
     box-shadow: 
@@ -782,30 +767,6 @@ body {
     transition: box-shadow 0.3s ease;
 }
 
-.form-card::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(
-        45deg,
-        transparent 30%,
-        rgba(233, 241, 246, 0.03) 45%,
-        rgba(255, 255, 255, 0.08) 50%,
-        rgba(233, 241, 246, 0.03) 55%,
-        transparent 70%
-    );
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-}
-
-.form-card:hover::after {
-    opacity: 1;
-    animation: metallic-shimmer 2s ease-in-out infinite;
-}
 
 .form-title {
     font-size: 36px;

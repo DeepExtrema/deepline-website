@@ -243,17 +243,52 @@ body::before {
 .step,
 .playbook-card,
 .security-item,
-.install-footprint .card {
-    /* Ensure consistent metallic box-shadow across all types */
+.install-footprint .card,
+.form-card {
+    /* Enhanced dark chromatic backgrounds */
+    background: 
+        linear-gradient(135deg, 
+            #1A1F26 0%,
+            #0F1318 25%,
+            #0A0D12 50%,
+            #0F1318 75%,
+            #1A1F26 100%
+        ),
+        radial-gradient(ellipse 400px 200px at 50% 30%, 
+            rgba(40, 50, 60, 0.25) 0%,
+            transparent 60%
+        ),
+        radial-gradient(ellipse 300px 150px at 70% 20%, 
+            rgba(30, 40, 50, 0.1) 0%,
+            transparent 70%
+        ),
+        radial-gradient(ellipse 200px 100px at 30% 80%, 
+            rgba(50, 40, 45, 0.08) 0%,
+            transparent 80%
+        );
+    
+    /* Enhanced dark metallic borders */
+    border: 1px solid transparent;
+    background-image: 
+        linear-gradient(#0A0D12, #0A0D12),
+        linear-gradient(135deg,
+            #2A3037 0%,
+            #3A4249 25%,
+            #4A5259 50%,
+            #3A4249 75%,
+            #2A3037 100%
+        );
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    
+    /* Enhanced dark shadows on all edges */
     box-shadow: 
-        inset 0 0 0 1px rgba(100, 110, 125, 0.25),
-        inset 1px 1px 0 rgba(120, 130, 145, 0.2),
-        inset -1px -1px 0 rgba(0, 0, 0, 0.5),
-        inset 0 1px 1px rgba(120, 130, 145, 0.15),
-        inset 0 1px 2px rgba(0, 0, 0, 0.4),
-        inset 0 -1px 2px rgba(0, 0, 0, 0.4),
-        0 4px 15px rgba(0, 0, 0, 0.5),
-        0 0 0 1px rgba(80, 90, 105, 0.1) !important;
+        inset 1px 1px 3px rgba(0, 0, 0, 0.5),
+        inset -1px -1px 3px rgba(0, 0, 0, 0.5),
+        inset 0 3px 6px rgba(0, 0, 0, 0.4),
+        inset 0 -3px 6px rgba(0, 0, 0, 0.4),
+        0 6px 20px rgba(0, 0, 0, 0.7),
+        0 0 0 1px rgba(0, 0, 0, 0.3) !important;
 }
 
 /* Unified hover effect */
@@ -262,17 +297,59 @@ body::before {
 .step:hover,
 .playbook-card:hover,
 .security-item:hover,
-.install-footprint .card:hover {
+.install-footprint .card:hover,
+.form-card:hover {
     box-shadow: 
-        inset 0 0 0 1px rgba(100, 110, 125, 0.4),
-        inset 1px 1px 0 rgba(120, 130, 145, 0.3),
-        inset -1px -1px 0 rgba(0, 0, 0, 0.7),
-        inset 0 2px 3px rgba(120, 130, 145, 0.3),
-        inset 0 1px 2px rgba(0, 0, 0, 0.6),
-        inset 0 -1px 2px rgba(0, 0, 0, 0.6),
-        0 10px 35px rgba(0, 0, 0, 0.7),
-        0 0 0 1px rgba(80, 90, 105, 0.2) !important;
-    transform: translateY(-2px);
+        /* Enhanced dark shadows on hover */
+        inset 1px 1px 4px rgba(0, 0, 0, 0.6),
+        inset -1px -1px 4px rgba(0, 0, 0, 0.6),
+        inset 0 4px 8px rgba(0, 0, 0, 0.5),
+        inset 0 -4px 8px rgba(0, 0, 0, 0.5),
+        /* Stronger outer shadow */
+        0 12px 40px rgba(0, 0, 0, 0.8),
+        0 0 0 1px rgba(0, 0, 0, 0.4) !important;
+    transform: translateY(-3px);
+}
+
+/* ============================================================================
+   SHIMMER EFFECT - All Boxes
+   ========================================================================= */
+
+.problem-item::after,
+.capability-card::after,
+.step::after,
+.playbook-card::after,
+.security-item::after,
+.install-footprint .card::after,
+.form-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(233, 241, 246, 0.02) 45%,
+        rgba(255, 255, 255, 0.06) 50%,
+        rgba(233, 241, 246, 0.02) 55%,
+        transparent 70%
+    );
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.problem-item:hover::after,
+.capability-card:hover::after,
+.step:hover::after,
+.playbook-card:hover::after,
+.security-item:hover::after,
+.install-footprint .card:hover::after,
+.form-card:hover::after {
+    opacity: 1;
+    animation: metallic-shimmer 2s ease-in-out infinite;
 }
 
 /* ============================================================================
@@ -284,30 +361,40 @@ body::before {
 .why-now,
 .early-access {
     background: 
-        /* Ultra dark gunmetal surface */
+        /* Ultra dark gunmetal surface - DARKER AT TOP AND BOTTOM */
         linear-gradient(180deg, 
-            #121418 0%, 
-            #0E0F11 50%, 
-            #08090A 100%
+            #08090A 0%,      /* DARKEST at top */
+            #121418 50%,     /* Lighter in middle */
+            #08090A 100%     /* DARKEST at bottom */
+        ),
+        /* Top dark zone */
+        radial-gradient(ellipse 800px 300px at 50% 0%, 
+            rgba(0, 0, 0, 0.4) 0%,        /* Dark shadow at top */
+            transparent 60%
+        ),
+        /* Bottom dark zone */
+        radial-gradient(ellipse 800px 300px at 30% 100%, 
+            rgba(0, 0, 0, 0.4) 0%,        /* Dark shadow at bottom */
+            transparent 50%
         ),
         /* Ultra dark gunmetal reflection zones */
         radial-gradient(ellipse 1200px 400px at 50% 0%, 
             rgba(40, 45, 55, 0.25) 0%, 
             transparent 60%
         ),
-        radial-gradient(ellipse 800px 300px at 30% 100%, 
-            rgba(50, 55, 65, 0.2) 0%, 
-            transparent 50%
-        ),
         /* Strong metallic texture */
         url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.2'/%3E%3C/svg%3E");
     
     box-shadow: 
+        /* TOP EDGE - Dark shading */
+        inset 0 1px 0 rgba(0, 0, 0, 0.5),   /* Dark line at top */
+        inset 0 3px 8px rgba(0, 0, 0, 0.4), /* Dark shadow bleeding down from top */
         /* Strong metallic edges */
         inset 0 2px 0 rgba(160, 170, 185, 0.2),
         inset 0 1px 0 rgba(140, 150, 165, 0.3),
-        /* Bottom edge */
-        inset 0 -1px 0 rgba(0, 0, 0, 0.5),
+        /* BOTTOM EDGE - Dark shading */
+        inset 0 -1px 0 rgba(0, 0, 0, 0.5),  /* Dark line at bottom */
+        inset 0 -3px 8px rgba(0, 0, 0, 0.4), /* Dark shadow bleeding up from bottom */
         /* Outer rim glow */
         0 0 0 1px rgba(100, 110, 125, 0.15);
     position: relative;
