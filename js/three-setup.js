@@ -48,6 +48,10 @@ export function createRenderer(canvas, options = {}) {
 
       // Enable shadows if needed
       renderer.shadowMap.enabled = false; // Disabled for performance
+      
+      // Enable antialiasing for smoother edges
+      renderer.antialias = true;
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 3)); // Start with 3x for quality
 
       // Set clear color to transparent for alpha blending
       renderer.setClearColor(0x000000, 0); // Clear to transparent (color, alpha)
@@ -87,7 +91,7 @@ export function handleResize(renderer, camera, composer = null) {
   camera.updateProjectionMatrix();
 
   renderer.setSize(width, height);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Cap at 2x for performance
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 3)); // Cap at 3x for better quality
 
   if (composer) {
     composer.setSize(width, height);

@@ -31,17 +31,17 @@ export const TOKENS = {
 // Tweakable parameters
 export const PARAMS = {
   // Silver material
-  SILVER_METALNESS: 0.95,
-  SILVER_ROUGHNESS: 0.12,
-  SILVER_CLEARCOAT: 0.25,
-  SILVER_CLEARCOAT_ROUGHNESS: 0.03,
-  SILVER_REFLECTIVITY: 0.8,
+  SILVER_METALNESS: 0.85,
+  SILVER_ROUGHNESS: 0.18,
+  SILVER_CLEARCOAT: 0.15,
+  SILVER_CLEARCOAT_ROUGHNESS: 0.08,
+  SILVER_REFLECTIVITY: 0.7,
   
   // Glass material
-  GLASS_METALNESS: 0.28,
-  GLASS_ROUGHNESS: 0.11,
-  GLASS_TRANSMISSION: 0.30,
-  GLASS_THICKNESS: 0.5,
+  GLASS_METALNESS: 0.15,
+  GLASS_ROUGHNESS: 0.15,
+  GLASS_TRANSMISSION: 0.20,
+  GLASS_THICKNESS: 0.3,
   GLASS_IOR: 1.47,
   
   // Bloom post-processing
@@ -128,9 +128,16 @@ export function createMicroTextureNormal(THREE, strength = 0.08) {
 /**
  * Apply micro-texture to material
  */
-export function applyMicroTexture(material, THREE, strength = 0.08) {
+export function applyMicroTexture(material, THREE, strength = 0.08, renderer = null) {
   material.normalMap = createMicroTextureNormal(THREE, strength);
   material.normalScale = new THREE.Vector2(0.1, 0.1); // Very subtle
+  
+  // Apply anisotropic filtering for sharper textures
+  if (renderer && material.normalMap) {
+    const maxAnisotropy = renderer.capabilities.getMaxAnisotropy();
+    material.normalMap.anisotropy = maxAnisotropy;
+  }
+  
   material.needsUpdate = true;
 }
 
@@ -138,22 +145,22 @@ export function applyMicroTexture(material, THREE, strength = 0.08) {
  * Create environment lighting setup
  */
 export function createLighting(THREE, scene) {
-  // Key Rim Light (upper-left/front, grazing angle)
-  const keyRim = new THREE.DirectionalLight(TOKENS.highlight1, PARAMS.RIM_INTENSITY);
+  // Key Rim Light (upper-left/front, grazing angle) - reduced intensity
+  const keyRim = new THREE.DirectionalLight(TOKENS.highlight1, PARAMS.RIM_INTENSITY * 0.7);
   keyRim.position.set(-3, 4, 2);
   scene.add(keyRim);
   
-  // Counter Rim (upper-right/back, 40-50% of key)
-  const counterRim = new THREE.DirectionalLight(TOKENS.highlight2, PARAMS.COUNTER_RIM_INTENSITY);
+  // Counter Rim (upper-right/back, 40-50% of key) - reduced intensity
+  const counterRim = new THREE.DirectionalLight(TOKENS.highlight2, PARAMS.COUNTER_RIM_INTENSITY * 0.6);
   counterRim.position.set(3, 3, -2);
   scene.add(counterRim);
   
-  // Subtle fill (below/center)
-  const fillLight = new THREE.AmbientLight(TOKENS.silver2, PARAMS.FILL_INTENSITY);
+  // Softer fill light
+  const fillLight = new THREE.AmbientLight(TOKENS.silver2, PARAMS.FILL_INTENSITY * 1.5);
   scene.add(fillLight);
   
-  // Hemisphere light for subtle gradient (cool above, neutral below)
-  const hemiLight = new THREE.HemisphereLight(TOKENS.highlight2, TOKENS.shadow2, 0.3);
+  // Hemisphere light for subtle gradient (cool above, neutral below) - reduced intensity
+  const hemiLight = new THREE.HemisphereLight(TOKENS.highlight2, TOKENS.shadow2, 0.2);
   scene.add(hemiLight);
   
   return { keyRim, counterRim, fillLight, hemiLight };

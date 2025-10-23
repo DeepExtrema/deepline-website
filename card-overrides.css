@@ -1,0 +1,20 @@
+/**
+ * Card Override Styling
+ * Overrides metallic-theme.css to ensure glassy effect consistency across all cards
+ * This file loads after metallic-theme.css to ensure precedence
+ */
+
+/* All cards now use the unified glassy effect from metallic-theme.css */
+/* This file ensures no conflicts with the new glassy styling */
+
+/* Ensure glassy effect consistency across all card types */
+.problem-item,
+.capability-card,
+.step,
+.playbook-card,
+.security-item,
+.install-footprint .card,
+.form-card {
+    /* Let the glassy effect from metallic-theme.css take precedence */
+    /* No overrides needed - the glassy effect is now the unified standard */
+}

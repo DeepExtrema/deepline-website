@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="js/components/InfoCard.css">
     <link rel="stylesheet" href="metallic-theme.css">
+    <link rel="stylesheet" href="card-overrides.css">
     <script type="importmap">
     {
       "imports": {
@@ -42,11 +43,12 @@
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
-                    <h1 class="hero-title">Secure Overmind early access. Let AI command your ML ops.</h1>
-                    <p class="hero-subtitle">One <strong>vendor-agnostic control plane</strong> that <strong>detects drift, blocks bad deploys, and auto-retrains</strong> across AWS/Azure/GCP or on-prem—<strong>no lock-in</strong>.</p>
+                    <h1 class="hero-title">Let your ML pipelines run themselves.</h1>
+                    <p class="hero-subtitle">Deepline is building an AI-driven control layer that autonomously monitors, detects drift, and retrains models—across any stack.</p>
+                    <p class="hero-subtext">We're inviting early teams to shape the future of autonomous ML operations.</p>
                     <div class="hero-ctas">
-                        <a href="#early-access" class="btn btn-primary btn-large" data-event="hero_cta_request_access">Request Access</a>
-                        <a href="https://calendly.com/deeplineanalytics/30min" target="_blank" rel="noopener" class="btn btn-secondary btn-large" data-event="hero_cta_calendly">Book 15-min Discovery</a>
+                        <a href="#early-access" class="btn btn-primary btn-large" data-event="hero_cta_request_access">Join Early Access</a>
+                        <a href="https://calendly.com/deeplineanalytics/30min" target="_blank" rel="noopener" class="btn btn-secondary btn-large" data-event="hero_cta_calendly">Book Discovery Call</a>
                     </div>
                     <div class="trust-strip">
                         <span>Data stays in your cloud</span>
@@ -66,28 +68,62 @@
         </div>
     </section>
 
+    <section class="deepline-intro" id="product">
+        <div class="container">
+            <h2 class="section-title">What Deepline Is</h2>
+            <p class="section-intro">Deepline is building an <strong>agentic control layer for ML operations</strong> — a single plane that <strong>watches, decides, and acts</strong> across your stack.</p>
+        </div>
+    </section>
+
+    <section class="capabilities">
+        <div class="container">
+            <div class="capabilities-grid">
+                <div class="capability-card">
+                    <h3>Universal connectors</h3>
+                    <p>Plug in your existing stack — MLflow, W&B, ClearML, AWS, Azure, or on-prem — in minutes. No rewrites, no lock-in.</p>
+                </div>
+                <div class="capability-card">
+                    <h3>Unified context</h3>
+                    <p>Normalize runs, metrics, and alerts into one view for easier debugging, governance, and search.</p>
+                </div>
+                <div class="capability-card">
+                    <h3>Autonomous agents</h3>
+                    <p>Agents detect drift, quarantine bad data, and trigger retrains or rollbacks automatically.</p>
+                </div>
+            </div>
+            <p class="secure-tagline">Secure by design</p>
+        </div>
+    </section>
+
+    <section class="mlops-breakdown">
+        <div class="container">
+            <h2 class="section-title">Where ML Ops Breaks Down</h2>
+            <p class="breakdown-text">Every team hits the same wall — fragmented monitoring, alert noise, and endless manual retrains.</p>
+        </div>
+    </section>
+
     <section class="problem" id="problem">
         <div class="container">
             <div class="problem-grid">
                 <div class="problem-item">
                     <img class="icon-infinity" src="/Deepline logos NO BACK/Infinity_No_Back-removebg-preview.png" alt="" aria-hidden="true" width="112" height="72">
                     <h3>Fragmented monitoring</h3>
-                    <p>Machine learning systems often lack unified monitoring, causing hidden issues and slow responses.</p>
+                    <p>Teams waste hours watching multiple dashboards just to know if models are healthy.</p>
                 </div>
                 <div class="problem-item">
                     <img class="icon-infinity" src="/Deepline logos NO BACK/Infinity_No_Back-removebg-preview.png" alt="" aria-hidden="true" width="112" height="72">
                     <h3>Operational drag</h3>
-                    <p>Poor oversight leads to inefficiencies, costly downtime, and delayed deployments.</p>
+                    <p>Every retrain or rollback requires manual coordination and context-switching.</p>
                 </div>
                 <div class="problem-item">
                     <img class="icon-infinity" src="/Deepline logos NO BACK/Infinity_No_Back-removebg-preview.png" alt="" aria-hidden="true" width="112" height="72">
                     <h3>Alert fatigue</h3>
-                    <p>Overly complex monitoring setups create fatigue and increase the risk of critical failures.</p>
+                    <p>Too many noisy alerts, not enough decisive action.</p>
                 </div>
                 <div class="problem-item">
                     <img class="icon-infinity" src="/Deepline logos NO BACK/Infinity_No_Back-removebg-preview.png" alt="" aria-hidden="true" width="112" height="72">
                     <h3>Wasted talent</h3>
-                    <p>Companies waste valuable time and money maintaining ML pipelines instead of focusing on building better models.</p>
+                    <p>Highly-paid engineers spend more time firefighting than innovating.</p>
                 </div>
             </div>
             <div class="outcome">
@@ -96,54 +132,30 @@
         </div>
     </section>
 
-    <section class="capabilities metallic-bg" id="product">
-        <div class="container">
-            <h2 class="section-title">What Deepline is</h2>
-            <p class="section-intro">Deepline is an <strong>agentic MLOps control plane</strong> with a <strong>unified ML schema</strong> and <strong>cross‑tool event bus</strong> that can <strong>act</strong> (rollback/retrain), not just alert.</p>
-            <div class="capabilities-grid">
-                <div class="capability-card">
-                    <h3>Vendor‑agnostic adapters</h3>
-                    <p>AWS / Azure / GCP + on‑prem; MLflow, W&B, ClearML; S3/GCS/Blob; GitHub Actions/Jenkins; CloudWatch/Prometheus; PagerDuty/Slack.</p>
-                </div>
-                <div class="capability-card">
-                    <h3>Unified data model</h3>
-                    <p>Normalize runs, artifacts, metrics, alerts for single‑pane governance and search.</p>
-                </div>
-                <div class="capability-card">
-                    <h3>Agentic automation</h3>
-                    <p>Live metric sentries, data/contract checks, daily retrains, noise‑aware routing, "ask‑and‑wire" installs.</p>
-                </div>
-                <div class="capability-card">
-                    <h3>Enterprise controls</h3>
-                    <p>VPC/on‑prem, least‑privilege, full audit trails.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <section class="how-it-works" id="how-it-works">
         <div class="container">
-            <h2 class="section-title">How it works</h2>
+            <h2 class="section-title">How it Works</h2>
             <div class="steps-grid">
                 <div class="step">
                     <div class="step-number">1</div>
                     <h3>Connect your stack</h3>
-                    <p>OAuth/keys to clouds + tools (2–5 minutes).</p>
+                    <p>Plug in your existing tools and clouds, MLflow, W&B, ClearML, AWS, GCP, or on-prem — in minutes. Deepline connects through lightweight adapters, no rewrites or lock-ins.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">2</div>
-                    <h3>Select Playbooks</h3>
-                    <p>e.g., <strong>Drift Guard</strong>, <strong>Data Contract Sentry</strong>, <strong>Hotfix Rollback</strong>.</p>
+                    <h3>Activate agents</h3>
+                    <p>Choose from early playbooks like Drift Sentinel, Data Integrity Agent, or Hotfix Autopilot. Each agent observes your pipelines and learns from live metrics.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">3</div>
-                    <h3>Automate remediation</h3>
-                    <p>Agents execute: block bad deploys, trigger retrains, open PRs, ping on‑call.</p>
+                    <h3>Let it run itself</h3>
+                    <p>Agents act autonomously, blocking bad deploys, triggering retrains, opening PRs, or pinging on-call when something breaks. You stay in control, but the system handles the grind.</p>
                 </div>
             </div>
             <div class="diagram-container">
                 <img src="/Deepline logos NO BACK/Overmind Schema Art No Back.png" alt="Overmind control hub routing events across monitoring, deployment, testing, version control" class="diagram-image" loading="lazy">
             </div>
+            <p class="center footer-line">One control plane. Infinite feedback loops, monitoring, testing, deployment, version control.</p>
             <p class="center cta-mid"><a href="#early-access" class="btn btn-primary btn-large" data-event="cta_mid_how">Request Access</a></p>
         </div>
     </section>
@@ -194,9 +206,8 @@
         <div class="container">
             <h2 class="section-title">Why now</h2>
             <div class="why-now-content">
-                <p>Teams are migrating from <strong>point tools → platform control</strong> without surrendering choice.</p>
-                <p><strong>Dashboard sprawl</strong> + <strong>alert noise</strong> = demand for a <strong>neutral control plane</strong>.</p>
-                <p>Forward‑deployed installs show <strong>fast time‑to‑value</strong>; agents being productized.</p>
+                <p>ML teams are moving from point tools → control planes without giving up choice.</p>
+                <p>Dashboard sprawl + alert noise = demand for a neutral agentic layer.</p>
             </div>
         </div>
     </section>
@@ -322,6 +333,6 @@
     </footer>
 
     <script src="main.js"></script>
-    <script type="module" src="js/hero-3d-init.js"></script>
+    <!-- <script type="module" src="js/hero-3d-init.js"></script> -->
 </body>
 </html>

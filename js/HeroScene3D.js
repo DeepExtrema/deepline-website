@@ -61,6 +61,10 @@ export class HeroScene3D {
       this.camera.position.set(1, 0, 12);
       this.camera.lookAt(1, 0, 0);
 
+      // Create environment map for metallic reflections
+      const { createEnvironment } = await import('./materials.js');
+      await createEnvironment(THREE, this.renderer, this.scene);
+
       // Load GLB model
       await this.loadModel();
 
@@ -128,7 +132,8 @@ export class HeroScene3D {
                 this.ball = child;
                 // Apply silver metal-glass material to ball
                 const silverMat = createSilverMaterial(this.THREE);
-                applyMicroTexture(silverMat, this.THREE, 0.08);
+                // Apply micro-texture for better surface quality
+                applyMicroTexture(silverMat, this.THREE, 0.08, this.renderer);
                 child.material = silverMat;
               } else {
                 this.puck = child;
@@ -137,8 +142,8 @@ export class HeroScene3D {
                 child.material = glassMat;
               }
               
-              child.castShadow = true;
-              child.receiveShadow = true;
+              // child.castShadow = true;
+              // child.receiveShadow = true;
             }
           });
           
@@ -296,17 +301,19 @@ export class HeroScene3D {
     const { RenderPass } = await import('three/addons/postprocessing/RenderPass.js');
     const { UnrealBloomPass } = await import('three/addons/postprocessing/UnrealBloomPass.js');
 
-    // Create composer with alpha support
+    // Create composer with alpha support and higher precision
     const container = this.canvas.parentElement;
+    const dpr = Math.min(window.devicePixelRatio, 3);
     const renderTarget = new this.THREE.WebGLRenderTarget(
-      container.clientWidth,
-      container.clientHeight,
+      container.clientWidth * dpr,
+      container.clientHeight * dpr,
       {
         minFilter: this.THREE.LinearFilter,
         magFilter: this.THREE.LinearFilter,
         format: this.THREE.RGBAFormat,
-        type: this.THREE.UnsignedByteType,
-        stencilBuffer: false
+        type: this.THREE.HalfFloatType,
+        stencilBuffer: false,
+        samples: 4
       }
     );
     this.composer = new EffectComposer(this.renderer, renderTarget);
@@ -318,7 +325,6 @@ export class HeroScene3D {
     this.composer.addPass(renderPass);
 
     // Add bloom pass
-    const container = this.canvas.parentElement;
     const bloomPass = new UnrealBloomPass(
       new this.THREE.Vector2(container.clientWidth, container.clientHeight),
       PARAMS.BLOOM_STRENGTH,
@@ -401,7 +407,7 @@ export class HeroScene3D {
     this.camera.updateProjectionMatrix();
 
     this.renderer.setSize(width, height);
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Cap at 2x for performance
+    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 3)); // Cap at 3x for better quality
 
     // Update background shader resolution
     // REMOVED: Background shader disabled for transparency

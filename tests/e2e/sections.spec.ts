@@ -96,4 +96,39 @@ test('hero has top vignette darker than mid band', async ({ page }) => {
   expect(midAvg - topAvg).toBeGreaterThanOrEqual(8);
 });
 
+test('nav bottom edge area is near-black (no bright band)', async ({ page }) => {
+  const nav = page.locator('.nav').first();
+  const box = await nav.boundingBox();
+  if (!box) return;
+  const view = page.viewportSize()!;
+  const strip = await page.screenshot({
+    clip: {
+      x: 0,
+      y: Math.max(0, Math.floor(box.y + box.height)),
+      width: view.width,
+      height: 8,
+    },
+    animations: 'disabled',
+    scale: 'device',
+  });
+  const avg = await page.evaluate((pngBase64) => new Promise<number>((resolve) => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = img.width; canvas.height = img.height;
+      const ctx = canvas.getContext('2d')!;
+      ctx.drawImage(img, 0, 0);
+      const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+      let sum = 0; let n = 0;
+      for (let i = 0; i < data.length; i += 4) {
+        sum += 0.2126 * data[i] + 0.7152 * data[i + 1] + 0.0722 * data[i + 2];
+        n++;
+      }
+      resolve(sum / n);
+    };
+    img.src = 'data:image/png;base64,' + pngBase64;
+  }), strip.toString('base64'));
+  expect(avg).toBeLessThanOrEqual(10);
+});
+
 

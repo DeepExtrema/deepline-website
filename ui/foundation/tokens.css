@@ -79,10 +79,11 @@
   /* Metallic Background System Tokens */
   --mg-metallic-gradient-width: 85%;
   --mg-metallic-gradient-height: 65%;
-  --mg-metallic-blue-r: 30;
-  --mg-metallic-blue-g: 35;
-  --mg-metallic-blue-b: 75;
-  --mg-metallic-blue-opacity: 0.25;
+  /* Blue band tint disabled for pure-black overlaps */
+  --mg-metallic-blue-r: 0;
+  --mg-metallic-blue-g: 0;
+  --mg-metallic-blue-b: 0;
+  --mg-metallic-blue-opacity: 0;
   --mg-metallic-gradient-x: 50%;
   --mg-metallic-gradient-y: 50%;
   --mg-metallic-gradient-falloff: 70%;
@@ -101,7 +102,7 @@
   :root {
     --mg-metallic-gradient-width: 88%;
     --mg-metallic-gradient-height: 68%;
-    --mg-metallic-blue-opacity: 0.26;
+    --mg-metallic-blue-opacity: 0;
   }
 }
 
@@ -110,7 +111,7 @@
   :root {
     --mg-metallic-gradient-width: 92%;
     --mg-metallic-gradient-height: 72%;
-    --mg-metallic-blue-opacity: 0.28;
+    --mg-metallic-blue-opacity: 0;
   }
 }
 
@@ -119,7 +120,7 @@
   :root {
     --mg-metallic-gradient-width: 95%;
     --mg-metallic-gradient-height: 75%;
-    --mg-metallic-blue-opacity: 0.30;
+    --mg-metallic-blue-opacity: 0;
   }
 }
 
@@ -156,9 +157,9 @@
   --mg-bg: #000000;
   
   /* Metallic background theme colors */
-  --mg-metallic-blue-r: 30;
-  --mg-metallic-blue-g: 35;
-  --mg-metallic-blue-b: 75;
+  --mg-metallic-blue-r: 0;
+  --mg-metallic-blue-g: 0;
+  --mg-metallic-blue-b: 0;
   
   /* Glass material base */
   --mg-glass-base: #CFE0EA;

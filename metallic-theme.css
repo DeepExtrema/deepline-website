@@ -30,6 +30,29 @@ body {
     position: relative;
 }
 
+/* ============================================================================
+   GLOBAL BAND VARIABLES & UTILITIES
+   ========================================================================= */
+
+:root {
+    /* Base near-black background and band stops */
+    --bg-black: #0a0c0e;
+    --band-black-1: #000000;
+    --band-black-2: rgba(0, 0, 0, 0);
+    /* Disable any residual blue metallic band tint layer */
+    --mg-metallic-blue-opacity: 0;
+}
+
+/* Generic reusable black band gradient (no blue hue) */
+.band-gradient {
+    background: linear-gradient(
+        to bottom,
+        var(--band-black-1) 0%,
+        var(--band-black-1) 35%,
+        var(--band-black-2) 100%
+    );
+}
+
 
 /* ============================================================================
    NAVIGATION - Chrome Glass Panel
@@ -37,22 +60,16 @@ body {
 
 .nav {
     background: 
-        /* Ultra dark gunmetal chrome gradient base */
+        /* Ultra dark gunmetal chrome gradient base (no reflection to avoid glow strip) */
         linear-gradient(180deg, 
             rgba(8, 9, 10, 0.95) 0%,
             rgba(2, 2, 3, 0.98) 100%
-        ),
-        /* Ultra dark gunmetal reflection overlay */
-        radial-gradient(ellipse 800px 200px at 50% 0%, 
-            rgba(40, 45, 55, 0.4) 0%, 
-            transparent 70%
         );
     backdrop-filter: blur(15px) saturate(1.2);
     border-bottom: none;
     box-shadow: 
-        /* Outer glow */
-        0 2px 8px rgba(0, 0, 0, 0.7),
-        0 0 30px rgba(100, 110, 125, 0.3);
+        /* Dark edge only */
+        0 2px 8px rgba(0, 0, 0, 0.8);
 }
 
 /* ============================================================================
@@ -214,47 +231,60 @@ body {
 .playbook-card,
 .security-item,
 .install-footprint .card,
-.form-card {
-    /* Enhanced dark chromatic backgrounds */
+.form-card,
+.hero-subtext {
+    /* Preserve existing dark chromatic backgrounds */
     background: 
+        /* Glassy gradient overlays - more transparent */
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.10), transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.05), transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(120, 119, 198, 0.05), transparent 50%),
+        /* Preserve existing dark chromatic base - more transparent */
         linear-gradient(135deg, 
-            #1A1F26 0%,
-            #0F1318 25%,
-            #0A0D12 50%,
-            #0F1318 75%,
-            #1A1F26 100%
+            rgba(26, 31, 38, 0.5) 0%,
+            rgba(15, 19, 24, 0.5) 25%,
+            rgba(10, 13, 18, 0.5) 50%,
+            rgba(15, 19, 24, 0.5) 75%,
+            rgba(26, 31, 38, 0.5) 100%
         ),
         radial-gradient(ellipse 400px 200px at 50% 30%, 
-            rgba(40, 50, 60, 0.25) 0%,
+            rgba(40, 50, 60, 0.10) 0%,
             transparent 60%
         ),
         radial-gradient(ellipse 300px 150px at 70% 20%, 
-            rgba(30, 40, 50, 0.1) 0%,
+            rgba(30, 40, 50, 0.05) 0%,
             transparent 70%
         ),
         radial-gradient(ellipse 200px 100px at 30% 80%, 
-            rgba(50, 40, 45, 0.08) 0%,
+            rgba(50, 40, 45, 0.03) 0%,
             transparent 80%
         );
     
-    /* Enhanced dark metallic borders */
-    border: 1px solid transparent;
-    background-image: 
-        linear-gradient(#0A0D12, #0A0D12),
-        linear-gradient(135deg,
-            #2A3037 0%,
-            #3A4249 25%,
-            #4A5259 50%,
-            #3A4249 75%,
-            #2A3037 100%
-        );
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
+    /* Glassy backdrop filter */
+    backdrop-filter: 
+        blur(40px) 
+        saturate(180%) 
+        brightness(110%) 
+        contrast(120%);
+    -webkit-backdrop-filter: 
+        blur(40px) 
+        saturate(180%) 
+        brightness(110%) 
+        contrast(120%);
     
-    /* Enhanced dark shadows on all edges */
+    /* Glassy border */
+    border: 1px solid transparent;
+    border-radius: var(--mg-radius-lg, 16px);
+    
+    /* Glassy shadows */
     box-shadow: 
-        0 6px 20px rgba(0, 0, 0, 0.7),
-        0 0 0 1px rgba(0, 0, 0, 0.3) !important;
+        0 8px 32px rgba(0, 0, 0, 0.12),
+        0 1px 0 rgba(255, 255, 255, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
 }
 
 /* Unified hover effect */
@@ -264,52 +294,159 @@ body {
 .playbook-card:hover,
 .security-item:hover,
 .install-footprint .card:hover,
-.form-card:hover {
+.form-card:hover,
+.hero-subtext:hover {
+    backdrop-filter: 
+        blur(50px) 
+        saturate(200%) 
+        brightness(115%) 
+        contrast(130%);
+    -webkit-backdrop-filter: 
+        blur(50px) 
+        saturate(200%) 
+        brightness(115%) 
+        contrast(130%);
+    
+    /* Keep the popup bump effect */
+    transform: translateY(-4px);
+    transition: all 0.3s ease;
+    
+    /* Add glowing silvery border + popup shadow */
+    border: 1px solid rgba(233, 241, 246, 0.4);
     box-shadow: 
-        /* Stronger outer shadow */
-        0 12px 40px rgba(0, 0, 0, 0.8),
-        0 0 0 1px rgba(0, 0, 0, 0.4) !important;
-    transform: translateY(-3px);
+        /* Glowing border effect - more silvery */
+        0 0 20px rgba(233, 241, 246, 0.4),
+        0 0 40px rgba(207, 224, 234, 0.3),
+        0 0 60px rgba(166, 183, 195, 0.2),
+        /* Popup shadow effect */
+        0 16px 48px rgba(0, 0, 0, 0.25),
+        0 4px 0 rgba(233, 241, 246, 0.15),
+        inset 0 1px 0 rgba(233, 241, 246, 0.25);
 }
 
 /* ============================================================================
-   SHIMMER EFFECT - All Boxes
+   ANIMATED LIQUID-FLOW SHIMMER EFFECT - REDUCED BRIGHTNESS
    ========================================================================= */
 
-.problem-item::after,
-.capability-card::after,
-.step::after,
-.playbook-card::after,
-.security-item::after,
-.install-footprint .card::after,
-.form-card::after {
+.problem-item::before,
+.capability-card::before,
+.step::before,
+.playbook-card::before,
+.security-item::before,
+.install-footprint .card::before,
+.form-card::before,
+.hero-subtext::before {
     content: '';
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
     background: linear-gradient(
-        45deg,
-        transparent 30%,
-        rgba(233, 241, 246, 0.02) 45%,
-        rgba(255, 255, 255, 0.06) 50%,
-        rgba(233, 241, 246, 0.02) 55%,
-        transparent 70%
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.015),
+        rgba(255, 255, 255, 0.03),
+        rgba(255, 255, 255, 0.015),
+        transparent
     );
-    opacity: 0;
     pointer-events: none;
-    transition: opacity 0.3s ease;
+    z-index: 1;
 }
 
-.problem-item:hover::after,
-.capability-card:hover::after,
-.step:hover::after,
-.playbook-card:hover::after,
-.security-item:hover::after,
-.install-footprint .card:hover::after,
-.form-card:hover::after {
-    opacity: 1;
+/* Individual shimmer animations with random timing */
+.problem-item::before {
+    animation: liquid-flow-1 4.2s ease-in-out infinite;
+}
+
+.capability-card::before {
+    animation: liquid-flow-2 3.8s ease-in-out infinite;
+}
+
+.step::before {
+    animation: liquid-flow-3 4.5s ease-in-out infinite;
+}
+
+.playbook-card::before {
+    animation: liquid-flow-4 3.6s ease-in-out infinite;
+}
+
+.security-item::before {
+    animation: liquid-flow-5 4.1s ease-in-out infinite;
+}
+
+.install-footprint .card::before {
+    animation: liquid-flow-6 3.9s ease-in-out infinite;
+}
+
+.form-card::before {
+    animation: liquid-flow-7 4.3s ease-in-out infinite;
+}
+
+.hero-subtext::before {
+    animation: liquid-flow-8 4.0s ease-in-out infinite;
+}
+
+/* Pause shimmer animation on hover */
+.problem-item:hover::before,
+.capability-card:hover::before,
+.step:hover::before,
+.playbook-card:hover::before,
+.security-item:hover::before,
+.install-footprint .card:hover::before,
+.form-card:hover::before,
+.hero-subtext:hover::before {
+    animation-play-state: paused;
+    opacity: 0;
+}
+
+/* Individual keyframe animations with slight variations */
+@keyframes liquid-flow-1 {
+    0% { left: -100%; opacity: 0; }
+    50% { opacity: 1; }
+    100% { left: 100%; opacity: 0; }
+}
+
+@keyframes liquid-flow-2 {
+    0% { left: -100%; opacity: 0; }
+    45% { opacity: 1; }
+    100% { left: 100%; opacity: 0; }
+}
+
+@keyframes liquid-flow-3 {
+    0% { left: -100%; opacity: 0; }
+    55% { opacity: 1; }
+    100% { left: 100%; opacity: 0; }
+}
+
+@keyframes liquid-flow-4 {
+    0% { left: -100%; opacity: 0; }
+    48% { opacity: 1; }
+    100% { left: 100%; opacity: 0; }
+}
+
+@keyframes liquid-flow-5 {
+    0% { left: -100%; opacity: 0; }
+    52% { opacity: 1; }
+    100% { left: 100%; opacity: 0; }
+}
+
+@keyframes liquid-flow-6 {
+    0% { left: -100%; opacity: 0; }
+    46% { opacity: 1; }
+    100% { left: 100%; opacity: 0; }
+}
+
+@keyframes liquid-flow-7 {
+    0% { left: -100%; opacity: 0; }
+    54% { opacity: 1; }
+    100% { left: 100%; opacity: 0; }
+}
+
+@keyframes liquid-flow-8 {
+    0% { left: -100%; opacity: 0; }
+    49% { opacity: 1; }
+    100% { left: 100%; opacity: 0; }
 }
 
 /* ============================================================================
@@ -319,7 +456,9 @@ body {
 .problem,
 .how-it-works,
 .why-now,
-.early-access {
+.early-access,
+.mlops-breakdown,
+.deepline-intro {
     background:
         /* Vertical vignette for seamless top/bottom fades to black */
         linear-gradient(180deg,
@@ -344,17 +483,44 @@ body {
             rgba(0, 0, 0, 0.68) 0%,
             transparent 70%
         ),
-        /* Softer reflection so edges don’t lift */
-        radial-gradient(ellipse 1200px 400px at 50% 0%,
-            rgba(40, 45, 55, 0.15) 0%,
-            transparent 60%
-        ),
         /* Slightly reduced noise to avoid mid grey haze */
         url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.12'/%3E%3C/svg%3E");
 
     box-shadow: none;
     position: relative;
     overflow: hidden;
+}
+
+/* Create overlap between hero and problem sections */
+.problem {
+    margin-top: -80px;
+    padding-top: 133px; /* 53px original + 80px overlap */
+    z-index: 2;
+    position: relative;
+}
+
+/* Add top shading to problem section for seamless blend */
+.problem::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: linear-gradient(180deg,
+        rgba(0, 0, 0, 1) 0%,
+        rgba(0, 0, 0, 0.8) 30%,
+        rgba(0, 0, 0, 0.4) 70%,
+        transparent 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Ensure problem section content stays above the shading */
+.problem > * {
+    position: relative;
+    z-index: 2;
 }
 
 
@@ -364,40 +530,52 @@ body {
 
 .hero {
     background: 
+        /* Top vignette to blend with navigation */
+        linear-gradient(180deg, 
+            rgba(0, 0, 0, 0.9) 0%, 
+            rgba(0, 0, 0, 0.3) 15%, 
+            transparent 30%
+        ),
         /* Deep metallic gradient */
         radial-gradient(ellipse at center 40%, 
             #0A121A 0%, 
             #0B0F14 30%, 
             #000000 100%
         ),
-        /* Ultra dark gunmetal central glow */
-        radial-gradient(ellipse 1000px 600px at 50% 50%, 
-            rgba(40, 45, 55, 0.25) 0%, 
+        /* Ultra dark gunmetal central glow - dramatically reduced vertical size */
+        radial-gradient(ellipse 300px 200px at 50% 50%, 
+            rgba(100, 120, 140, 0.4) 0%, 
+            transparent 70%
+        ),
+        /* Ultra dark gunmetal corner highlights - dramatically reduced vertical size */
+        radial-gradient(ellipse 1000px 300px at 20% 20%, 
+            rgba(20, 25, 30, 0.6) 0%, 
             transparent 60%
         ),
-        /* Ultra dark gunmetal corner highlights */
-        radial-gradient(ellipse 600px 400px at 20% 20%, 
-            rgba(50, 55, 65, 0.2) 0%, 
-            transparent 50%
-        ),
-        radial-gradient(ellipse 600px 400px at 80% 80%, 
-            rgba(50, 55, 65, 0.2) 0%, 
-            transparent 50%
+        radial-gradient(ellipse 1000px 300px at 80% 80%, 
+            rgba(20, 25, 30, 0.6) 0%, 
+            transparent 60%
         );
     position: relative;
 }
 
-/* Hero top vignette overlay to blend to true black */
+/* Hero bottom bridge overlay to blend seamlessly with problem section */
 .hero::after {
     content: '';
     position: absolute;
+    bottom: 0;
     left: 0;
     right: 0;
-    top: 0;
-    height: 160px;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 100%);
+    height: 200px;
+    background: linear-gradient(180deg,
+        transparent 0%,
+        rgba(0, 0, 0, 0.15) 20%,
+        rgba(0, 0, 0, 0.4) 50%,
+        rgba(0, 0, 0, 0.8) 80%,
+        rgba(0, 0, 0, 1) 100%
+    );
     pointer-events: none;
-    z-index: 1; /* above particles (::before), below content */
+    z-index: 3; /* above particles (::before) and content */
 }
 
 .hero > * {
@@ -430,28 +608,75 @@ body {
     position: relative;
 }
 
+/* Section band overlay to guarantee black overlap between sections */
+.section-band { position: relative; isolation: isolate; }
+.section-band::before {
+    content: '';
+    position: absolute;
+    inset: -4rem 0 0 0; /* extend upward to melt with previous section */
+    pointer-events: none;
+    z-index: 0;
+    background: linear-gradient(to bottom, var(--band-black-1) 0%, rgba(0,0,0,0) 70%);
+}
+.section-band > * { position: relative; z-index: 1; }
+
+/* Apply band overlay to existing section classes without needing HTML edits */
+.problem,
+.how-it-works,
+.why-now,
+.early-access,
+.playbooks,
+.capabilities,
+.security,
+.mlops-breakdown,
+.deepline-intro { position: relative; isolation: isolate; }
+
+.problem::before,
+.how-it-works::before,
+.why-now::before,
+.early-access::before,
+.playbooks::before,
+.capabilities::before,
+.security::before,
+.mlops-breakdown::before,
+.deepline-intro::before {
+    content: '';
+    position: absolute;
+    inset: -4rem 0 0 0;
+    pointer-events: none;
+    z-index: 0;
+    background: linear-gradient(to bottom, var(--band-black-1) 0%, rgba(0,0,0,0) 70%);
+}
+
+@media (max-width: 768px) {
+  .section-band::before,
+  .problem::before,
+  .how-it-works::before,
+  .why-now::before,
+  .early-access::before,
+  .playbooks::before,
+  .capabilities::before,
+  .security::before,
+  .mlops-breakdown::before,
+  .deepline-intro::before { inset: -3rem 0 0 0; }
+}
+
 /* ============================================================================
    REUSABLE METALLIC BACKGROUND SYSTEM
    Responsive, transferable, theme-aware gradient system
    Uses CSS custom properties defined in ui/foundation/tokens.css
    ========================================================================= */
 
-/* Basic metallic background with blue hue - RESPONSIVE & DYNAMIC */
+/* Basic metallic background with pure-black overlaps (no blue) */
 .metallic-bg {
-    background: 
-        /* Blue metallic tint - uses CSS custom properties */
-        radial-gradient(
-            ellipse 
-            var(--mg-metallic-gradient-width) 
-            var(--mg-metallic-gradient-height) 
-            at var(--mg-metallic-gradient-x) var(--mg-metallic-gradient-y), 
-            rgba(
-                var(--mg-metallic-blue-r), 
-                var(--mg-metallic-blue-g), 
-                var(--mg-metallic-blue-b), 
-                var(--mg-metallic-blue-opacity)
-            ) 0%, 
-            transparent var(--mg-metallic-gradient-falloff)
+    background:
+        /* Top/bottom fades to pure black for seamless section joins */
+        linear-gradient(
+            180deg,
+            var(--band-black-1) 0%,
+            rgba(0, 0, 0, 0) 14%,
+            rgba(0, 0, 0, 0) 86%,
+            var(--band-black-1) 100%
         ),
         /* Ultra dark gunmetal base */
         radial-gradient(
@@ -462,7 +687,7 @@ body {
         );
     position: relative;
     overflow: hidden;
-    transform: translateZ(0); /* GPU acceleration */
+    transform: translateZ(0);
     will-change: background;
 }
 
@@ -498,14 +723,13 @@ body {
 
 /* Intense variant - for hero sections */
 .metallic-bg--intense {
-  --mg-metallic-blue-opacity: 0.35;
+  /* No blue layer; just adjust base shaping if needed */
   --mg-metallic-gradient-width: 75%;
   --mg-metallic-gradient-height: 60%;
 }
 
 /* Subtle variant - less prominent sections */
 .metallic-bg--subtle {
-  --mg-metallic-blue-opacity: 0.18;
   --mg-metallic-gradient-width: 95%;
 }
 
@@ -776,7 +1000,9 @@ body {
     .problem,
     .how-it-works,
     .why-now,
-    .early-access {
+    .early-access,
+    .mlops-breakdown,
+    .deepline-intro {
         background:
             linear-gradient(180deg, #000000 0%, #121418 50%, #000000 100%);
     }
@@ -819,7 +1045,9 @@ body {
     .problem,
     .how-it-works,
     .why-now,
-    .early-access {
+    .early-access,
+    .mlops-breakdown,
+    .deepline-intro {
         background: 
             linear-gradient(180deg, 
                 #1A1F28 0%, 
